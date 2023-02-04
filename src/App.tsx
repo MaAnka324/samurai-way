@@ -1,13 +1,12 @@
 import React from 'react';
 import './App.css';
+import Header from "./components/Header";
 
 
 function App() {
   return (
     <div className="app-wrapper">
-        <header className='header'>
-            <img src='https://abrakadabra.fun/uploads/posts/2022-02/1644169601_3-abrakadabra-fun-p-avatarka-s-ulibkoi-4.jpg'/>
-        </header>
+        <Header/>
             <nav className='nav'>
                 <div>
                     <a>Profile</a>
