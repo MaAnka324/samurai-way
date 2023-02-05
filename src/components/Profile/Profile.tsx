@@ -1,11 +1,11 @@
 import React from 'react';
-import './Profile.module.css'
+import s from './Profile.module.css'
 import exp from "constants";
 
-let s = {
-    'item': 'Profile_item__5kFCT',
-    'content': 'Profile_content__E5Ora '
-}
+// let s = {
+//     'item': 'Profile_item__TYOiq',
+//     'content': 'Profile_content__LWBsZ '
+// }
 const Profile = () => {
     return (
         <div className={s.content}>

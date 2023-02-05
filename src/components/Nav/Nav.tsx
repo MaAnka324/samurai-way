@@ -1,11 +1,11 @@
 import React from 'react';
-import './Nav.module.css';
+import s from './Nav.module.css';
 import exp from "constants";
 
-let s = {
-    'nav': 'Nav_nav__jai+c',
-    'item': 'Nav_item__r9ghb'
-}
+// let s = {
+//     'nav': 'Nav_nav__FfLBg',
+//     'item': 'Nav_item__2Fnx8'
+// }
 const Nav = () => {
     return (
         <nav className={s.nav}>
