@@ -1,31 +1,29 @@
 import React from 'react';
-import classes from './Nav.module.css'
+import './Nav.module.css';
 import exp from "constants";
 
-
-// let classes {
-//     'nav': '',
-//     'item': ''
-// }
+let s = {
+    'nav': 'Nav_nav__jai+c',
+    'item': 'Nav_item__r9ghb'
+}
 const Nav = () => {
     return (
-        <nav className='nav'>
-            <div className='item'>
+        <nav className={s.nav}>
+            <div className={s.item}>
                 <a>Profile</a>
             </div>
-            <div className='item'>
+            <div className={s.item}>
                 <a>Messages</a>
             </div>
-            <div className='item'>
+            <div className={s.item}>
                 <a>News</a>
             </div>
-            <div className='item'>
+            <div className={s.item}>
                 <a>Music</a>
             </div>
-            <div className='item'>
+            <div className={s.item}>
                 <a>Settings</a>
             </div>
-
         </nav>
     )
 }
