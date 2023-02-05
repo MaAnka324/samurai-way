@@ -1,4 +1,5 @@
 import React from 'react';
+import './Profile.css'
 import exp from "constants";
 
 const Profile = () => {
@@ -16,11 +17,13 @@ const Profile = () => {
                     New posts
                 </div>
             </div>
-            <div>
-                post 1
-            </div>
-            <div>
-                post 2
+            <div className='posts'>
+                <div className='item'>
+                    post 1
+                </div>
+                <div className='item'>
+                    post 2
+                </div>
             </div>
         </div>
     )
