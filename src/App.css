@@ -12,6 +12,10 @@
   /*grid-gap: 10px;*/
 }
 
+.app-wrapper-content {
+  grid-area: c;
+  background-color: darkslategrey;
+}
 
 /*.App {*/
 /*  text-align: center;*/

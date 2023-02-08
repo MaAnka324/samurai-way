@@ -3,6 +3,7 @@ import s from './MyPosts.module.css'
 import Post from './Post/Post'
 import exp from "constants";
 
+
 const MyPosts = () => {
     return (
             <div>
@@ -12,8 +13,8 @@ const MyPosts = () => {
                     <button>Add post</button>
                 </div>
                 <div className={s.posts}>
-                    <Post/>
-                    <Post/>
+                    <Post message="Hello"/>
+                    <Post message="How are you?"/>
                 </div>
             </div>
     )
