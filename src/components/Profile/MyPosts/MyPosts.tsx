@@ -6,8 +6,8 @@ import exp from "constants";
 
 const MyPosts = () => {
     return (
-            <div>
-                My posts
+            <div className={s.postsBlock}>
+                <h3>My posts</h3>
                 <div>
                     <textarea></textarea>
                     <button>Add post</button>
