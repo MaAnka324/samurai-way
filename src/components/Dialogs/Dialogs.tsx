@@ -30,7 +30,7 @@ const Dialogs = () => {
         {id: 2, name: 'Alexey'},
         {id: 3, name: 'Andrey'}
     ]
-
+//test
     let messagesData = [
         {id: 1, message: 'Hello'},
         {id: 2, message: 'Hi'},
