@@ -9,6 +9,7 @@ import exp from "constants";
 
 export type MessagePropsType = {
     message: string
+    likesCount: number
 }
 const Post = (props:MessagePropsType) => {
     return (
@@ -16,7 +17,8 @@ const Post = (props:MessagePropsType) => {
             <img src='https://www.ochkov.net/wiki/wiki/storage/app/uploads/public/5d7/a08/0c6/5d7a080c6de1b874225893.jpg'/>
             {props.message}
             <div>
-                <span>LIKE</span>
+                <span>LIKE </span>
+                {props.likesCount}
             </div>
         </div>
     )
