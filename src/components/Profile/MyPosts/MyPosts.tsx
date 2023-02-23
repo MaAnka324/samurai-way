@@ -6,10 +6,12 @@ import exp from "constants";
 
 const MyPosts = () => {
 
-    let postData = [
+    let post = [
         {id: 1, message: 'Hello', likesCount: 12},
         {id: 2, message: 'How are you?', likesCount: 11},
     ]
+
+    let postElement = post.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
 
     return (
             <div className={s.postsBlock}>
@@ -19,8 +21,7 @@ const MyPosts = () => {
                     <button>Add post</button>
                 </div>
                 <div className={s.posts}>
-                    <Post message={postData[0].message} likesCount={postData[0].likesCount}/>
-                    <Post message={postData[1].message} likesCount={postData[1].likesCount}/>
+                    {postElement}
                 </div>
             </div>
     )
