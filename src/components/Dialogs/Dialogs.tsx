@@ -2,24 +2,29 @@ import React from 'react';
 import s from './Dialogs.module.css'
 import Message from "./Message/Message";
 import DialogItem from "./DialogItem/DialogItem";
+import {DialogsArrayType} from "../../index";
 
 
-const Dialogs = () => {
-    let dialogs = [
-        {id: 1, name: 'Masha'},
-        {id: 2, name: 'Alexey'},
-        {id: 3, name: 'Andrey'}
-    ]
+// type DialogsType = {
+//     id: number,
+//     name: string
+// }
+//
+// type MessagesType = {
+//     id: number,
+//     message: string
+// }
+//
+// export type DialogsArrayType = {
+//     dialogs: DialogsType[]
+//     messages: MessagesType[]
+// }
 
-    let messages = [
-        {id: 1, message: 'Hello'},
-        {id: 2, message: 'Hi'},
-        {id: 3, message: 'Yo'}
-    ]
+const Dialogs = (props: DialogsArrayType) => {
 
-    let dialogsElements = dialogs.map(dialog => <DialogItem name={dialog.name} id={dialog.id}/>)
+    let dialogsElements =  props.dialogs.map(dialog => <DialogItem name={dialog.name} id={dialog.id}/>)
 
-    let messagesElement = messages.map(message => <Message message={message.message}/>)
+    let messagesElement = props.messages.map(message => <Message message={message.message}/>)
 
     return (
         <div className={s.dialogs}>
@@ -27,7 +32,7 @@ const Dialogs = () => {
                 {dialogsElements}
             </div>
             <div className={s.messages}>
-                {messagesElement}
+                {}
             </div>
         </div>
     )
