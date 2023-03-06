@@ -10,8 +10,9 @@ import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 
 import dialogs from "./components/Dialogs/Dialogs";
-import {AppPropsType} from "./index";
+
 import Dialogs from "./components/Dialogs/Dialogs";
+import {AppPropsType} from "./redux/state";
 
 
 
@@ -28,9 +29,7 @@ function App(props:AppPropsType) {
                     <Route path='/news' render={() => <News/>}/>
                     <Route path='/music' render={() => <Music/>}/>
                     <Route path='/settings' render={() => <Settings/>}/>
-
                 </div>
-
             </div>
         </BrowserRouter>
     );

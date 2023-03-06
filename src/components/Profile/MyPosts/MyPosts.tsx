@@ -2,19 +2,10 @@ import React from 'react';
 import s from './MyPosts.module.css'
 import Post from './Post/Post'
 import exp from "constants";
-import {MyPostsType} from "../../../index";
+import {MyPostsType} from "../../../redux/state";
 
 
 
-// type ProfileType = {
-//     id: number,
-//     message: string,
-//     likesCount: number
-// }
-//
-// export type MyPostsType = {
-//     post: ProfileType[]
-// }
 
 const MyPosts = (props:MyPostsType) => {
 

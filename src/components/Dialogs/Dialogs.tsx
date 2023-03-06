@@ -2,23 +2,10 @@ import React from 'react';
 import s from './Dialogs.module.css'
 import Message from "./Message/Message";
 import DialogItem from "./DialogItem/DialogItem";
-import {DialogsArrayType} from "../../index";
+import {DialogsArrayType} from "../../redux/state";
 
 
-// type DialogsType = {
-//     id: number,
-//     name: string
-// }
-//
-// type MessagesType = {
-//     id: number,
-//     message: string
-// }
-//
-// export type DialogsArrayType = {
-//     dialogs: DialogsType[]
-//     messages: MessagesType[]
-// }
+
 
 const Dialogs = (props: DialogsArrayType) => {
 
@@ -32,7 +19,7 @@ const Dialogs = (props: DialogsArrayType) => {
                 {dialogsElements}
             </div>
             <div className={s.messages}>
-                {}
+                {messagesElement}
             </div>
         </div>
     )
