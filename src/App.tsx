@@ -25,7 +25,10 @@ function App(props:AppPropsType) {
                 <Nav/>
                 <div className='app-wrapper-content'>
                     <Route path='/profile' render={() => <Profile post={props.profilePage.post}/>}/>
-                    <Route path='/dialogs' render={() => <Dialogs dialogs={props.dialogsPage.dialogs} messages={props.dialogsPage.messages}/>}/>
+                    <Route path='/dialogs' render={() => <Dialogs
+                        dialogs={props.dialogsPage.dialogs}
+                        messages={props.dialogsPage.messages}
+                    />}/>
                     <Route path='/news' render={() => <News/>}/>
                     <Route path='/music' render={() => <Music/>}/>
                     <Route path='/settings' render={() => <Settings/>}/>

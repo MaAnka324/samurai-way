@@ -12,7 +12,7 @@
     color: chartreuse;
 }
 
-.messages {
+.messages .dialog{
     padding: 10px;
 }
 

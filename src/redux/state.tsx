@@ -34,7 +34,7 @@ export type AppPropsType = {
     sidebar: SidebarType
 }
 
-let state: AppPropsType = {
+const state: AppPropsType = {
     profilePage: {
         post: [
             {id: 1, message: 'Hello', likesCount: 12},
@@ -43,7 +43,7 @@ let state: AppPropsType = {
     },
     dialogsPage: {
         dialogs: [
-            {id: 1, name: 'Masha'},
+            {id: 1, name: 'Dobby'},
             {id: 2, name: 'Alexey'},
             {id: 3, name: 'Andrey'}
         ],
@@ -51,9 +51,18 @@ let state: AppPropsType = {
             {id: 1, message: 'Hello'},
             {id: 2, message: 'Hi'},
             {id: 3, message: 'Yo'}
-        ]
+        ],
     },
     sidebar: {}
+}
+
+export const addPost = (postMessage: string) => {
+    let newPost = {
+        id: 5,
+        message: postMessage,
+        likesCount: 0
+    }
+    state.profilePage.post.push(newPost)
 }
 
 export default state
