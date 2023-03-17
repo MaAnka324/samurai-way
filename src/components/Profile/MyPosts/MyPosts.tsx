@@ -23,7 +23,7 @@ const MyPosts = (props:MyPostsType) => {
 
     const addPost = () => {
         if (newPostElement.current !== null) {
-            alert(newPostElement.current.value)
+            props.addPost(newPostElement.current.value)
         }
     }
 
@@ -45,6 +45,7 @@ const MyPosts = (props:MyPostsType) => {
                 </div>
                 <div className={s.posts}>
                     {postElement}
+                    {props.post.map(p => <div key={p.id}></div>)}
                 </div>
             </div>
     )

@@ -1,4 +1,4 @@
-
+import {renderTree} from "../index";
 
 
 export type ProfileType = {
@@ -9,6 +9,7 @@ export type ProfileType = {
 
 export type MyPostsType = {
     post: ProfileType[]
+    addPost: (message: string) => void
 }
 
 export type DialogsType = {
@@ -32,14 +33,30 @@ export type AppPropsType = {
     profilePage: MyPostsType
     dialogsPage: DialogsArrayType
     sidebar: SidebarType
+    //
 }
+
+
+export const addPost = (postMessage: string) => {
+    let newPost: ProfileType = {
+        id: 5,
+        message: postMessage,
+        likesCount: 0
+    }
+    state.profilePage.post.push(newPost)
+
+    renderTree(state)
+}
+
+
 
 const state: AppPropsType = {
     profilePage: {
         post: [
             {id: 1, message: 'Hello', likesCount: 12},
             {id: 2, message: 'How are you?', likesCount: 11},
-        ]
+        ],
+        addPost
     },
     dialogsPage: {
         dialogs: [
@@ -53,16 +70,10 @@ const state: AppPropsType = {
             {id: 3, message: 'Yo'}
         ],
     },
-    sidebar: {}
+    sidebar: {},
+
 }
 
-export const addPost = (postMessage: string) => {
-    let newPost = {
-        id: 5,
-        message: postMessage,
-        likesCount: 0
-    }
-    state.profilePage.post.push(newPost)
-}
+
 
 export default state
