@@ -31,7 +31,7 @@ const MyPosts = (props:MyPostsType) => {
     //     let text = newPostElement.current.value
     //     alert(text)
     // }
-
+//
     return (
             <div className={s.postsBlock}>
                 <h3>My posts</h3>
