@@ -25,6 +25,7 @@ export type MessagesType = {
 export type DialogsArrayType = {
     dialogs: DialogsType[]
     messages: MessagesType[]
+    addMessage: (message: string) => void
 }
 
 export type SidebarType = {}
@@ -33,7 +34,7 @@ export type AppPropsType = {
     profilePage: MyPostsType
     dialogsPage: DialogsArrayType
     sidebar: SidebarType
-    //
+
 }
 
 
@@ -48,6 +49,16 @@ export const addPost = (postMessage: string) => {
     renderTree(state)
 }
 
+
+export const addMessage = (postMessage: string) => {
+    let newMessage: MessagesType = {
+        id: 5   ,
+        message: postMessage
+    }
+    state.dialogsPage.messages.push(newMessage)
+
+    renderTree(state)
+}
 
 
 const state: AppPropsType = {
@@ -69,6 +80,7 @@ const state: AppPropsType = {
             {id: 2, message: 'Hi'},
             {id: 3, message: 'Yo'}
         ],
+        addMessage
     },
     sidebar: {},
 

@@ -17,7 +17,8 @@ const Dialogs = (props: DialogsArrayType) => {
 
     let addMessage = () => {
         if(newPostElement.current !== null){
-            alert(newPostElement.current.value)
+            props.addMessage(newPostElement.current.value)
+            newPostElement.current.value = ''
         }
     }
 
@@ -30,7 +31,7 @@ const Dialogs = (props: DialogsArrayType) => {
             <div className={s.messages}>
                 {messagesElement}
             </div>
-
+            <textarea ref={newPostElement}></textarea>
             <button onClick={addMessage}>Send</button>
         </div>
     )

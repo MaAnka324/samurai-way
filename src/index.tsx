@@ -11,6 +11,7 @@ export const renderTree = (state:AppPropsType) => {
             profilePage={state.profilePage}
             dialogsPage={state.dialogsPage}
             sidebar={state}
+
         />,
         document.getElementById('root')
     );
