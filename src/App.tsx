@@ -12,7 +12,7 @@ import Settings from "./components/Settings/Settings";
 import dialogs from "./components/Dialogs/Dialogs";
 
 import Dialogs from "./components/Dialogs/Dialogs";
-import {addMessage, addPost, AppPropsType} from "./redux/state";
+import {addMessage, addPost, AppPropsType, changeNewText} from "./redux/state";
 
 
 
@@ -25,8 +25,13 @@ function App(props:AppPropsType) {
                 <Nav/>
                 <div className='app-wrapper-content'>
                     <Route path='/profile' render={() => <Profile
+                        messageForNewPost={props.profilePage.messageForNewPost}
                         post={props.profilePage.post}
-                        addPost={addPost}/>}/>
+                        addPost={addPost}
+                        changeNewTextCallback={changeNewText}
+                    />}
+
+                    />
                     <Route path='/dialogs' render={() => <Dialogs
                         dialogs={props.dialogsPage.dialogs}
                         messages={props.dialogsPage.messages}

@@ -8,8 +8,10 @@ export type ProfileType = {
 }
 
 export type MyPostsType = {
+    messageForNewPost: string
     post: ProfileType[]
     addPost: (message: string) => void
+    changeNewTextCallback: (newText: string) => void
 }
 
 export type DialogsType = {
@@ -34,21 +36,18 @@ export type AppPropsType = {
     profilePage: MyPostsType
     dialogsPage: DialogsArrayType
     sidebar: SidebarType
-
 }
 
-
-export const addPost = (postMessage: string) => {
+export const addPost = () => {
     let newPost: ProfileType = {
         id: 5,
-        message: postMessage,
+        message: state.profilePage.messageForNewPost,
         likesCount: 0
     }
     state.profilePage.post.push(newPost)
-
+    state.profilePage.changeNewTextCallback('')
     renderTree(state)
 }
-
 
 export const addMessage = (postMessage: string) => {
     let newMessage: MessagesType = {
@@ -56,18 +55,23 @@ export const addMessage = (postMessage: string) => {
         message: postMessage
     }
     state.dialogsPage.messages.push(newMessage)
-
     renderTree(state)
 }
 
+export const changeNewText = (newText: string) => {
+    state.profilePage.messageForNewPost = newText
+    renderTree(state)
+}
 
 const state: AppPropsType = {
     profilePage: {
+        messageForNewPost: '',
         post: [
             {id: 1, message: 'Hello', likesCount: 12},
             {id: 2, message: 'How are you?', likesCount: 11},
         ],
-        addPost
+        addPost,
+        changeNewTextCallback: changeNewText
     },
     dialogsPage: {
         dialogs: [
@@ -85,7 +89,5 @@ const state: AppPropsType = {
     sidebar: {},
 
 }
-
-
 
 export default state
