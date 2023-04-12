@@ -2,16 +2,18 @@ import React, {useRef} from 'react';
 import s from './MyPosts.module.css'
 import Post from './Post/Post'
 import exp from "constants";
-import {MyPostsType} from "../../../redux/state";
+import {ProfileType} from "../../../redux/state";
 
 
+type MyPostsType = {
+    messageForNewPost: string
+    posts: ProfileType[]
+    addPost: (val:string) => void
+    changeNewTextCallback: (val: string) => void
+}
 const MyPosts = (props: MyPostsType) => {
-    // let post = [
-    //     {id: 1, message: 'Hello', likesCount: 12},
-    //     {id: 2, message: 'How are you?', likesCount: 11},
-    // ]
 
-    let postElement = props.post.map(p => <Post
+    let postElement = props.posts.map(p => <Post
         key={p.id}
         message={p.message}
         likesCount={p.likesCount}/>)

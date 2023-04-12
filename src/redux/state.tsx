@@ -1,22 +1,15 @@
-let renderTree = () => {
+let onChange = () => {
     console.log("hello")
 }
 
 export const subscribe = (callback: () => void) => {
-    renderTree = callback
+    onChange = callback
 }
 
 export type ProfileType = {
     id: number,
     message: string,
     likesCount: number
-}
-
-export type MyPostsType = {
-    messageForNewPost: string
-    post: ProfileType[]
-    addPost: (message: string) => void
-    changeNewTextCallback: (newText: string) => void
 }
 
 export type DialogsType = {
@@ -32,13 +25,16 @@ export type MessagesType = {
 export type DialogsArrayType = {
     dialogs: DialogsType[]
     messages: MessagesType[]
-    addMessage: (message: string) => void
 }
 
 export type SidebarType = {}
+type ProfilePageType = {
+    messageForNewPost: string
+    post: ProfileType[]
 
+}
 export type AppPropsType = {
-    profilePage: MyPostsType
+    profilePage: ProfilePageType
     dialogsPage: DialogsArrayType
     sidebar: SidebarType
 }
@@ -51,7 +47,7 @@ export type AppPropsType = {
 //     }
 //     state.profilePage.post.push(newPost)
 //     state.profilePage.changeNewTextCallback('')
-//     renderTree()
+//     onChange()
 // }
 
 // export const addMessage = (postMessage: string) => {
@@ -60,12 +56,12 @@ export type AppPropsType = {
 //         message: postMessage
 //     }
 //     state.dialogsPage.messages.push(newMessage)
-//     renderTree()
+//     onChange()
 // }
 
 // export const changeNewText = (newText: string) => {
 //     state.profilePage.messageForNewPost = newText
-//     renderTree()
+//     onChange()
 // }
 
 // const state: AppPropsType = {
@@ -99,7 +95,11 @@ export type StoreType = {
     _state: AppPropsType
     changeNewText: (newText: string) => void
     addPost:  (message: string) => void,
-    addMessage: (postMessage: string) => void
+    addMessage: (postMessage: string) => void,
+    changeNewTextCallback: (newText: string) => void
+    _onChange: () => void
+    subscribe: (callback: () => void) => void
+    getState: () => AppPropsType
 }
 
 export const store: StoreType = {
@@ -110,8 +110,6 @@ export const store: StoreType = {
             {id: 1, message: 'Hello', likesCount: 12},
             {id: 2, message: 'How are you?', likesCount: 11},
         ],
-        addPost,
-        changeNewTextCallback: changeNewText
     },
     dialogsPage: {
         dialogs: [
@@ -124,24 +122,23 @@ export const store: StoreType = {
             {id: 2, message: 'Hi'},
             {id: 3, message: 'Yo'}
         ],
-        addMessage
     },
     sidebar: {},
 
-},
+    },
     changeNewText  (newText: string)  {
         this._state.profilePage.messageForNewPost = newText
-        renderTree()
+        this._onChange()
     },
-    addPost  ()  {
+    addPost()  {
         let newPost: ProfileType = {
             id: 5,
             message: this._state.profilePage.messageForNewPost,
             likesCount: 0
         }
         this._state.profilePage.post.push(newPost)
-        this._state.profilePage.changeNewTextCallback('')
-        renderTree()
+        // this.changeNewText('')
+        this._onChange()
     },
     addMessage  (postMessage: string)  {
         let newMessage: MessagesType = {
@@ -149,7 +146,22 @@ export const store: StoreType = {
             message: postMessage
         }
         this._state.dialogsPage.messages.push(newMessage)
-        renderTree()
+        this._onChange()
+    },
+    changeNewTextCallback () {
+
+    },
+
+    _onChange () {
+        console.log("state changed")
+    },
+
+    subscribe (callback) {
+        this._onChange = callback
+    },
+
+    getState() {
+         return this._state
     }
 }
 

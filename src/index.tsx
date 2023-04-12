@@ -2,11 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import state, {AppPropsType, store} from "./redux/state";
+import state, {AppPropsType, store, subscribe} from "./redux/state";
 
 
-export const renderTree = (state:AppPropsType) => {
-    ReactDOM.render(
+export const renderTree = () => {
+  return  ReactDOM.render(
         <App
             // profilePage={state.profilePage}
             // dialogsPage={state.dialogsPage}
@@ -17,5 +17,9 @@ export const renderTree = (state:AppPropsType) => {
     );
 }
 
+store.subscribe(renderTree)
+
+
+renderTree()
 
 

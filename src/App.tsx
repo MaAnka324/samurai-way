@@ -9,13 +9,19 @@ import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import Dialogs from "./components/Dialogs/Dialogs";
-import {StoreType} from "./redux/state";
+import {store, StoreType} from "./redux/state";
 
 type PropsType = {
     store: StoreType
 }
 
 const App: React.FC<PropsType> = (props) => {
+
+    const state = props.store.getState()
+
+    // let message = state.profilePage.post[0].message
+    // let message2 = state.profilePage.post[1].message
+
     return (
         <BrowserRouter>
             <div className="app-wrapper">
@@ -23,8 +29,8 @@ const App: React.FC<PropsType> = (props) => {
                 <Nav/>
                 <div className='app-wrapper-content'>
                     <Route path='/profile' render={() => <Profile
-                        messageForNewPost={props.store._state.profilePage.messageForNewPost}
-                        post={props.store._state.profilePage.post}
+                        messageForNewPost={state.profilePage.messageForNewPost}
+                        posts={state.profilePage.post}
                         addPost={props.store.addPost.bind(props.store)}
                         changeNewTextCallback={props.store.changeNewText.bind(props.store)}
                     />}
