@@ -31,6 +31,7 @@ const App: React.FC<PropsType> = (props) => {
                     <Route path='/profile' render={() => <Profile
                         messageForNewPost={state.profilePage.messageForNewPost}
                         posts={state.profilePage.post}
+                        dispatch={store.dispatch.bind(props.store)}
                         addPost={props.store.addPost.bind(props.store)}
                         changeNewTextCallback={props.store.changeNewText.bind(props.store)}
                     />}

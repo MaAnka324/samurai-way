@@ -96,11 +96,22 @@ export type StoreType = {
     changeNewText: (newText: string) => void
     addPost:  (message: string) => void,
     addMessage: (postMessage: string) => void,
-    changeNewTextCallback: (newText: string) => void
     _onChange: () => void
     subscribe: (callback: () => void) => void
     getState: () => AppPropsType
+    dispatch: (action: ActionsTypes) => void
 }
+
+ type AddPostActionType = {
+    type: 'ADD-POST'
+    postMessage: string
+}
+ type ChangeNewTextActionType = {
+    type: 'CHANGE-NEW-TEXT'
+    newText: string
+}
+
+export type ActionsTypes = AddPostActionType | ChangeNewTextActionType
 
 export const store: StoreType = {
      _state: {
@@ -148,20 +159,30 @@ export const store: StoreType = {
         this._state.dialogsPage.messages.push(newMessage)
         this._onChange()
     },
-    changeNewTextCallback () {
-
-    },
-
     _onChange () {
         console.log("state changed")
     },
-
     subscribe (callback) {
         this._onChange = callback
     },
-
     getState() {
          return this._state
+    },
+    dispatch(action) {
+         if(action.type === 'ADD-POST') {
+             let newPost: ProfileType = {
+                 id: 5,
+                 message: action.postMessage,
+                 likesCount: 0
+             }
+             this._state.profilePage.post.push(newPost)
+             // this.changeNewText('')
+             this._onChange()
+         }
+         else if (action.type === 'CHANGE-NEW-TEXT'){
+             this._state.profilePage.messageForNewPost = action.newText
+             this._onChange()
+         }
     }
 }
 
