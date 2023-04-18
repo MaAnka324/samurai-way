@@ -2,7 +2,7 @@ import React, {useRef} from 'react';
 import s from './MyPosts.module.css'
 import Post from './Post/Post'
 import exp from "constants";
-import {ProfileType} from "../../../redux/state";
+import {ActionsTypes, addPostAC, ProfileType} from "../../../redux/state";
 
 
 type MyPostsType = {
@@ -10,6 +10,7 @@ type MyPostsType = {
     posts: ProfileType[]
     addPost: (val:string) => void
     changeNewTextCallback: (val: string) => void
+    dispatch: (action: ActionsTypes) => void
 }
 const MyPosts = (props: MyPostsType) => {
 
@@ -20,7 +21,7 @@ const MyPosts = (props: MyPostsType) => {
 
     const addPost = () => {
         props.addPost(props.messageForNewPost)
-
+        props.dispatch(addPostAC(props.messageForNewPost))
     }
 
     return (
@@ -31,7 +32,6 @@ const MyPosts = (props: MyPostsType) => {
                     onChange={(e) => {
                         props.changeNewTextCallback(e.currentTarget.value)
                     }}
-
                     value={props.messageForNewPost}
                 />
                 <button

@@ -38,6 +38,7 @@ const Profile = (props: ProfilePropsType) => {
                 addPost={props.addPost}
                 messageForNewPost={props.messageForNewPost}
                 changeNewTextCallback={props.changeNewTextCallback}
+                dispatch={props.dispatch}
             />
 
         </div>
