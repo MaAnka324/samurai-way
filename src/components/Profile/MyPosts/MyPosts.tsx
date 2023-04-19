@@ -20,7 +20,7 @@ const MyPosts = (props: MyPostsType) => {
         likesCount={p.likesCount}/>)
 
     const addPost = () => {
-        props.addPost(props.messageForNewPost)
+        // props.addPost(props.messageForNewPost)
         props.dispatch(addPostAC(props.messageForNewPost))
     }
 
@@ -29,15 +29,12 @@ const MyPosts = (props: MyPostsType) => {
             <h3>My posts</h3>
             <div>
                 <textarea
+                    value={props.messageForNewPost}
                     onChange={(e) => {
                         props.changeNewTextCallback(e.currentTarget.value)
                     }}
-                    value={props.messageForNewPost}
                 />
-                <button
-                    onClick={addPost}
-                >Add post
-                </button>
+                <button onClick={addPost}>Add post</button>
             </div>
             <div className={s.posts}>
                 {postElement}

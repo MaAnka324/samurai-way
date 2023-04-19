@@ -8,9 +8,6 @@ import state, {AppPropsType, store, subscribe} from "./redux/state";
 export const renderTree = () => {
   return  ReactDOM.render(
         <App
-            // profilePage={state.profilePage}
-            // dialogsPage={state.dialogsPage}
-            // sidebar={state}
             store={store}
         />,
         document.getElementById('root')
@@ -18,7 +15,6 @@ export const renderTree = () => {
 }
 
 store.subscribe(renderTree)
-
 
 renderTree()
 

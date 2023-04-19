@@ -18,23 +18,16 @@ const Dialogs = (props: DialogsPropsType) => {
 
     let dialogsElements =  props.dialogs.map(dialog => <DialogItem name={dialog.name} id={dialog.id} />)
 
-    let messagesElement = props.messages.map(message => <Message message={message.message}/>)
-
-    let newPostElement = useRef<HTMLTextAreaElement>(null)
+    let messagesElement = props.messages.map(message => <Message
+        key={message.id}
+        message={message.message}
+    />)
 
     let newMessageDody = props.newMessageText
 
-    // let addMessage = () => {
-    //     if(newPostElement.current !== null){
-    //         props.addMessage(newPostElement.current.value)
-    //         newPostElement.current.value = ''
-    //         props.dispatch(sendMessageAC(props.newMessageText))
-    //     }
-    // }
-
     const addMessage = () => {
-        props.addMessage(props.newMessageText)
-        props.dispatch(addPostAC(props.newMessageText))
+        // props.addMessage(props.newMessageText)
+        props.dispatch(sendMessageAC(props.newMessageText))
     }
 
     return (
@@ -47,13 +40,11 @@ const Dialogs = (props: DialogsPropsType) => {
                 {messagesElement}
             </div>
             <textarea value={newMessageDody}
-                      // ref={newPostElement}
-                      placeholder='Enter your message'
                       onChange={(e) => {
                           props.addMessage(e.currentTarget.value)}}
+                      placeholder='Enter your message'
             ></textarea>
             <button onClick={addMessage}>Send</button>
-
         </div>
     )
 }
