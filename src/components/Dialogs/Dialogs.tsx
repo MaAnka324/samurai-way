@@ -2,8 +2,15 @@ import React, {useRef} from 'react';
 import s from './Dialogs.module.css'
 import Message from "./Message/Message";
 import DialogItem from "./DialogItem/DialogItem";
-import {ActionsTypes, addPostAC, DialogsArrayType, DialogsType, MessagesType, sendMessageAC} from "../../redux/state";
-import Post from "../Profile/MyPosts/Post/Post";
+import {
+    ActionsTypes,
+    addPostAC,
+    DialogsArrayType,
+    DialogsType,
+    MessagesType,
+    newMessageTextAC,
+    sendMessageAC
+} from "../../redux/state";
 
 
 
@@ -41,7 +48,7 @@ const Dialogs = (props: DialogsPropsType) => {
             </div>
             <textarea value={newMessageDody}
                       onChange={(e) => {
-                          props.addMessage(e.currentTarget.value)}}
+                          props.dispatch(newMessageTextAC(e.currentTarget.value))}}
                       placeholder='Enter your message'
             ></textarea>
             <button onClick={addMessage}>Send</button>
