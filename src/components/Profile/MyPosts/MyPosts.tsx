@@ -1,7 +1,6 @@
 import React, {useRef} from 'react';
 import s from './MyPosts.module.css'
 import Post from './Post/Post'
-import exp from "constants";
 import {ActionsTypes, addPostAC, ProfileType} from "../../../redux/state";
 
 
