@@ -19,20 +19,18 @@ const sendMessageAC = (messageText: string) => {
 
 const dialogsReducer = (state: StoreType, action: ActionsTypes) => {
 
-    switch (action.type) {
-        case "UPDATE-NEW-MESSAGE-BODY":
-            state._state.dialogsPage.newMessageText = action.newMessage
-            state._onChange()
-            return state
-        case "SEND-MESSAGE":
-            let body = state._state.dialogsPage.newMessageText
-            state._state.dialogsPage.newMessageText = ''
-            state._state.dialogsPage.messages.push({id: 7, message: body})
-            state._onChange()
-            return state
-        default:
-            return state
+    if (action.type === "UPDATE-NEW-MESSAGE-BODY") {
+        state._state.dialogsPage.newMessageText = action.newMessage
+        state._onChange()
     }
+    else if (action.type === "SEND-MESSAGE") {
+        let body = state._state.dialogsPage.newMessageText
+        state._state.dialogsPage.newMessageText = ''
+        state._state.dialogsPage.messages.push({id: 7, message: body})
+        state._onChange()
+    }
+
+    return state
 }
 
 export default dialogsReducer
