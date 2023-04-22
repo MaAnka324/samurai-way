@@ -1,3 +1,7 @@
+import profileReducer from "./profile-reducer";
+import dialogsReducer from "./dialogs-reducer";
+import sidebarReducer from "./sidebar-reducer";
+
 let onChange = () => {
     console.log("hello")
 }
@@ -193,29 +197,11 @@ export const store: StoreType = {
          return this._state
     },
     dispatch(action) {
-         if(action.type === 'ADD-POST') {
-             let newPost: ProfileType = {
-                 id: 5,
-                 message: action.postMessage,
-                 likesCount: 0
-             }
-             this._state.profilePage.post.push(newPost)
-             this._onChange()
-         }
-         else if (action.type === 'CHANGE-NEW-TEXT'){
-             this._state.profilePage.messageForNewPost = action.newText
-             this._onChange()
-         }
-         else if (action.type === "UPDATE-NEW-MESSAGE-BODY") {
-             this._state.dialogsPage.newMessageText = action.newMessage
-             this._onChange()
-         }
-         else if (action.type === "SEND-MESSAGE") {
-             let body = this._state.dialogsPage.newMessageText
-             this._state.dialogsPage.newMessageText = ''
-             this._state.dialogsPage.messages.push({id: 7, message: body})
-             this._onChange()
-         }
+
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+        this._state.sidebar = sidebarReducer(this._state.sidebar, action)
+
     }
 }
 

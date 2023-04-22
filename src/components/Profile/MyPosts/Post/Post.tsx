@@ -1,6 +1,5 @@
 import React from 'react';
 import s from './Post.module.css'
-import exp from "constants";
 
 // let s = {
 //     'item': 'Profile_item__TYOiq',
