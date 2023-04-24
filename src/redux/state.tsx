@@ -1,5 +1,5 @@
-import profileReducer from "./profile-reducer";
-import dialogsReducer from "./dialogs-reducer";
+import profileReducer, {ProfileActionsTypes} from "./profile-reducer";
+import dialogsReducer, {DialogsActionsTypes} from "./dialogs-reducer";
 import sidebarReducer from "./sidebar-reducer";
 
 let onChange = () => {
@@ -33,7 +33,7 @@ export type DialogsArrayType = {
 }
 
 export type SidebarType = {}
-type ProfilePageType = {
+export type ProfilePageType = {
     messageForNewPost: string
     post: ProfileType[]
 
@@ -104,42 +104,39 @@ export type StoreType = {
     _onChange: () => void
     subscribe: (callback: () => void) => void
     getState: () => AppPropsType
-    dispatch: (action: ActionsTypes) => void
+    dispatch: (action: AllActionsTypes) => void
 }
 
 
-export type ActionsTypes = ReturnType<typeof addPostAC>
-    | ReturnType<typeof changeNewTextAC>
-    | ReturnType<typeof newMessageTextAC>
-    | ReturnType<typeof sendMessageAC>
-
-export const addPostAC = (postText: string) => {
-    return {
-        type: "ADD-POST",
-        postMessage: postText
-    } as const
-}
-
-export const changeNewTextAC = (newText: string) => {
-    return {
-        type: "CHANGE-NEW-TEXT",
-        newText: newText
-    } as const
-}
-
-export const newMessageTextAC = (newMessage: string) => {
-    return {
-        type: "UPDATE-NEW-MESSAGE-BODY",
-        newMessage: newMessage
-    } as const
-}
-
-export const sendMessageAC = (messageText: string) => {
-    return {
-        type: "SEND-MESSAGE",
-        messageText: messageText
-    } as const
-}
+export type AllActionsTypes = ProfileActionsTypes | DialogsActionsTypes
+//
+// export const addPostAC = (postText: string) => {
+//     return {
+//         type: "ADD-POST",
+//         postMessage: postText
+//     } as const
+// }
+//
+// export const changeNewTextAC = (newText: string) => {
+//     return {
+//         type: "CHANGE-NEW-TEXT",
+//         newText: newText
+//     } as const
+// }
+//
+// export const newMessageTextAC = (newMessage: string) => {
+//     return {
+//         type: "UPDATE-NEW-MESSAGE-BODY",
+//         newMessage: newMessage
+//     } as const
+// }
+//
+// export const sendMessageAC = (messageText: string) => {
+//     return {
+//         type: "SEND-MESSAGE",
+//         messageText: messageText
+//     } as const
+// }
 
 export const store: StoreType = {
      _state: {
@@ -198,8 +195,8 @@ export const store: StoreType = {
     },
     dispatch(action) {
 
-        // this._state.profilePage = profileReducer(this._state.profilePage, action)
-        // this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
         this._state.sidebar = sidebarReducer(this._state.sidebar, action)
 
     }

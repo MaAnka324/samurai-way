@@ -3,12 +3,12 @@ import s from './Dialogs.module.css'
 import Message from "./Message/Message";
 import DialogItem from "./DialogItem/DialogItem";
 import {
-    ActionsTypes,
+    AllActionsTypes,
     DialogsType,
     MessagesType,
-    newMessageTextAC,
-    sendMessageAC
+
 } from "../../redux/state";
+import {DialogsActionsTypes, newMessageTextAC, sendMessageAC} from "../../redux/dialogs-reducer";
 
 
 
@@ -16,7 +16,7 @@ type DialogsPropsType = {
     addMessage: (val: string) => void
     dialogs: DialogsType[]
     messages: MessagesType[]
-    dispatch: (action: ActionsTypes) => void
+    dispatch: (action: DialogsActionsTypes) => void
     newMessageText: string
 }
 const Dialogs = (props: DialogsPropsType) => {

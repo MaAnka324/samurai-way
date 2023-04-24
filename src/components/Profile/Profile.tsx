@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './Profile.module.css'
 import MyPosts from "./MyPosts/MyPosts";
-import {ActionsTypes, ProfileType} from "../../redux/state";
+import {AllActionsTypes, ProfileType} from "../../redux/state";
 
 
 const ProfileInfo = () => {
@@ -24,7 +24,7 @@ type ProfilePropsType = {
     posts: ProfileType[]
     addPost: (val:string) => void
     changeNewTextCallback: (val: string) => void
-    dispatch: (action: ActionsTypes) => void
+    dispatch: (action: AllActionsTypes) => void
 }
 const Profile = (props: ProfilePropsType) => {
 

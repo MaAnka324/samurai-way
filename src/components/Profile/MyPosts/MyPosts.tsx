@@ -1,7 +1,8 @@
 import React, {useRef} from 'react';
 import s from './MyPosts.module.css'
 import Post from './Post/Post'
-import {ActionsTypes, addPostAC, ProfileType} from "../../../redux/state";
+import {AllActionsTypes, ProfileType} from "../../../redux/state";
+import {addPostAC, ProfileActionsTypes} from "../../../redux/profile-reducer";
 
 
 type MyPostsType = {
@@ -9,7 +10,7 @@ type MyPostsType = {
     posts: ProfileType[]
     addPost: (val:string) => void
     changeNewTextCallback: (val: string) => void
-    dispatch: (action: ActionsTypes) => void
+    dispatch: (action: ProfileActionsTypes) => void
 }
 const MyPosts = (props: MyPostsType) => {
 

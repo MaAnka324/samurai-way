@@ -1,33 +1,31 @@
-import {StoreType} from "./state";
+import {AllActionsTypes, DialogsArrayType, StoreType} from "./state";
 
-type ActionsTypes = ReturnType<typeof newMessageTextAC>
+export type DialogsActionsTypes = ReturnType<typeof newMessageTextAC>
     | ReturnType<typeof sendMessageAC>
 
-const newMessageTextAC = (newMessage: string) => {
+export const newMessageTextAC = (newMessage: string) => {
     return {
         type: "UPDATE-NEW-MESSAGE-BODY",
         newMessage: newMessage
     } as const
 }
 
-const sendMessageAC = (messageText: string) => {
+export const sendMessageAC = (messageText: string) => {
     return {
         type: "SEND-MESSAGE",
         messageText: messageText
     } as const
 }
 
-const dialogsReducer = (state: StoreType, action: ActionsTypes) => {
+const dialogsReducer = (state: DialogsArrayType, action: AllActionsTypes) => {
 
     if (action.type === "UPDATE-NEW-MESSAGE-BODY") {
-        state._state.dialogsPage.newMessageText = action.newMessage
-        state._onChange()
+        state.newMessageText = action.newMessage
     }
     else if (action.type === "SEND-MESSAGE") {
-        let body = state._state.dialogsPage.newMessageText
-        state._state.dialogsPage.newMessageText = ''
-        state._state.dialogsPage.messages.push({id: 7, message: body})
-        state._onChange()
+        let body = state.newMessageText
+        state.newMessageText = ''
+        state.messages.push({id: 7, message: body})
     }
 
     return state

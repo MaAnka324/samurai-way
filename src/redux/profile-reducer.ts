@@ -1,24 +1,25 @@
-import {ProfileType, StoreType} from "./state";
+import {AllActionsTypes, ProfilePageType, ProfileType, StoreType} from "./state";
 
-type ActionsTypes = ReturnType<typeof addPostAC>
+export type ProfileActionsTypes = ReturnType<typeof addPostAC>
     | ReturnType<typeof changeNewTextAC>
 
 
-const addPostAC = (postText: string) => {
+export const addPostAC = (postText: string) => {
     return {
         type: "ADD-POST",
         postMessage: postText
     } as const
 }
 
-const changeNewTextAC = (newText: string) => {
+export const changeNewTextAC = (newText: string) => {
     return {
         type: "CHANGE-NEW-TEXT",
         newText: newText
     } as const
 }
 
-const profileReducer = (state: StoreType, action: ActionsTypes) => {
+
+const profileReducer = (state: ProfilePageType, action: AllActionsTypes) => {
 
     switch (action.type) {
         case 'ADD-POST':
@@ -27,12 +28,10 @@ const profileReducer = (state: StoreType, action: ActionsTypes) => {
                 message: action.postMessage,
                 likesCount: 0
             }
-            state._state.profilePage.post.push(newPost)
-            state._onChange()
+            state.post.push(newPost)
             return state
         case 'CHANGE-NEW-TEXT':
-            state._state.profilePage.messageForNewPost = action.newText
-            state._onChange()
+            state.messageForNewPost = action.newText
             return state
         default:
             return state
