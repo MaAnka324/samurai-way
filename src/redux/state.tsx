@@ -98,9 +98,9 @@ export type AppPropsType = {
 
 export type StoreType = {
     _state: AppPropsType
-    changeNewText: (newText: string) => void
-    addPost:  (message: string) => void,
-    addMessage: (postMessage: string) => void,
+    // changeNewText: (newText: string) => void
+    // addPost:  (message: string) => void,
+    // addMessage: (postMessage: string) => void,
     _onChange: () => void
     subscribe: (callback: () => void) => void
     getState: () => AppPropsType
@@ -163,27 +163,6 @@ export const store: StoreType = {
     sidebar: {},
 
     },
-    changeNewText  (newText: string)  {
-        this._state.profilePage.messageForNewPost = newText
-        this._onChange()
-    },
-    addPost()  {
-        let newPost: ProfileType = {
-            id: 5,
-            message: this._state.profilePage.messageForNewPost,
-            likesCount: 0
-        }
-        this._state.profilePage.post.push(newPost)
-        this._onChange()
-    },
-    addMessage  (postMessage: string)  {
-        let newMessage: MessagesType = {
-            id: 5,
-            message: postMessage
-        }
-        this._state.dialogsPage.messages.push(newMessage)
-        this._onChange()
-    },
     _onChange () {
         console.log("state changed")
     },
@@ -194,11 +173,10 @@ export const store: StoreType = {
          return this._state
     },
     dispatch(action) {
-
         this._state.profilePage = profileReducer(this._state.profilePage, action)
         this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
         this._state.sidebar = sidebarReducer(this._state.sidebar, action)
-
+        this._onChange() //rerenderTree()
     }
 }
 

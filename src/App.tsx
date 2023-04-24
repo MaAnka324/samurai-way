@@ -32,8 +32,6 @@ const App: React.FC<PropsType> = (props) => {
                         messageForNewPost={state.profilePage.messageForNewPost}
                         posts={state.profilePage.post}
                         dispatch={props.store.dispatch.bind(props.store)}
-                        addPost={props.store.addPost.bind(props.store)}
-                        changeNewTextCallback={props.store.changeNewText.bind(props.store)}
                     />}
 
                     />
@@ -42,7 +40,6 @@ const App: React.FC<PropsType> = (props) => {
                         dialogs={props.store._state.dialogsPage.dialogs}
                         messages={props.store._state.dialogsPage.messages}
                         dispatch={props.store.dispatch.bind(props.store)}
-                        addMessage={props.store.addMessage.bind(props.store)}
                     />}/>
                     <Route path='/news' render={() => <News/>}/>
                     <Route path='/music' render={() => <Music/>}/>

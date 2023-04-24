@@ -2,14 +2,13 @@ import React, {useRef} from 'react';
 import s from './MyPosts.module.css'
 import Post from './Post/Post'
 import {AllActionsTypes, ProfileType} from "../../../redux/state";
-import {addPostAC, ProfileActionsTypes} from "../../../redux/profile-reducer";
+import {addPostAC, changeNewTextAC, ProfileActionsTypes} from "../../../redux/profile-reducer";
 
 
 type MyPostsType = {
     messageForNewPost: string
     posts: ProfileType[]
-    addPost: (val:string) => void
-    changeNewTextCallback: (val: string) => void
+
     dispatch: (action: ProfileActionsTypes) => void
 }
 const MyPosts = (props: MyPostsType) => {
@@ -20,7 +19,6 @@ const MyPosts = (props: MyPostsType) => {
         likesCount={p.likesCount}/>)
 
     const addPost = () => {
-        // props.addPost(props.messageForNewPost)
         props.dispatch(addPostAC(props.messageForNewPost))
     }
 
@@ -31,7 +29,7 @@ const MyPosts = (props: MyPostsType) => {
                 <textarea
                     value={props.messageForNewPost}
                     onChange={(e) => {
-                        props.changeNewTextCallback(e.currentTarget.value)
+                        props.dispatch(changeNewTextAC(e.currentTarget.value))
                     }}
                 />
                 <button onClick={addPost}>Add post</button>

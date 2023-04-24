@@ -1,4 +1,4 @@
-import {AllActionsTypes, ProfilePageType, ProfileType, StoreType} from "./state";
+import {AllActionsTypes, ProfilePageType, ProfileType} from "./state";
 
 export type ProfileActionsTypes = ReturnType<typeof addPostAC>
     | ReturnType<typeof changeNewTextAC>
@@ -19,7 +19,7 @@ export const changeNewTextAC = (newText: string) => {
 }
 
 
-const profileReducer = (state: ProfilePageType, action: AllActionsTypes) => {
+const profileReducer = (state: ProfilePageType, action: AllActionsTypes): ProfilePageType => {
 
     switch (action.type) {
         case 'ADD-POST':

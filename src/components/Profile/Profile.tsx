@@ -22,8 +22,7 @@ const ProfileInfo = () => {
 type ProfilePropsType = {
     messageForNewPost: string
     posts: ProfileType[]
-    addPost: (val:string) => void
-    changeNewTextCallback: (val: string) => void
+
     dispatch: (action: AllActionsTypes) => void
 }
 const Profile = (props: ProfilePropsType) => {
@@ -34,9 +33,7 @@ const Profile = (props: ProfilePropsType) => {
             <ProfileInfo/>
             <MyPosts
                 posts={props.posts}
-                addPost={props.addPost}
                 messageForNewPost={props.messageForNewPost}
-                changeNewTextCallback={props.changeNewTextCallback}
                 dispatch={props.dispatch}
             />
 

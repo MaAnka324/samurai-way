@@ -13,7 +13,7 @@ import {DialogsActionsTypes, newMessageTextAC, sendMessageAC} from "../../redux/
 
 
 type DialogsPropsType = {
-    addMessage: (val: string) => void
+
     dialogs: DialogsType[]
     messages: MessagesType[]
     dispatch: (action: DialogsActionsTypes) => void
