@@ -17,7 +17,21 @@ export const sendMessageAC = (messageText: string) => {
     } as const
 }
 
-const dialogsReducer = (state: DialogsArrayType, action: AllActionsTypes) => {
+let initialState = {
+    dialogs: [
+        {id: 1, name: 'Dobby'},
+        {id: 2, name: 'Alexey'},
+        {id: 3, name: 'Andrey'}
+    ],
+    messages: [
+        {id: 1, message: 'Hello'},
+        {id: 2, message: 'Hi'},
+        {id: 3, message: 'Yo'}
+    ],
+    newMessageText: ''
+}
+
+const dialogsReducer = (state: DialogsArrayType = initialState, action: AllActionsTypes) => {
 
     if (action.type === "UPDATE-NEW-MESSAGE-BODY") {
         state.newMessageText = action.newMessage
