@@ -22,7 +22,6 @@ const ProfileInfo = () => {
 type ProfilePropsType = {
     messageForNewPost: string
     posts: ProfileType[]
-
     dispatch: (action: AllActionsTypes) => void
 }
 const Profile = (props: ProfilePropsType) => {

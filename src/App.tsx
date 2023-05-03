@@ -3,24 +3,21 @@ import './App.css';
 import Profile from "./components/Profile/Profile";
 import Nav from "./components/Nav/Nav";
 import Header from "./components/Header/Header";
-
 import {BrowserRouter, Route} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import Dialogs from "./components/Dialogs/Dialogs";
 import {StoreType} from "./redux/state";
+import {ReduxStoreRootStateType} from "./redux/redux-store";
 
 type PropsType = {
-    store: StoreType
+    state: ReduxStoreRootStateType
 }
 
 const App: React.FC<PropsType> = (props) => {
 
-    const state = props.store.getState()
-
-    // let message = state.profilePage.post[0].message
-    // let message2 = state.profilePage.post[1].message
+    const state = props.state
 
     return (
         <BrowserRouter>
@@ -32,13 +29,11 @@ const App: React.FC<PropsType> = (props) => {
                         messageForNewPost={state.profilePage.messageForNewPost}
                         posts={state.profilePage.post}
                         dispatch={props.store.dispatch.bind(props.store)}
-                    />}
-
-                    />
+                    />}/>
                     <Route path='/dialogs' render={() => <Dialogs
                         newMessageText={state.dialogsPage.newMessageText}
-                        dialogs={props.store._state.dialogsPage.dialogs}
-                        messages={props.store._state.dialogsPage.messages}
+                        dialogs={props.state.dialogsPage.dialogs}
+                        messages={props.state.dialogsPage.messages}
                         dispatch={props.store.dispatch.bind(props.store)}
                     />}/>
                     <Route path='/news' render={() => <News/>}/>

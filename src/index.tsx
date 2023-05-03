@@ -2,14 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import state, {AppPropsType, subscribe} from "./redux/state";
-import store from "./redux/redux-store";
+import state, {AppPropsType, StoreType, subscribe} from "./redux/state";
+import store, {ReduxStoreRootStateType} from "./redux/redux-store";
 
 
-export const renderTree = (state: any) => {
+export const renderTree = (state: ReduxStoreRootStateType) => {
   return  ReactDOM.render(
         <App
-            store={store}
+            state={state}
+            dispatch = {store.dispatch.bind(store)}
         />,
         document.getElementById('root')
     );
@@ -21,5 +22,3 @@ store.subscribe(() => {
 })
 
 renderTree(store.getState())
-
-
