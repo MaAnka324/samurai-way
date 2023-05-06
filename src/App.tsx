@@ -10,9 +10,11 @@ import Settings from "./components/Settings/Settings";
 import Dialogs from "./components/Dialogs/Dialogs";
 import {StoreType} from "./redux/state";
 import {ReduxStoreRootStateType} from "./redux/redux-store";
+import {Dispatch} from "redux";
 
 type PropsType = {
     state: ReduxStoreRootStateType
+    dispatch: Dispatch
 }
 
 const App: React.FC<PropsType> = (props) => {
@@ -28,13 +30,13 @@ const App: React.FC<PropsType> = (props) => {
                     <Route path='/profile' render={() => <Profile
                         messageForNewPost={state.profilePage.messageForNewPost}
                         posts={state.profilePage.post}
-                        dispatch={props.store.dispatch.bind(props.store)}
+                        dispatch={props.dispatch}
                     />}/>
                     <Route path='/dialogs' render={() => <Dialogs
                         newMessageText={state.dialogsPage.newMessageText}
                         dialogs={props.state.dialogsPage.dialogs}
                         messages={props.state.dialogsPage.messages}
-                        dispatch={props.store.dispatch.bind(props.store)}
+                        dispatch={props.dispatch}
                     />}/>
                     <Route path='/news' render={() => <News/>}/>
                     <Route path='/music' render={() => <Music/>}/>

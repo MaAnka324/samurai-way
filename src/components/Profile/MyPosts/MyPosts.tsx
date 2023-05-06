@@ -1,26 +1,25 @@
-import React, {useRef} from 'react';
+import React, {ChangeEvent, ChangeEventHandler} from 'react';
 import s from './MyPosts.module.css'
-import Post from './Post/Post'
-import {AllActionsTypes, ProfileType} from "../../../redux/state";
-import {addPostAC, changeNewTextAC, ProfileActionsTypes} from "../../../redux/profile-reducer";
+import {ProfileType} from "../../../redux/state";
+import Post from "./Post/Post";
 
 
 type MyPostsType = {
-    messageForNewPost: string
+    addPost: () => void
     posts: ProfileType[]
-
-    dispatch: (action: ProfileActionsTypes) => void
+    onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void
+    messageForNewPost: string
 }
 const MyPosts = (props: MyPostsType) => {
+
+    const addPost = () => {
+        props.addPost()
+    }
 
     let postElement = props.posts.map(p => <Post
         key={p.id}
         message={p.message}
         likesCount={p.likesCount}/>)
-
-    const addPost = () => {
-        props.dispatch(addPostAC(props.messageForNewPost))
-    }
 
     return (
         <div className={s.postsBlock}>
@@ -28,15 +27,12 @@ const MyPosts = (props: MyPostsType) => {
             <div>
                 <textarea
                     value={props.messageForNewPost}
-                    onChange={(e) => {
-                        props.dispatch(changeNewTextAC(e.currentTarget.value))
-                    }}
+                    onChange={props.onChange}
                 />
                 <button onClick={addPost}>Add post</button>
             </div>
             <div className={s.posts}>
                 {postElement}
-                {/*{props.post.map(p => <div key={p.id}>{props.messageForNewPost}</div>)}*/}
             </div>
         </div>
     )
