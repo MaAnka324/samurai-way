@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './Profile.module.css'
 import MyPosts from "./MyPosts/MyPosts";
-import {AllActionsTypes, ProfileType} from "../../redux/state";
+import {AllActionsTypes, ProfileType, store} from "../../redux/state";
 import MyPostsContainer from "./MyPosts/Post/MyPostsContainer";
 
 
@@ -35,6 +35,7 @@ const Profile = (props: ProfilePropsType) => {
                 messageForNewPost={props.messageForNewPost}
                 posts={props.posts}
                 dispatch={props.dispatch}
+                store={store}
             />
 
         </div>
