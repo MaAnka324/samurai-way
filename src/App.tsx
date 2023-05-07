@@ -11,6 +11,7 @@ import Dialogs from "./components/Dialogs/Dialogs";
 import {StoreType} from "./redux/state";
 import {ReduxStoreRootStateType} from "./redux/redux-store";
 import {Dispatch} from "redux";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 type PropsType = {
     state: ReduxStoreRootStateType
@@ -32,7 +33,7 @@ const App: React.FC<PropsType> = (props) => {
                         posts={state.profilePage.post}
                         dispatch={props.dispatch}
                     />}/>
-                    <Route path='/dialogs' render={() => <Dialogs
+                    <Route path='/dialogs' render={() => <DialogsContainer
                         newMessageText={state.dialogsPage.newMessageText}
                         dialogs={props.state.dialogsPage.dialogs}
                         messages={props.state.dialogsPage.messages}
