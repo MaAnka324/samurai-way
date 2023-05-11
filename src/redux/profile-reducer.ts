@@ -4,10 +4,9 @@ export type ProfileActionsTypes = ReturnType<typeof addPostAC>
     | ReturnType<typeof changeNewTextAC>
 
 
-export const addPostAC = (postText: string) => {
+export const addPostAC = () => {
     return {
         type: "ADD-POST",
-        postMessage: postText
     } as const
 }
 
@@ -29,17 +28,18 @@ let initialState = {
 const profileReducer = (state: ProfilePageType = initialState, action: AllActionsTypes): ProfilePageType => {
 
     switch (action.type) {
-        case 'ADD-POST':
-            let newPost: ProfileType = {
-                id: 5,
-                message: action.postMessage,
-                likesCount: 0
-            }
-            state.post.push(newPost)
-            return state
         case 'CHANGE-NEW-TEXT':
-            state.messageForNewPost = action.newText
-            return state
+            return {
+                ...state,
+                messageForNewPost: action.newText
+            }
+        case 'ADD-POST':
+            const newMessage = {id: 3, message: state.messageForNewPost, likesCount: 4}
+            return {
+                ...state,
+                messageForNewPost: '',
+                post: [...state.post, newMessage]
+            }
         default:
             return state
     }

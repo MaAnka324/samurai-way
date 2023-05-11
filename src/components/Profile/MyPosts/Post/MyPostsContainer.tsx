@@ -2,30 +2,70 @@
  import MyPosts from "../MyPosts";
  import {ProfileType, StoreType} from "../../../../redux/state";
  import {addPostAC, changeNewTextAC, ProfileActionsTypes} from "../../../../redux/profile-reducer";
+ import {newMessageTextAC, sendMessageAC} from "../../../../redux/dialogs-reducer";
+ import Dialogs from "../../../Dialogs/Dialogs";
+ import {ReduxStoreRootStateType} from "../../../../redux/redux-store";
+ import {Dispatch} from "redux";
+ import {connect} from "react-redux";
 
-type MyPostsContainerType = {
-    messageForNewPost: string
-    posts: ProfileType[]
-    dispatch: (action: ProfileActionsTypes) => void
-    store: StoreType
-}
-const MyPostsContainer = (props: MyPostsContainerType) => {
-    let state = props.store.getState()
+// type MyPostsContainerType = {
+    // messageForNewPost: string
+    // posts: ProfileType[]
+    // dispatch: (action: ProfileActionsTypes) => void
+    // store: StoreType
+// }
+// const MyPostsContainer = (props: any) => {
+//
+//
+//     return (
+//         <StoreContext.Consumer>
+//             {
+//                 store => {
+//                     let state = props.store.getState().profilePage
+//
+//                     const addPost = () => {
+//                         store.dispatch(addPostAC(state.messageForNewPost))
+//                     }
+//
+//                     const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+//                         store.dispatch(changeNewTextAC(e.currentTarget.value))}
+//
+//
+//                     return (
+//                         <MyPosts addPost={addPost}
+//                                  onChange={onChange}
+//                                  posts={state.post}
+//                                  messageForNewPost={state.messageForNewPost}
+//                         />
+//                     )
+//                 }
+//             }
+//         </StoreContext.Consumer>
+//     )
+// }
 
-    const addPost = () => {
-        props.dispatch(addPostAC(props.messageForNewPost))
-    }
 
-    const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch(changeNewTextAC(e.currentTarget.value))}
 
-    return (
-        <MyPosts addPost={addPost}
-                 posts={props.posts}
-                 onChange={onChange}
-                 messageForNewPost={props.messageForNewPost}
-        />
-    )
-}
+ let mapStateToProps = (state: ReduxStoreRootStateType) => {
+     return {
+         posts: state.profilePage.post,
+         messageForNewPost: state.profilePage.messageForNewPost
+     }
+ }
 
-export default MyPostsContainer
+ let mapDispatchToProps = (dispatch: Dispatch) => {
+     return {
+         addPost: () => {
+             dispatch(addPostAC())
+         },
+         onChange: (e: ChangeEvent<HTMLTextAreaElement>) => {
+             dispatch(changeNewTextAC(e.currentTarget.value))
+         }
+     }
+ }
+
+ const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts)
+
+
+
+ export default MyPostsContainer

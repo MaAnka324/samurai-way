@@ -32,10 +32,10 @@ const Profile = (props: ProfilePropsType) => {
         <div>
             <ProfileInfo/>
             <MyPostsContainer
-                messageForNewPost={props.messageForNewPost}
-                posts={props.posts}
-                dispatch={props.dispatch}
-                store={store}
+                // messageForNewPost={props.messageForNewPost}
+                // posts={props.posts}
+                // dispatch={props.dispatch}
+                // store={store}
             />
 
         </div>

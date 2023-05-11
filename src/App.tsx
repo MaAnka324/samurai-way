@@ -34,10 +34,10 @@ const App: React.FC<PropsType> = (props) => {
                         dispatch={props.dispatch}
                     />}/>
                     <Route path='/dialogs' render={() => <DialogsContainer
-                        newMessageText={state.dialogsPage.newMessageText}
-                        dialogs={props.state.dialogsPage.dialogs}
-                        messages={props.state.dialogsPage.messages}
-                        dispatch={props.dispatch}
+                        // newMessageText={state.dialogsPage.newMessageText}
+                        // dialogs={props.state.dialogsPage.dialogs}
+                        // messages={props.state.dialogsPage.messages}
+                        // dispatch={props.dispatch}
                     />}/>
                     <Route path='/news' render={() => <News/>}/>
                     <Route path='/music' render={() => <Music/>}/>

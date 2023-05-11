@@ -10,10 +10,9 @@ export const newMessageTextAC = (newMessage: string) => {
     } as const
 }
 
-export const sendMessageAC = (messageText: string) => {
+export const sendMessageAC = () => {
     return {
         type: "SEND-MESSAGE",
-        messageText: messageText
     } as const
 }
 
@@ -33,16 +32,23 @@ let initialState = {
 
 const dialogsReducer = (state: DialogsArrayType = initialState, action: AllActionsTypes) => {
 
-    if (action.type === "UPDATE-NEW-MESSAGE-BODY") {
-        state.newMessageText = action.newMessage
+    switch (action.type) {
+        case "UPDATE-NEW-MESSAGE-BODY":
+            return {
+                ...state,
+                newMessageText: action.newMessage
+            }
+        case "SEND-MESSAGE": {
+            const newMessage = {id: 7, message: state.newMessageText}
+            return {
+                ...state,
+                newMessageText: '',
+                messages: [...state.messages, newMessage]
+            }
+        }
+        default:
+            return state
     }
-    else if (action.type === "SEND-MESSAGE") {
-        let body = state.newMessageText
-        state.newMessageText = ''
-        state.messages.push({id: 7, message: body})
-    }
-
-    return state
 }
 
 export default dialogsReducer
