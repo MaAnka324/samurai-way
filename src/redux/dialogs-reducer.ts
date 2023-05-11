@@ -16,21 +16,34 @@ export const sendMessageAC = () => {
     } as const
 }
 
+export type DialogsType = {
+    id: number,
+    name: string
+}
+
+export type MessagesType = {
+    id: number,
+    message: string
+}
+
 let initialState = {
     dialogs: [
         {id: 1, name: 'Dobby'},
         {id: 2, name: 'Alexey'},
         {id: 3, name: 'Andrey'}
-    ],
+    ] as Array<DialogsType>,
     messages: [
         {id: 1, message: 'Hello'},
         {id: 2, message: 'Hi'},
         {id: 3, message: 'Yo'}
-    ],
+    ]  as Array<MessagesType>,
     newMessageText: ''
 }
 
-const dialogsReducer = (state: DialogsArrayType = initialState, action: AllActionsTypes) => {
+export type InitialStateType = typeof initialState
+
+
+const dialogsReducer = (state: InitialStateType = initialState, action: AllActionsTypes): InitialStateType => {
 
     switch (action.type) {
         case "UPDATE-NEW-MESSAGE-BODY":

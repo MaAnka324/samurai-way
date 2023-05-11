@@ -1,8 +1,9 @@
 import React from 'react';
 import s from './Profile.module.css'
 import MyPosts from "./MyPosts/MyPosts";
-import {AllActionsTypes, ProfileType, store} from "../../redux/state";
+import {AllActionsTypes} from "../../redux/state";
 import MyPostsContainer from "./MyPosts/Post/MyPostsContainer";
+import {ProfileType} from "../../redux/profile-reducer";
 
 
 const ProfileInfo = () => {
@@ -25,17 +26,11 @@ type ProfilePropsType = {
     posts: ProfileType[]
     dispatch: (action: AllActionsTypes) => void
 }
-const Profile = (props: ProfilePropsType) => {
-
-
+const Profile = () => {
     return (
         <div>
             <ProfileInfo/>
             <MyPostsContainer
-                // messageForNewPost={props.messageForNewPost}
-                // posts={props.posts}
-                // dispatch={props.dispatch}
-                // store={store}
             />
 
         </div>

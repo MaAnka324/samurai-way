@@ -10,18 +10,18 @@ export const subscribe = (callback: () => void) => {
     onChange = callback
 }
 
-export type ProfileType = {
+type ProfileType = {
     id: number,
     message: string,
     likesCount: number
 }
 
-export type DialogsType = {
+type DialogsType = {
     id: number,
     name: string
 }
 
-export type MessagesType = {
+type MessagesType = {
     id: number,
     message: string
 }
@@ -33,11 +33,13 @@ export type DialogsArrayType = {
 }
 
 export type SidebarType = {}
+
 export type ProfilePageType = {
     messageForNewPost: string
     post: ProfileType[]
 
 }
+
 export type AppPropsType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsArrayType
@@ -109,34 +111,6 @@ export type StoreType = {
 
 
 export type AllActionsTypes = ProfileActionsTypes | DialogsActionsTypes
-//
-// export const addPostAC = (postText: string) => {
-//     return {
-//         type: "ADD-POST",
-//         postMessage: postText
-//     } as const
-// }
-//
-// export const changeNewTextAC = (newText: string) => {
-//     return {
-//         type: "CHANGE-NEW-TEXT",
-//         newText: newText
-//     } as const
-// }
-//
-// export const newMessageTextAC = (newMessage: string) => {
-//     return {
-//         type: "UPDATE-NEW-MESSAGE-BODY",
-//         newMessage: newMessage
-//     } as const
-// }
-//
-// export const sendMessageAC = (messageText: string) => {
-//     return {
-//         type: "SEND-MESSAGE",
-//         messageText: messageText
-//     } as const
-// }
 
 export const store: StoreType = {
      _state: {

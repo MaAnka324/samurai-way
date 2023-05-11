@@ -1,4 +1,4 @@
-import {AllActionsTypes, ProfilePageType, ProfileType} from "./state";
+import {AllActionsTypes, ProfilePageType} from "./state";
 
 export type ProfileActionsTypes = ReturnType<typeof addPostAC>
     | ReturnType<typeof changeNewTextAC>
@@ -17,15 +17,23 @@ export const changeNewTextAC = (newText: string) => {
     } as const
 }
 
+export type ProfileType = {
+    id: number,
+    message: string,
+    likesCount: number
+}
+
 let initialState = {
     messageForNewPost: '',
     post: [
         {id: 1, message: 'Hello', likesCount: 12},
         {id: 2, message: 'How are you?', likesCount: 11},
-    ]
+    ] as Array<ProfileType>
 }
 
-const profileReducer = (state: ProfilePageType = initialState, action: AllActionsTypes): ProfilePageType => {
+export type InitialStateType = typeof initialState
+
+const profileReducer = (state: InitialStateType = initialState, action: AllActionsTypes): InitialStateType => {
 
     switch (action.type) {
         case 'CHANGE-NEW-TEXT':

@@ -7,8 +7,6 @@ import {BrowserRouter, Route} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
-import Dialogs from "./components/Dialogs/Dialogs";
-import {StoreType} from "./redux/state";
 import {ReduxStoreRootStateType} from "./redux/redux-store";
 import {Dispatch} from "redux";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
@@ -29,9 +27,9 @@ const App: React.FC<PropsType> = (props) => {
                 <Nav/>
                 <div className='app-wrapper-content'>
                     <Route path='/profile' render={() => <Profile
-                        messageForNewPost={state.profilePage.messageForNewPost}
-                        posts={state.profilePage.post}
-                        dispatch={props.dispatch}
+                        // messageForNewPost={state.profilePage.messageForNewPost}
+                        // posts={state.profilePage.post}
+                        // dispatch={props.dispatch}
                     />}/>
                     <Route path='/dialogs' render={() => <DialogsContainer
                         // newMessageText={state.dialogsPage.newMessageText}

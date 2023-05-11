@@ -3,13 +3,16 @@ import s from './Dialogs.module.css'
 import Message from "./Message/Message";
 import DialogItem from "./DialogItem/DialogItem";
 import {
-    AllActionsTypes,
-    DialogsType,
-    MessagesType,
+
 
 } from "../../redux/state";
-import {DialogsActionsTypes, newMessageTextAC, sendMessageAC} from "../../redux/dialogs-reducer";
-import {changeNewTextAC} from "../../redux/profile-reducer";
+import {
+    DialogsActionsTypes,
+    DialogsType,
+    MessagesType,
+    newMessageTextAC,
+    sendMessageAC
+} from "../../redux/dialogs-reducer";
 
 
 
@@ -31,7 +34,6 @@ const Dialogs = (props: DialogsPropsType) => {
     />)
 
     let newMessageDody = props.newMessageText
-
 
     return (
         <div className={s.dialogs}>

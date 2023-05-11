@@ -1,6 +1,5 @@
  import React, {ChangeEvent} from 'react';
  import MyPosts from "../MyPosts";
- import {ProfileType, StoreType} from "../../../../redux/state";
  import {addPostAC, changeNewTextAC, ProfileActionsTypes} from "../../../../redux/profile-reducer";
  import {newMessageTextAC, sendMessageAC} from "../../../../redux/dialogs-reducer";
  import Dialogs from "../../../Dialogs/Dialogs";
@@ -43,7 +42,6 @@
 //         </StoreContext.Consumer>
 //     )
 // }
-
 
 
  let mapStateToProps = (state: ReduxStoreRootStateType) => {
