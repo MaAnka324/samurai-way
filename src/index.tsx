@@ -22,9 +22,9 @@ export const renderTree = (state: ReduxStoreRootStateType) => {
     );
 }
 
-store.subscribe(() => {
-    let state = store.getState()
-    renderTree(state)
-})
+// store.subscribe(() => {
+//     let state = store.getState()
+//     renderTree(state)
+// })
 
 renderTree(store.getState())

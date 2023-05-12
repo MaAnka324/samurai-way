@@ -26,7 +26,7 @@ type MessagesType = {
     message: string
 }
 
-export type DialogsArrayType = {
+type DialogsArrayType = {
     dialogs: DialogsType[]
     messages: MessagesType[]
     newMessageText: string
@@ -34,13 +34,13 @@ export type DialogsArrayType = {
 
 export type SidebarType = {}
 
-export type ProfilePageType = {
+type ProfilePageType = {
     messageForNewPost: string
     post: ProfileType[]
 
 }
 
-export type AppPropsType = {
+type AppPropsType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsArrayType
     sidebar: SidebarType
@@ -98,7 +98,7 @@ export type AppPropsType = {
 //
 // }
 
-export type StoreType = {
+type StoreType = {
     _state: AppPropsType
     // changeNewText: (newText: string) => void
     // addPost:  (message: string) => void,
@@ -108,7 +108,6 @@ export type StoreType = {
     getState: () => AppPropsType
     dispatch: (action: AllActionsTypes) => void
 }
-
 
 export type AllActionsTypes = ProfileActionsTypes | DialogsActionsTypes
 

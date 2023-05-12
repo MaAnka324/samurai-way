@@ -3,23 +3,20 @@ import s from './Dialogs.module.css'
 import Message from "./Message/Message";
 import DialogItem from "./DialogItem/DialogItem";
 import state, {
-    AllActionsTypes, AppPropsType, DialogsArrayType,
-    StoreType,
-
-} from "../../redux/state";
+    AllActionsTypes} from "../../redux/state";
 import {DialogsActionsTypes, newMessageTextAC, sendMessageAC} from "../../redux/dialogs-reducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {ReduxStoreRootStateType} from "../../redux/redux-store";
 import {Dispatch} from "redux";
 
-type DialogsPropsType = {
+// type DialogsPropsType = {
     // dialogs: DialogsType[]
     // messages: MessagesType[]
     // dispatch: (action: DialogsActionsTypes) => void
     // newMessageText: string
-    store: StoreType
-}
+//     store: StoreType
+// }
 // const DialogsContainer = (props: any) => {
 //
 //     return (

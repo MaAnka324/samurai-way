@@ -1,4 +1,4 @@
-import {AllActionsTypes, ProfilePageType} from "./state";
+import {AllActionsTypes} from "./state";
 
 export type ProfileActionsTypes = ReturnType<typeof addPostAC>
     | ReturnType<typeof changeNewTextAC>
