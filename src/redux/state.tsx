@@ -152,5 +152,5 @@ export const store: StoreType = {
         this._onChange() //rerenderTree()
     }
 }
-
+//
 export default store
