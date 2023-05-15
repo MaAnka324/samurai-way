@@ -1,6 +1,7 @@
 import profileReducer, {ProfileActionsTypes} from "./profile-reducer";
 import dialogsReducer, {DialogsActionsTypes} from "./dialogs-reducer";
 import sidebarReducer from "./sidebar-reducer";
+import {UsersActionsTypes, UserType} from "./users-reducer";
 
 let onChange = () => {
     console.log("hello")
@@ -40,7 +41,13 @@ type ProfilePageType = {
 
 }
 
-type AppPropsType = {
+export type FindUsersType = {
+    users: Array<UserType>
+}
+
+
+
+export type AppPropsType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsArrayType
     sidebar: SidebarType
@@ -109,41 +116,41 @@ type StoreType = {
     dispatch: (action: AllActionsTypes) => void
 }
 
-export type AllActionsTypes = ProfileActionsTypes | DialogsActionsTypes
+export type AllActionsTypes = ProfileActionsTypes | DialogsActionsTypes | UsersActionsTypes
 
 export const store: StoreType = {
-     _state: {
-    profilePage: {
-        messageForNewPost: '',
-        post: [
-            {id: 1, message: 'Hello', likesCount: 12},
-            {id: 2, message: 'How are you?', likesCount: 11},
-        ],
-    },
-    dialogsPage: {
-        dialogs: [
-            {id: 1, name: 'Dobby'},
-            {id: 2, name: 'Alexey'},
-            {id: 3, name: 'Andrey'}
-        ],
-        messages: [
-            {id: 1, message: 'Hello'},
-            {id: 2, message: 'Hi'},
-            {id: 3, message: 'Yo'}
-        ],
-        newMessageText: ''
-    },
-    sidebar: {},
+    _state: {
+        profilePage: {
+            messageForNewPost: '',
+            post: [
+                {id: 1, message: 'Hello', likesCount: 12},
+                {id: 2, message: 'How are you?', likesCount: 11},
+            ],
+        },
+        dialogsPage: {
+            dialogs: [
+                {id: 1, name: 'Dobby'},
+                {id: 2, name: 'Alexey'},
+                {id: 3, name: 'Andrey'}
+            ],
+            messages: [
+                {id: 1, message: 'Hello'},
+                {id: 2, message: 'Hi'},
+                {id: 3, message: 'Yo'}
+            ],
+            newMessageText: ''
+        },
+        sidebar: {},
 
     },
-    _onChange () {
+    _onChange() {
         console.log("state changed")
     },
-    subscribe (callback) {
+    subscribe(callback) {
         this._onChange = callback
     },
     getState() {
-         return this._state
+        return this._state
     },
     dispatch(action) {
         this._state.profilePage = profileReducer(this._state.profilePage, action)
@@ -152,5 +159,5 @@ export const store: StoreType = {
         this._onChange() //rerenderTree()
     }
 }
-//
+
 export default store

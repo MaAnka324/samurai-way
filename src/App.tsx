@@ -10,6 +10,7 @@ import Settings from "./components/Settings/Settings";
 import {ReduxStoreRootStateType} from "./redux/redux-store";
 import {Dispatch} from "redux";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import Users from "./components/Users/Users";
 
 type PropsType = {
     state: ReduxStoreRootStateType
@@ -18,28 +19,18 @@ type PropsType = {
 
 const App: React.FC<PropsType> = (props) => {
 
-    const state = props.state
-
     return (
         <BrowserRouter>
             <div className="app-wrapper">
                 <Header/>
                 <Nav/>
                 <div className='app-wrapper-content'>
-                    <Route path='/profile' render={() => <Profile
-                        // messageForNewPost={state.profilePage.messageForNewPost}
-                        // posts={state.profilePage.post}
-                        // dispatch={props.dispatch}
-                    />}/>
-                    <Route path='/dialogs' render={() => <DialogsContainer
-                        // newMessageText={state.dialogsPage.newMessageText}
-                        // dialogs={props.state.dialogsPage.dialogs}
-                        // messages={props.state.dialogsPage.messages}
-                        // dispatch={props.dispatch}
-                    />}/>
+                    <Route path='/profile' render={() => <Profile/>}/>
+                    <Route path='/dialogs' render={() => <DialogsContainer/>}/>
                     <Route path='/news' render={() => <News/>}/>
                     <Route path='/music' render={() => <Music/>}/>
                     <Route path='/settings' render={() => <Settings/>}/>
+                    <Route path='/users' render={() => <Users/>}/>
                 </div>
             </div>
         </BrowserRouter>

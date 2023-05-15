@@ -13,7 +13,7 @@ export const addPostAC = () => {
 export const changeNewTextAC = (newText: string) => {
     return {
         type: "CHANGE-NEW-TEXT",
-        newText: newText
+        newText
     } as const
 }
 
