@@ -1,16 +1,17 @@
 import React from 'react';
 import {UsersType} from "./UsersContainer";
+import styles from './Users.module.css'
 
 export const Users = (props: UsersType) => {
 
-    if(props.usersPage.users.length === 0) {
+    if (props.usersPage.users.length === 0) {
         props.setUsers([
             {
                 id: 1,
-                protoURL: '',
+                protoURL: 'https://thypix.com/wp-content/uploads/2021/11/sponge-bob-profile-picture-thypix-m.jpg',
                 followed: true,
-                fullName: 'Alexey',
-                status: 'Hello',
+                fullName: 'SpongeBob',
+                status: 'LaLaLa',
                 location:
                     {
                         city: 'Kiev',
@@ -19,7 +20,7 @@ export const Users = (props: UsersType) => {
             },
             {
                 id: 2,
-                protoURL: '',
+                protoURL: 'https://thypix.com/wp-content/uploads/2021/11/sponge-bob-profile-picture-thypix-m.jpg',
                 followed: true,
                 fullName: 'Angelina',
                 status: 'Hi',
@@ -30,11 +31,11 @@ export const Users = (props: UsersType) => {
                     }
             },
             {
-                id: 1,
-                protoURL: '',
-                followed: true,
+                id: 3,
+                protoURL: 'https://thypix.com/wp-content/uploads/2021/11/sponge-bob-profile-picture-thypix-m.jpg',
+                followed: false,
                 fullName: 'Andrew',
-                status: 'LaLaLa',
+                status: 'Hello, I am Andrew',
                 location:
                     {
                         city: 'Kiev',
@@ -50,12 +51,16 @@ export const Users = (props: UsersType) => {
                 props.usersPage.users.map(u => <div key={u.id}>
                     <span>
                         <div>
-                            <img src={u.protoURL}/>
+                            <img src={u.protoURL} className={styles.userPhoto}/>
                         </div>
                         <div>
                             {u.followed
-                                ? <button onClick={() => {props.unfollow(u.id)}}>Unfollowed</button>
-                                : <button onClick={() => {props.follow(u.id)}}>Followed</button>
+                                ? <button onClick={() => {
+                                    props.unfollow(u.id)
+                                }}>Unfollowed</button>
+                                : <button onClick={() => {
+                                    props.follow(u.id)
+                                }}>Followed</button>
                             }
                         </div>
                     </span>
