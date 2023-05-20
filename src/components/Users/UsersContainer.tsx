@@ -7,7 +7,7 @@ import {ReduxStoreRootStateType} from "../../redux/redux-store";
 
 
 type MapStatePropsType = {
-    usersPage: InitialStateType
+    users: UserType[]
 }
 
 type MapDispatchPropsType = {
@@ -20,7 +20,7 @@ export type UsersType = MapStatePropsType & MapDispatchPropsType
 
 let mapStateToProps = (state: ReduxStoreRootStateType): MapStatePropsType => {
     return {
-        usersPage: state.users
+        users: state.usersPage.users
     }
 }
 

@@ -3,8 +3,12 @@ import {AllActionsTypes, FindUsersType} from "./state";
 export type UserType = {
     id: number
     protoURL: string
+    "photos": {
+        "small": string,
+        "large": string
+    },
     followed: boolean
-    fullName: string
+    name: string
     status: string
     location: UserLocation
 }
@@ -81,11 +85,12 @@ const usersReducer = (state: InitialStateType = initialState, action: AllActions
                     return  u
                 })
             }
-        case "SET-USERS":
+        case "SET-USERS": {
             return {
                 ...state,
-                users: [...state.users, ...action.users]
+                users: action.users
             }
+        }
         default:
             return state
     }

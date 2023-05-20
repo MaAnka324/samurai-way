@@ -1,57 +1,36 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {UsersType} from "./UsersContainer";
 import styles from './Users.module.css'
+import axios from "axios";
+import userPhoto from '../../assets/images/UserIcon.png'
 
+const instance = axios.create({
+    baseURL: 'https://social-network.samuraijs.com/api/1.0',
+    // withCredentials: true,
+    // headers:{
+    //     'API-KEY':'7d3c398b-2b30-4da2-a118-f5a83f07d318'
+    // }
+})
 export const Users = (props: UsersType) => {
-
-    if (props.usersPage.users.length === 0) {
-        props.setUsers([
-            {
-                id: 1,
-                protoURL: 'https://thypix.com/wp-content/uploads/2021/11/sponge-bob-profile-picture-thypix-m.jpg',
-                followed: true,
-                fullName: 'SpongeBob',
-                status: 'LaLaLa',
-                location:
-                    {
-                        city: 'Kiev',
-                        country: 'Ukraine'
-                    }
-            },
-            {
-                id: 2,
-                protoURL: 'https://thypix.com/wp-content/uploads/2021/11/sponge-bob-profile-picture-thypix-m.jpg',
-                followed: true,
-                fullName: 'Angelina',
-                status: 'Hi',
-                location:
-                    {
-                        city: 'Kiev',
-                        country: 'Ukraine'
-                    }
-            },
-            {
-                id: 3,
-                protoURL: 'https://thypix.com/wp-content/uploads/2021/11/sponge-bob-profile-picture-thypix-m.jpg',
-                followed: false,
-                fullName: 'Andrew',
-                status: 'Hello, I am Andrew',
-                location:
-                    {
-                        city: 'Kiev',
-                        country: 'Ukraine'
-                    }
-            },
-        ])
+    let getUsers = () => {
+        if (props.users.length === 0) {
+            instance.get('/users').then(response => {
+                props.setUsers(response.data.items)
+            })
+        }
     }
+
 
     return (
         <div>
+            <button onClick={getUsers}>Get Users</button>
             {
-                props.usersPage.users.map(u => <div key={u.id}>
+                props.users && props.users.map(u => <div key={u.id}>
                     <span>
                         <div>
-                            <img src={u.protoURL} className={styles.userPhoto}/>
+                            <img
+                                src={u.photos.small != null ? u.photos.small : userPhoto}
+                                className={styles.userPhoto}/>
                         </div>
                         <div>
                             {u.followed
@@ -66,12 +45,12 @@ export const Users = (props: UsersType) => {
                     </span>
                     <span>
                         <span>
-                            <div>{u.fullName}</div>
+                            <div>{u.name}</div>
                             <div>{u.status}</div>
                         </span>
                         <span>
-                            <div>{u.location.country}</div>
-                            <div>{u.location.city}</div>
+                            <div>{"u.location.country"}</div>
+                            <div>{"u.location.city"}</div>
                         </span>
                     </span>
                 </div>)
