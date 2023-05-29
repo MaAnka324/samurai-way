@@ -38,14 +38,11 @@ export type SidebarType = {}
 type ProfilePageType = {
     messageForNewPost: string
     post: ProfileType[]
-
 }
 
 export type FindUsersType = {
     users: Array<UserType>
 }
-
-
 
 export type AppPropsType = {
     profilePage: ProfilePageType

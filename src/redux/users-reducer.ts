@@ -19,43 +19,8 @@ export type UserLocation = {
 }
 
 
-
 let initialState: InitialStateType = {
-    users: [
-        // {
-        //     id: 1,
-        //     followed: true,
-        //     fullName: 'Alexey',
-        //     status: 'Hello',
-        //     location:
-        //         {
-        //             city: 'Kiev',
-        //             country: 'Ukraine'
-        //         }
-        // },
-        // {
-        //     id: 2,
-        //     followed: true,
-        //     fullName: 'Angelina',
-        //     status: 'Hi',
-        //     location:
-        //         {
-        //             city: 'Kiev',
-        //             country: 'Ukraine'
-        //         }
-        // },
-        // {
-        //     id: 1,
-        //     followed: true,
-        //     fullName: 'Andrew',
-        //     status: 'LaLaLa',
-        //     location:
-        //         {
-        //             city: 'Kiev',
-        //             country: 'Ukraine'
-        //         }
-        // },
-    ]
+    users: []
 }
 
 export type InitialStateType = {
