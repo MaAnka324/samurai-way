@@ -10,8 +10,7 @@ class Users extends React.Component<any, any> {
         baseURL: 'https://social-network.samuraijs.com/api/1.0'
     })
 
-    constructor(props: any) {
-        super(props);
+    componentDidMount() {
         this.instance.get('/users').then(response => {
             this.props.setUsers(response.data.items)
         })
