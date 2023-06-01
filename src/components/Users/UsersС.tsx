@@ -19,6 +19,13 @@ class Users extends React.Component<any, any> {
     render() {
         return (
             <div>
+                <div>
+                    <span>1</span>
+                    <span className={styles.selectedPage}>2</span>
+                    <span>3</span>
+                    <span>4</span>
+                    <span>5</span>
+                </div>
                 {
                     this.props.users && this.props.users.map((u: any) => <div key={u.id}>
                     <span>
