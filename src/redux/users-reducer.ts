@@ -20,11 +20,17 @@ export type UserLocation = {
 
 
 let initialState: InitialStateType = {
-    users: []
+    users: [],
+    pageSize: 3,
+    totalUsersCount: 10,
+    currentPage: 1
 }
 
 export type InitialStateType = {
     users: Array<UserType>
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
 }
 
 const usersReducer = (state: InitialStateType = initialState, action: AllActionsTypes): InitialStateType => {
@@ -56,6 +62,11 @@ const usersReducer = (state: InitialStateType = initialState, action: AllActions
                 users: action.users
             }
         }
+        case "SET-CURRENT-PAGE":
+            return {
+                ...state,
+                currentPage: action.currentPage
+            }
         default:
             return state
     }
@@ -67,6 +78,7 @@ export default usersReducer
 export type UsersActionsTypes = ReturnType<typeof followAC>
     | ReturnType<typeof unfollowAC>
     | ReturnType<typeof setUsersAC>
+    | ReturnType<typeof setCurrentPage>
 
 export const followAC = (userId: number) => (
     {type: "FOLLOW", userId} as const
@@ -76,4 +88,7 @@ export const unfollowAC = (userId: number) => (
 )
 export const setUsersAC = (users: Array<UserType>) => (
     {type: "SET-USERS", users} as const
+)
+export const setCurrentPage = (currentPage: number) => (
+    {type: "SET-CURRENT-PAGE", currentPage} as const
 )
