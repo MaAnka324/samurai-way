@@ -2,7 +2,6 @@ import React from 'react';
 import styles from './Users.module.css'
 import axios from "axios";
 import userPhoto from '../../assets/images/UserIcon.png'
-import {setCurrentPage} from "../../redux/users-reducer";
 
 
 class Users extends React.Component<any, any> {
@@ -11,11 +10,16 @@ class Users extends React.Component<any, any> {
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
             .then(response => {
             this.props.setUsers(response.data.items)
+            // this.props.setTotalUsersCount(response.data.totalCount)  //покажет все количество страниц
         })
     }
 
     onPageChanged = (pageNumber: any) => {
         this.props.setCurrentPage(pageNumber)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+            .then(response => {
+                this.props.setUsers(response.data.items)
+            })
     }
 
     render() {
@@ -33,7 +37,7 @@ class Users extends React.Component<any, any> {
                         return <span
                             key={this.props.id}
                             className={this.props.currentPage === p ? styles.selectedPage : ''}
-                            onClick={() => {}}
+                            onClick={(e) => {this.onPageChanged(p)}}
                         >{p}</span>
                     })}
                 </div>
@@ -63,7 +67,7 @@ class Users extends React.Component<any, any> {
                         </span>
                         <span>
                             <div>{"u.location.country"}</div>
-                            <div>{"u.location.city"}</div>
+                            {/*<div>{"u.location.city"}</div>*/}
                         </span>
                     </span>
                     </div>)
