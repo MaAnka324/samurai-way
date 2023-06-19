@@ -1,32 +1,30 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {UsersType} from "./UsersContainer";
 import styles from './Users.module.css'
-import axios from "axios";
 import userPhoto from '../../assets/images/UserIcon.png'
 
-const instance = axios.create({
-    baseURL: 'https://social-network.samuraijs.com/api/1.0',
-
-    // withCredentials: true,
-    // headers:{
-    //     'API-KEY':''
-    // }
-})
 export const Users = (props: UsersType) => {
-    let getUsers = () => {
-        if (props.users.length === 0) {
-            instance.get('/users').then(response => {
-                props.setUsers(response.data.items)
-            })
-        }
-    }
 
+    let pagesCount =  Math.ceil(props.totalUsersCount / props.pageSize)
+
+    let pages = []
+    for(let i = 1; i <= pagesCount; i++) {
+        pages.push(i)
+    }
 
     return (
         <div>
-            <button onClick={getUsers}>Get Users</button>
+            <div>
+                {pages.map(p => {
+                    return <span
+                        // key={p.id} //??????????????????
+                        className={props.currentPage === p ? styles.selectedPage : ''}
+                        onClick={(e) => {props.setCurrentPage(p)}}
+                    >{p}</span>
+                })}
+            </div>
             {
-                props.users && props.users.map(u => <div key={u.id}>
+                props.users && props.users.map((u: any) => <div key={u.id}>
                     <span>
                         <div>
                             <img
@@ -51,13 +49,12 @@ export const Users = (props: UsersType) => {
                         </span>
                         <span>
                             <div>{"u.location.country"}</div>
-                            <div>{"u.location.city"}</div>
+                            {/*<div>{"u.location.city"}</div>*/}
                         </span>
                     </span>
                 </div>)
             }
         </div>
     );
-};
 
-export default Users;
+};
