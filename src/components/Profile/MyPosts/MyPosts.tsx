@@ -2,12 +2,12 @@ import React, {ChangeEvent, ChangeEventHandler} from 'react';
 import s from './MyPosts.module.css'
 
 import Post from "./Post/Post";
-import {ProfileType} from "../../../redux/profile-reducer";
+import {PostsType} from "../../../redux/profile-reducer";
 
 
 type MyPostsType = {
     addPost: () => void
-    posts: ProfileType[]
+    posts: PostsType[]
     onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void
     messageForNewPost: string
 }

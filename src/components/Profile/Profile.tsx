@@ -1,13 +1,18 @@
 import React from 'react';
 import s from './Profile.module.css'
-import MyPosts from "./MyPosts/MyPosts";
-import {AllActionsTypes} from "../../redux/state";
 import MyPostsContainer from "./MyPosts/Post/MyPostsContainer";
-import {ProfileType} from "../../redux/profile-reducer";
+import {PostsType, ProfileType} from "../../redux/profile-reducer";
+import {ProfilePropsType} from "./ProfileContainer";
 
+type ProfileInfoType = {
+    profile: ProfileType | null
+}
 
-const ProfileInfo = () => {
-
+const ProfileInfo = (props: ProfileInfoType) => {
+    if (!props.profile) {
+        return <div>Preloader</div>
+    }
+    console.log(props)
     return (
         <div>
             <div>
@@ -16,23 +21,30 @@ const ProfileInfo = () => {
             </div>
             <div className={s.descriptionBlock}>
                 <img
-                    src='https://www.ochkov.net/wiki/wiki/storage/app/uploads/public/5d7/a08/0c6/5d7a080c6de1b874225893.jpg'/>
+                    src={props?.profile?.photos?.large ? props?.profile?.photos?.large : ''}/>
             </div>
         </div>
     )
 }
-type ProfilePropsType = {
+
+
+interface ProfilePropsTypeNew {
+    profile: {
+        profile: ProfileType,
+        post: PostsType[],
+        messageForNewPost: string
+    },
+    post: PostsType[],
     messageForNewPost: string
-    posts: ProfileType[]
-    dispatch: (action: AllActionsTypes) => void
 }
-const Profile = () => {
+
+
+const Profile = (props: ProfilePropsTypeNew) => {
+    console.log(props)
     return (
         <div>
-            <ProfileInfo/>
-            <MyPostsContainer
-            />
-
+            <ProfileInfo profile={props.profile.profile}/>
+            <MyPostsContainer/>
         </div>
     )
 }

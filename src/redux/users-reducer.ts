@@ -1,11 +1,11 @@
-import {AllActionsTypes, FindUsersType} from "./state";
+import {AllActionsTypes} from "./state";
 
 export type UserType = {
     id: number
     protoURL: string
-    "photos": {
-        "small": string,
-        "large": string
+    photos: {
+        small: string,
+        large: string
     },
     followed: boolean
     name: string
@@ -87,28 +87,28 @@ const usersReducer = (state: InitialStateType = initialState, action: AllActions
 export default usersReducer
 
 
-export type UsersActionsTypes = ReturnType<typeof followAC>
-    | ReturnType<typeof unfollowAC>
-    | ReturnType<typeof setUsersAC>
-    | ReturnType<typeof setCurrentPageAC>
-    | ReturnType<typeof setUsersTotalCountAC>
-    | ReturnType<typeof toggleIsFetchingAC>
+export type UsersActionsTypes = ReturnType<typeof follow>
+    | ReturnType<typeof unfollow>
+    | ReturnType<typeof setUsers>
+    | ReturnType<typeof setCurrentPage>
+    | ReturnType<typeof setUsersTotalCount>
+    | ReturnType<typeof toggleIsFetching>
 
-export const followAC = (userId: number) => (
+export const follow = (userId: number) => (
     {type: "FOLLOW", userId} as const
 )
-export const unfollowAC = (userId: number) => (
+export const unfollow = (userId: number) => (
     {type: "UNFOLLOW", userId} as const
 )
-export const setUsersAC = (users: Array<UserType>) => (
+export const setUsers = (users: Array<UserType>) => (
     {type: "SET-USERS", users} as const
 )
-export const setCurrentPageAC = (currentPage: number) => (
+export const setCurrentPage = (currentPage: number) => (
     {type: "SET-CURRENT-PAGE", currentPage} as const
 )
-export const setUsersTotalCountAC = (totalCount: number) => (
+export const setUsersTotalCount = (totalCount: number) => (
     {type: "SET-TOTAL-COUNT", totalCount} as const
 )
-export const toggleIsFetchingAC = (isFetching: boolean) => (
+export const toggleIsFetching = (isFetching: boolean) => (
     {type: "TOGGLE-IS-FETCHING", isFetching} as const
 )

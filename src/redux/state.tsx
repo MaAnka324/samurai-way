@@ -115,46 +115,46 @@ type StoreType = {
 
 export type AllActionsTypes = ProfileActionsTypes | DialogsActionsTypes | UsersActionsTypes
 
-export const store: StoreType = {
-    _state: {
-        profilePage: {
-            messageForNewPost: '',
-            post: [
-                {id: 1, message: 'Hello', likesCount: 12},
-                {id: 2, message: 'How are you?', likesCount: 11},
-            ],
-        },
-        dialogsPage: {
-            dialogs: [
-                {id: 1, name: 'Dobby'},
-                {id: 2, name: 'Alexey'},
-                {id: 3, name: 'Andrey'}
-            ],
-            messages: [
-                {id: 1, message: 'Hello'},
-                {id: 2, message: 'Hi'},
-                {id: 3, message: 'Yo'}
-            ],
-            newMessageText: ''
-        },
-        sidebar: {},
+// const store: StoreType = {
+//     _state: {
+//         profilePage: {
+//             messageForNewPost: '',
+//             post: [
+//                 {id: 1, message: 'Hello', likesCount: 12},
+//                 {id: 2, message: 'How are you?', likesCount: 11},
+//             ],
+//         },
+//         dialogsPage: {
+//             dialogs: [
+//                 {id: 1, name: 'Dobby'},
+//                 {id: 2, name: 'Alexey'},
+//                 {id: 3, name: 'Andrey'}
+//             ],
+//             messages: [
+//                 {id: 1, message: 'Hello'},
+//                 {id: 2, message: 'Hi'},
+//                 {id: 3, message: 'Yo'}
+//             ],
+//             newMessageText: ''
+//         },
+//         sidebar: {},
+//
+//     },
+//     _onChange() {
+//         console.log("state changed")
+//     },
+//     subscribe(callback) {
+//         this._onChange = callback
+//     },
+//     getState() {
+//         return this._state
+//     },
+//     dispatch(action) {
+//         this._state.profilePage = profileReducer(this._state.profilePage, action)
+//         this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+//         this._state.sidebar = sidebarReducer(this._state.sidebar, action)
+//         this._onChange() //rerenderTree()
+//     }
+// }
 
-    },
-    _onChange() {
-        console.log("state changed")
-    },
-    subscribe(callback) {
-        this._onChange = callback
-    },
-    getState() {
-        return this._state
-    },
-    dispatch(action) {
-        this._state.profilePage = profileReducer(this._state.profilePage, action)
-        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
-        this._state.sidebar = sidebarReducer(this._state.sidebar, action)
-        this._onChange() //rerenderTree()
-    }
-}
-
-export default store
+// export default store
