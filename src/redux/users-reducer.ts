@@ -22,7 +22,7 @@ export type UserLocation = {
 let initialState: InitialStateType = {
     users: [],
     pageSize: 10,
-    totalUsersCount: 90,
+    totalUsersCount: 190,
     currentPage: 1,
     isFetching: true
 }

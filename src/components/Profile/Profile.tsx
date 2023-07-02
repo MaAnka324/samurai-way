@@ -2,6 +2,7 @@ import React from 'react';
 import s from './Profile.module.css'
 import MyPostsContainer from "./MyPosts/Post/MyPostsContainer";
 import {PostsType, ProfileType} from "../../redux/profile-reducer";
+import userPhoto from '../../assets/images/UserIcon.png'
 
 type ProfileInfoType = {
     profile: ProfileType | null
@@ -26,7 +27,7 @@ const ProfileInfo = (props: ProfileInfoType) => {
             </p>
             <div className={s.descriptionBlock}>
                 <img
-                    src={props.profile.photos?.large ? props.profile.photos.large : ''}/>
+                    src={props.profile.photos?.large ? props.profile.photos.large : userPhoto}/>
             </div>
             <div>
                 LookingForAJobDescription: {props.profile.lookingForAJobDescription}
