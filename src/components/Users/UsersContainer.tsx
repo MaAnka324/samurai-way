@@ -8,7 +8,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 
 
-class UsersAPIComponent extends React.Component<any, any> {
+class UsersAPIComponent extends React.Component<UsersType> {
 
     componentDidMount() {
         this.props.toggleIsFetching(true)
@@ -16,7 +16,7 @@ class UsersAPIComponent extends React.Component<any, any> {
             .then(response => {
                 this.props.toggleIsFetching(false)
                 this.props.setUsers(response.data.items)
-                this.props.setTotalUsersCount(response.data.totalCount)  //покажет все количество страниц
+                // this.props.setTotalUsersCount(response.data.totalCount)  //покажет все количество страниц
             })
     }
 
@@ -47,7 +47,7 @@ class UsersAPIComponent extends React.Component<any, any> {
                 unfollow={this.props.unfollow}
                 setUsers={this.props.setUsers}
                 toggleIsFetching={this.props.toggleIsFetching}
-                isFetching={this.props.toggleIsFetching}
+                isFetching={this.props.isFetching}
                 // setTotalUsersCount={this.props.setTotalUsersCount}
             />
         </>
