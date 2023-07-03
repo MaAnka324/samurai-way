@@ -83,28 +83,6 @@ let mapStateToProps = (state: ReduxStoreRootStateType): MapStatePropsType => {
     }
 }
 
-// let mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
-//     return {
-//         follow: (userId: number) => {
-//             dispatch(followAC(userId))
-//         },
-//         unfollow: (userId: number) => {
-//             dispatch(unfollowAC(userId))
-//         },
-//         setUsers: (users: Array<UserType>) => {
-//             dispatch(setUsersAC(users))
-//         },
-//         setCurrentPage: (pageNumber) => {
-//             dispatch(setCurrentPageAC(pageNumber))
-//         },
-//         toggleIsFetching: (isFetching: boolean) => {
-//             dispatch(toggleIsFetchingAC(isFetching))
-//         }
-//         // setTotalUsersCount: (totalCount) => {
-//         //     dispatch(setUsersTotalCountAC(totalCount))
-//         // }
-//     }
-// }
 
 const UsersContainer = connect(mapStateToProps, {
     follow,

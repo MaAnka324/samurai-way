@@ -1,29 +1,6 @@
 import {AllActionsTypes} from "./state";
 
-export type ProfileActionsTypes = ReturnType<typeof addPostAC>
-    | ReturnType<typeof changeNewTextAC>
-    | ReturnType<typeof setUsersProfile>
 
-
-export const addPostAC = () => {
-    return {
-        type: "ADD-POST",
-    } as const
-}
-
-export const changeNewTextAC = (newText: string) => {
-    return {
-        type: "CHANGE-NEW-TEXT",
-        newText
-    } as const
-}
-
-export const setUsersProfile = (profile: ProfileType) => {
-    return {
-        type: "SET-USER-PROFILE",
-        profile
-    } as const
-}
 
 export type PostsType = {
     id: number,
@@ -96,3 +73,30 @@ const profileReducer = (state: InitialStateType = initialState, action: AllActio
 }
 
 export default profileReducer
+
+
+
+export type ProfileActionsTypes = ReturnType<typeof addPostAC>
+    | ReturnType<typeof changeNewTextAC>
+    | ReturnType<typeof setUsersProfile>
+
+
+export const addPostAC = () => {
+    return {
+        type: "ADD-POST",
+    } as const
+}
+
+export const changeNewTextAC = (newText: string) => {
+    return {
+        type: "CHANGE-NEW-TEXT",
+        newText
+    } as const
+}
+
+export const setUsersProfile = (profile: ProfileType) => {
+    return {
+        type: "SET-USER-PROFILE",
+        profile
+    } as const
+}

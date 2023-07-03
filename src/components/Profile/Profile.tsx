@@ -12,7 +12,6 @@ const ProfileInfo = (props: ProfileInfoType) => {
     if (!props.profile) {
         return <div>Preloader</div>
     }
-    console.log(props)
     return (
         <div>
             <div>
@@ -46,7 +45,6 @@ interface ProfilePropsTypeNew {
 
 
 const Profile = (props: ProfilePropsTypeNew) => {
-    console.log(props)
     return (
         <div>
             <ProfileInfo profile={props.profile}/>
