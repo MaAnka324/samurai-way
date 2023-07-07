@@ -40,29 +40,32 @@ export const Users = (props: UsersType) => {
                         </div>
                         <div>
                             {u.followed
-                                ? <button onClick={() => {
+                                ? <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
                                     // axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
                                     //     withCredentials: true,
                                     //     headers: {
                                     //         'API-KEY': 'b2aa0181-7c4a-4cfb-9fa0-ad8f16fa6d5f'
                                     //     }
                                     // })
+                                    props.toggleFollowingProgress(true, u.id)
+
                                     usersAPI.unFollowUsers(u.id)
                                         .then(data => {
                                             if(data.resultCode === 0) {
                                                 props.unfollow(u.id)
                                             }
-
+                                            props.toggleFollowingProgress(false, u.id)
                                         })
 
                                 }}>Unfollow</button>
-                                : <button onClick={() => {
-
+                                : <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
+                                    props.toggleFollowingProgress(true, u.id)
                                     usersAPI.followUsers(u.id)
                                         .then(data => {
                                             if (data.resultCode === 0) {
                                                 props.follow(u.id)
                                             }
+                                            props.toggleFollowingProgress(false, u.id)
                                         })
 
                                 }}>Follow</button>
