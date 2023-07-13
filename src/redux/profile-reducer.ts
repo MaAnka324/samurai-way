@@ -1,5 +1,6 @@
 import {AllActionsTypes} from "./state";
-
+import {AppThunk} from "./redux-store";
+import {usersAPI} from "../api/api";
 
 
 export type PostsType = {
@@ -18,10 +19,11 @@ export type ProfileType = {
     photos: PhotosType
     aboutMe: string
     contacts: ContactsType
-    lookingForAJob:boolean
-    lookingForAJobDescription:string
-    fullName:string
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
 }
+
 type PhotosType = {
     'small': string
     'large': string
@@ -75,7 +77,6 @@ const profileReducer = (state: InitialStateType = initialState, action: AllActio
 export default profileReducer
 
 
-
 export type ProfileActionsTypes = ReturnType<typeof addPostAC>
     | ReturnType<typeof changeNewTextAC>
     | ReturnType<typeof setUsersProfile>
@@ -99,4 +100,13 @@ export const setUsersProfile = (profile: ProfileType) => {
         type: "SET-USER-PROFILE",
         profile
     } as const
+}
+
+export const setUsersProfileTC = (userId: string): AppThunk => {
+    return (dispatch) => {
+        usersAPI.setUsersProfile(userId)
+            .then(data => {
+                dispatch(setUsersProfile(data))
+            })
+    }
 }

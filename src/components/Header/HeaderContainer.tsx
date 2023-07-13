@@ -10,13 +10,6 @@ class HeaderContainer extends React.Component<ProfilePropsType> {
 
         this.props.setUsersDataTC()
 
-        // usersAPI.setUsersData()
-        //     .then(data => {
-        //         if (data.resultCode === 0) {
-        //             let {id, email, login} = data.data
-        //             this.props.setUserData(id, email, login)
-        //         }
-        //     })
     }
 
     render() {

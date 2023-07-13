@@ -32,6 +32,12 @@ export const usersAPI = {
             .then(response => {
                 return response.data
             })
+    },
+    setUsersProfile(userId: string){
+        return instance.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}` )
+            .then(response => {
+                return response.data
+            })
     }
 }
 
