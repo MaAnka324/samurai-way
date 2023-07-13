@@ -5,11 +5,11 @@ import {NavLink} from "react-router-dom";
 type AuthType = {
     isAuth: boolean
     login: string | null
-    setUserData: (
-        id: string | null,
-        email: string | null,
-        login: string | null,
-    ) => void
+    // setUserData: (
+    //     id: string | null,
+    //     email: string | null,
+    //     login: string | null,
+    // ) => void
 }
 
 const Header = (props: AuthType) => {
@@ -23,7 +23,6 @@ const Header = (props: AuthType) => {
                     ? props.login
                     : <NavLink to={'/login'}>Login</NavLink>
                 }
-
             </div>
         </header>
     )

@@ -15,14 +15,20 @@ export const usersAPI = {
                 return response.data
             })
     },
-    unFollowUsers(id: string) {
+    unFollowUsers(id: number) {
         return instance.delete(`follow/${id}`)
             .then(response => {
                 return response.data
             })
     },
-    followUsers(id: string) {
+    followUsers(id: number) {
         return instance.post(`follow/${id}`)
+            .then(response => {
+                return response.data
+            })
+    },
+    setUsersData(){
+        return instance.get(`https://social-network.samuraijs.com/api/1.0/auth/me`)
             .then(response => {
                 return response.data
             })
