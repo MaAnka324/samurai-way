@@ -1,6 +1,6 @@
 import {AllActionsTypes} from "./state";
 import {AppThunk} from "./redux-store";
-import {usersAPI} from "../api/api";
+import {authAPI, usersAPI} from "../api/api";
 import {setUsers, toggleIsFetching} from "./users-reducer";
 
 type DataType = {
@@ -54,7 +54,7 @@ export const setUserData = (id: string | null, email: string | null, login: stri
 
 export const setUsersDataTC = (): AppThunk => {
     return (dispatch) => {
-        usersAPI.setUsersData()
+        authAPI.me()
             .then(data => {
                 if (data.resultCode === 0) {
                     let {id, email, login} = data.data

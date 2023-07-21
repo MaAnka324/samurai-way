@@ -36,6 +36,7 @@ type MapStatePropsType = {
     post: Array<PostsType>
     messageForNewPost: string
     profile: null | ProfileType
+    isAuth: boolean
 }
 
 type MapDispatchPropsType = {
@@ -50,7 +51,8 @@ type PropsType = RouteComponentProps<PathParamsType> & ProfilePropsType
 let mapStateToProps = (state: ReduxStoreRootStateType): MapStatePropsType => ({
     profile: state.profilePage.profile,
     post: state.profilePage.post,
-    messageForNewPost: state.profilePage.messageForNewPost
+    messageForNewPost: state.profilePage.messageForNewPost,
+    isAuth: state.auth.isAuth
 })
 
 let WithDataContainerComponent = withRouter(ProfileContainer)

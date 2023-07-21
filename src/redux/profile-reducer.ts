@@ -1,6 +1,6 @@
 import {AllActionsTypes} from "./state";
 import {AppThunk} from "./redux-store";
-import {usersAPI} from "../api/api";
+import {profileAPI, usersAPI} from "../api/api";
 
 
 export type PostsType = {
@@ -104,7 +104,7 @@ export const setUsersProfile = (profile: ProfileType) => {
 
 export const setUsersProfileTC = (userId: string): AppThunk => {
     return (dispatch) => {
-        usersAPI.setUsersProfile(userId)
+        profileAPI.setUsersProfile(userId)
             .then(data => {
                 dispatch(setUsersProfile(data))
             })

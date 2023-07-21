@@ -26,15 +26,21 @@ export const usersAPI = {
             .then(response => {
                 return response.data
             })
-    },
-    setUsersData(){
-        return instance.get(`https://social-network.samuraijs.com/api/1.0/auth/me`)
+    }
+}
+
+export const authAPI = {
+    me(){
+        return instance.get(`auth/me`)
             .then(response => {
                 return response.data
             })
-    },
+    }
+}
+
+export const profileAPI = {
     setUsersProfile(userId: string){
-        return instance.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}` )
+        return instance.get(`profile/${userId}` )
             .then(response => {
                 return response.data
             })

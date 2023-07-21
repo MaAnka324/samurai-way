@@ -3,15 +3,19 @@ import s from './Profile.module.css'
 import MyPostsContainer from "./MyPosts/Post/MyPostsContainer";
 import {PostsType, ProfileType} from "../../redux/profile-reducer";
 import userPhoto from '../../assets/images/UserIcon.png'
+import {Redirect} from "react-router-dom";
 
 type ProfileInfoType = {
     profile: ProfileType | null
+
 }
 
 const ProfileInfo = (props: ProfileInfoType) => {
     if (!props.profile) {
         return <div>Preloader</div>
     }
+
+
     return (
         <div>
             <div>
@@ -41,10 +45,14 @@ interface ProfilePropsTypeNew {
     post: PostsType[]
     messageForNewPost: string
     setUsersProfile: (profile: ProfileType) => void
+    isAuth: boolean
 }
 
 
 const Profile = (props: ProfilePropsTypeNew) => {
+
+    if(!props.isAuth) return <Redirect to={'/login'}/>
+
     return (
         <div>
             <ProfileInfo profile={props.profile}/>
