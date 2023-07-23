@@ -6,7 +6,7 @@ import {DialogsType, MessagesType} from "../../redux/dialogs-reducer";
 import {Redirect} from "react-router-dom";
 
 
-type DialogsPropsType = {
+export type DialogsPropsType = {
     addMessage: () => void
     onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void
     dialogs: DialogsType[]

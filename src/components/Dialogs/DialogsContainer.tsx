@@ -1,9 +1,11 @@
 import React, {ChangeEvent} from 'react';
 import {newMessageTextAC, sendMessageAC} from "../../redux/dialogs-reducer";
-import Dialogs from "./Dialogs";
+import Dialogs, {DialogsPropsType} from "./Dialogs";
 import {connect} from "react-redux";
 import {ReduxStoreRootStateType} from "../../redux/redux-store";
 import {Dispatch} from "redux";
+import {Redirect} from "react-router-dom";
+import WithAuthRedirect from "../../hoc/withAuthRedirect";
 
 // type DialogsPropsType = {
     // dialogs: DialogsType[]
@@ -43,6 +45,14 @@ import {Dispatch} from "redux";
 //     )
 // }
 
+
+let AuthRedirectComponent = WithAuthRedirect(Dialogs)
+
+// let AuthRedirectComponent = (props: DialogsPropsType) => {
+//     if(!props.isAuth) return <Redirect to={'/login'}/>
+//     return <Dialogs {...props}/>
+// }
+
 let mapStateToProps = (state: ReduxStoreRootStateType) => {
     return {
         dialogs: state.dialogsPage.dialogs,
@@ -63,6 +73,6 @@ let mapDispatchToProps = (dispatch: Dispatch) => {
     }
 }
 
-const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
+const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent)
 
 export default DialogsContainer
