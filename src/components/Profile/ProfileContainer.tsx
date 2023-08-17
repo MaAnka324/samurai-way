@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import {ReduxStoreRootStateType} from "../../redux/redux-store";
 import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
 import WithAuthRedirect from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 
 class ProfileContainer extends React.Component<PropsType> {
@@ -29,13 +30,13 @@ class ProfileContainer extends React.Component<PropsType> {
     }
 }
 
-let AuthRedirectComponent = WithAuthRedirect(ProfileContainer)
+
 
 let mapStateToPropsForRedirect = (state: ReduxStoreRootStateType): MapStatePropsForRedirectType => ({
-    isAuth: state.auth.isAuth
+    //isAuth: state.auth.isAuth
 })
 
-// AuthRedirectComponent = connect(mapStateToPropsForRedirect)(AuthRedirectComponent) //////////////////////////////
+//AuthRedirectComponent = connect(mapStateToPropsForRedirect)(AuthRedirectComponent)
 
 // let AuthRedirectComponent = (props: PropsType) => {
 //     if(!props.isAuth) return <Redirect to={'/login'}/>
@@ -50,10 +51,11 @@ type MapStatePropsType = {
     post: Array<PostsType>
     messageForNewPost: string
     profile: null | ProfileType
+    isAuth: boolean
 }
 
 type MapStatePropsForRedirectType = {
-    isAuth: boolean
+    // isAuth: boolean
 }
 
 type MapDispatchPropsType = {
@@ -61,7 +63,7 @@ type MapDispatchPropsType = {
     setUsersProfileTC: (userId: string) => void
 }
 
-type ProfilePropsType = MapStatePropsType & MapDispatchPropsType & MapStatePropsForRedirectType
+type ProfilePropsType = MapStatePropsType & MapDispatchPropsType // & MapStatePropsForRedirectType
 
 type PropsType = RouteComponentProps<PathParamsType> & ProfilePropsType
 
@@ -69,11 +71,21 @@ let mapStateToProps = (state: ReduxStoreRootStateType): MapStatePropsType => ({
     profile: state.profilePage.profile,
     post: state.profilePage.post,
     messageForNewPost: state.profilePage.messageForNewPost,
+    isAuth: state.auth.isAuth
 })
 
-let WithDataContainerComponent = withRouter(AuthRedirectComponent)
+// let AuthRedirectComponent = WithAuthRedirect(ProfileContainer)
 
-export default connect(mapStateToProps, {
-    setUsersProfile,
-    setUsersProfileTC
-})(WithDataContainerComponent)
+// let WithDataContainerComponent = withRouter(AuthRedirectComponent)
+//
+// export default connect(mapStateToProps, {
+//     setUsersProfile,
+//     setUsersProfileTC
+// })(WithDataContainerComponent)
+
+
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, {setUsersProfile, setUsersProfileTC}),
+    withRouter,
+    WithAuthRedirect
+)(ProfileContainer)

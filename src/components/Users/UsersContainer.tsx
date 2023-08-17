@@ -12,6 +12,7 @@ import {ReduxStoreRootStateType} from "../../redux/redux-store";
 import {Users} from "./Users";
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
+import WithAuthRedirect from "../../hoc/withAuthRedirect";
 
 
 class UsersAPIComponent extends React.Component<UsersType> {
@@ -74,10 +75,13 @@ class UsersAPIComponent extends React.Component<UsersType> {
                 getUsersTC={this.props.getUsersTC}
                 followTC={this.props.followTC}
                 unfollowTC={this.props.unfollowTC}
+                isAuth={this.props.isAuth}
             />
         </>
     }
 }
+
+let withRedirect = WithAuthRedirect(UsersAPIComponent)
 
 type MapStatePropsType = {
     users: UserType[]
@@ -86,6 +90,7 @@ type MapStatePropsType = {
     currentPage: number
     isFetching: boolean
     followingInProgress: Array<number>
+    isAuth: boolean
 }
 
 type MapDispatchPropsType = {
@@ -110,7 +115,8 @@ let mapStateToProps = (state: ReduxStoreRootStateType): MapStatePropsType => {
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress
+        followingInProgress: state.usersPage.followingInProgress,
+        isAuth: state.auth.isAuth
     }
 }
 
@@ -126,7 +132,7 @@ const UsersContainer = connect(mapStateToProps, {
     getUsersTC,
     unfollowTC,
     followTC
-})(UsersAPIComponent)
+})(withRedirect)
 
 
 export default UsersContainer
