@@ -3,6 +3,7 @@ import Header from "./Header";
 import {ReduxStoreRootStateType} from "../../redux/redux-store";
 import {connect} from "react-redux";
 import {setUsersDataTC} from "../../redux/auth-reducer";
+import {compose} from "redux";
 
 
 class HeaderContainer extends React.Component<ProfilePropsType> {
@@ -39,10 +40,15 @@ let mapStateToProps = (state: ReduxStoreRootStateType): MapStatePropsType => ({
     login: state.auth.login
 })
 
-export default connect(mapStateToProps, {
-    // setUserData,
-    setUsersDataTC
-})(HeaderContainer)
+// export default connect(mapStateToProps, {
+//     // setUserData,
+//     setUsersDataTC
+// })(HeaderContainer)
+
+
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, {setUsersDataTC})
+)(HeaderContainer)
 
 
 

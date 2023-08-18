@@ -13,6 +13,8 @@ import {Users} from "./Users";
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import WithAuthRedirect from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
+import {withRouter} from "react-router-dom";
 
 
 class UsersAPIComponent extends React.Component<UsersType> {
@@ -54,8 +56,8 @@ class UsersAPIComponent extends React.Component<UsersType> {
     render() {
         return <>
             {this.props.isFetching
-                ? <Box sx={{ display: 'flex' }}>
-                    <CircularProgress />
+                ? <Box sx={{display: 'flex'}}>
+                    <CircularProgress/>
                 </Box>
                 : null}
             <Users
@@ -81,7 +83,6 @@ class UsersAPIComponent extends React.Component<UsersType> {
     }
 }
 
-let withRedirect = WithAuthRedirect(UsersAPIComponent)
 
 type MapStatePropsType = {
     users: UserType[]
@@ -120,19 +121,44 @@ let mapStateToProps = (state: ReduxStoreRootStateType): MapStatePropsType => {
     }
 }
 
-
-const UsersContainer = connect(mapStateToProps, {
-    // follow,
-    // unfollow,
-    // setUsers,
-    setCurrentPage,
-    // toggleIsFetching,
-    // toggleFollowingProgress,
-    // setTotalUsersCount,
-    getUsersTC,
-    unfollowTC,
-    followTC
-})(withRedirect)
+// let withRedirect = WithAuthRedirect(UsersAPIComponent)
+//
+// const UsersContainer = connect(mapStateToProps, {
+//     setCurrentPage,
+//     getUsersTC,
+//     unfollowTC,
+//     followTC
+// })(withRedirect)
+//
+//
+// export default UsersContainer
 
 
-export default UsersContainer
+// let withRedirect = WithAuthRedirect(UsersAPIComponent)
+//
+// const UsersContainer = connect(mapStateToProps, {
+//     setCurrentPage,
+//     getUsersTC,
+//     unfollowTC,
+//     followTC
+// })(withRedirect)
+
+
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, {setCurrentPage, getUsersTC, unfollowTC, followTC}),
+        WithAuthRedirect,
+        withRouter
+    )(UsersAPIComponent)
+
+
+// export default UsersContainer
+
+
+
+
+
+
+
+
+
+
