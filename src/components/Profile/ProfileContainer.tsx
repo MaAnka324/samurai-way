@@ -87,5 +87,5 @@ let mapStateToProps = (state: ReduxStoreRootStateType): MapStatePropsType => ({
 export default compose<React.ComponentType>(
     connect(mapStateToProps, {setUsersProfile, setUsersProfileTC}),
     withRouter,
-    WithAuthRedirect
+    // WithAuthRedirect
 )(ProfileContainer)
