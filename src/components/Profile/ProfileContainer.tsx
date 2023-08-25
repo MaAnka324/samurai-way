@@ -1,5 +1,12 @@
 import React from 'react';
-import {PostsType, ProfileType, setUsersProfile, setUsersProfileTC} from "../../redux/profile-reducer";
+import {
+    getStatusTC,
+    PostsType,
+    ProfileType,
+    setUsersProfile,
+    setUsersProfileTC,
+    updateStatusTC
+} from "../../redux/profile-reducer";
 import Profile from "./Profile";
 import {connect} from "react-redux";
 import {ReduxStoreRootStateType} from "../../redux/redux-store";
@@ -12,18 +19,22 @@ class ProfileContainer extends React.Component<PropsType> {
 
     componentDidMount() {
         let userId = this.props.match.params.userId
+        console.log(this.props)
         if (!userId) {
-            userId = "2"
+            userId = "28555" // my id
         }
 
         this.props.setUsersProfileTC(userId)
-
+        this.props.getStatusTC(userId)
     }
 
     render() {
         return (
             <div>
-                <Profile {...this.props} profile={this.props.profile}
+                <Profile {...this.props}
+                         profile={this.props.profile}
+                         status={this.props.status}
+                         updateStatus={this.props.updateStatusTC}
                 />
             </div>
         )
@@ -52,6 +63,7 @@ type MapStatePropsType = {
     messageForNewPost: string
     profile: null | ProfileType
     isAuth: boolean
+    status: string
 }
 
 type MapStatePropsForRedirectType = {
@@ -61,6 +73,8 @@ type MapStatePropsForRedirectType = {
 type MapDispatchPropsType = {
     setUsersProfile: (profile: ProfileType) => void
     setUsersProfileTC: (userId: string) => void
+    getStatusTC: (userId: string) => void
+    updateStatusTC: (status: string) => void
 }
 
 type ProfilePropsType = MapStatePropsType & MapDispatchPropsType // & MapStatePropsForRedirectType
@@ -71,7 +85,8 @@ let mapStateToProps = (state: ReduxStoreRootStateType): MapStatePropsType => ({
     profile: state.profilePage.profile,
     post: state.profilePage.post,
     messageForNewPost: state.profilePage.messageForNewPost,
-    isAuth: state.auth.isAuth
+    isAuth: state.auth.isAuth,
+    status: state.profilePage.status
 })
 
 // let AuthRedirectComponent = WithAuthRedirect(ProfileContainer)
@@ -85,7 +100,12 @@ let mapStateToProps = (state: ReduxStoreRootStateType): MapStatePropsType => ({
 
 
 export default compose<React.ComponentType>(
-    connect(mapStateToProps, {setUsersProfile, setUsersProfileTC}),
+    connect(mapStateToProps, {
+        setUsersProfile,
+        setUsersProfileTC,
+        getStatusTC,
+        updateStatusTC
+    }),
     withRouter,
     // WithAuthRedirect
 )(ProfileContainer)

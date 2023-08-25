@@ -8,7 +8,8 @@ import ProfileStatus from "./MyPosts/ProfileStatus";
 
 type ProfileInfoType = {
     profile: ProfileType | null
-
+    status: string
+    updateStatus: (userId: string) => void
 }
 
 
@@ -34,8 +35,7 @@ const ProfileInfo = (props: ProfileInfoType) => {
                 <img
                     src={props.profile.photos?.large ? props.profile.photos.large : userPhoto}
                 />
-                ava
-                <ProfileStatus status={'Hello'} />
+                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
             </div>
             <div>
                 LookingForAJobDescription: {props.profile.lookingForAJobDescription}
@@ -51,6 +51,8 @@ interface ProfilePropsTypeNew {
     messageForNewPost: string
     setUsersProfile: (profile: ProfileType) => void
     isAuth: boolean
+    status: string
+    updateStatus: (userId: string) => void
 }
 
 
@@ -60,7 +62,11 @@ const Profile = (props: ProfilePropsTypeNew) => {
 
     return (
         <div>
-            <ProfileInfo profile={props.profile}/>
+            <ProfileInfo
+                profile={props.profile}
+                status={props.status}
+                updateStatus={props.updateStatus}
+            />
             <MyPostsContainer/>
         </div>
     )
