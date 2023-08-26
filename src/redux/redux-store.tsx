@@ -6,13 +6,15 @@ import usersReducer, {UsersActionsTypes} from "./users-reducer";
 import authReducer, {AuthActionsTypes} from "./auth-reducer";
 import thunkMiddleware, {ThunkAction, ThunkDispatch} from "redux-thunk";
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
+import { reducer as formReducer } from 'redux-form'
 
 let rootReducer = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
     usersPage: usersReducer,
     sidebarPage: sidebarReducer,
-    auth: authReducer
+    auth: authReducer,
+    form: formReducer
 })
 
 export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
