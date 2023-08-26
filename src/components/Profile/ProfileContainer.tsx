@@ -21,7 +21,7 @@ class ProfileContainer extends React.Component<PropsType> {
         let userId = this.props.match.params.userId
         console.log(this.props)
         if (!userId) {
-            userId = "28555" // my id
+            userId = "28555" // my id 28555
         }
 
         this.props.setUsersProfileTC(userId)
