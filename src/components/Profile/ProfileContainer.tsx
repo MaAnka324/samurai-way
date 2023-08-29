@@ -10,8 +10,7 @@ import {
 import Profile from "./Profile";
 import {connect} from "react-redux";
 import {ReduxStoreRootStateType} from "../../redux/redux-store";
-import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
-import WithAuthRedirect from "../../hoc/withAuthRedirect";
+import {RouteComponentProps, withRouter} from "react-router-dom";
 import {compose} from "redux";
 
 

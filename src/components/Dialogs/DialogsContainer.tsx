@@ -1,12 +1,10 @@
-import React, {ChangeEvent} from 'react';
-import {newMessageTextAC, sendMessageAC} from "../../redux/dialogs-reducer";
-import Dialogs, {DialogsPropsType} from "./Dialogs";
+import React from 'react';
+import {sendMessageAC} from "../../redux/dialogs-reducer";
+import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {ReduxStoreRootStateType} from "../../redux/redux-store";
 import {compose, Dispatch} from "redux";
-import {Redirect, withRouter} from "react-router-dom";
-import WithAuthRedirect from "../../hoc/withAuthRedirect";
-import {setUsersProfile, setUsersProfileTC} from "../../redux/profile-reducer";
+import {withRouter} from "react-router-dom";
 import withAuthRedirect from "../../hoc/withAuthRedirect";
 
 // type DialogsPropsType = {
@@ -59,19 +57,19 @@ let mapStateToProps = (state: ReduxStoreRootStateType) => {
     return {
         dialogs: state.dialogsPage.dialogs,
         messages: state.dialogsPage.messages,
-        newMessageText: state.dialogsPage.newMessageText,
+        // newMessageText: state.dialogsPage.newMessageText,
         isAuth: state.auth.isAuth
     }
 }
 
 let mapDispatchToProps = (dispatch: Dispatch) => {
     return {
-        addMessage: () => {
-            dispatch(sendMessageAC())
+        addMessage: (newMessageBody: string) => {
+            dispatch(sendMessageAC(newMessageBody))
         },
-        onChange: (e: ChangeEvent<HTMLTextAreaElement>) => {
-            dispatch(newMessageTextAC(e.currentTarget.value))
-        }
+        // onChange: (e: ChangeEvent<HTMLTextAreaElement>) => {
+        //     dispatch(newMessageTextAC(e.currentTarget.value))
+        // }
     }
 }
 

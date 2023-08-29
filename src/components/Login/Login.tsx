@@ -1,15 +1,22 @@
 import React from 'react';
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {useAppDispatch, useAppSelector} from "../../redux/redux-store";
+import {loginTC} from "../../redux/auth-reducer";
+import {Redirect} from "react-router-dom";
 
 
-type FormDataType = {
+export type FormDataType = {
     login: string
     password: string
     rememberMe: boolean
 }
 
 
+
 const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
+    const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
+
+    if(isLoggedIn) return <Redirect to={'/profile/:userId?'}/>
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
@@ -24,7 +31,6 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
             <div>
                 <button>Login</button>
             </div>
-
         </form>
     );
 };
@@ -36,7 +42,9 @@ const LoginReduxForm = reduxForm<FormDataType>({
 
 
 const Login = () => {
+    const dispatch = useAppDispatch()
     const onSubmit = (formData: FormDataType) => {
+        dispatch(loginTC(formData))
         console.log(formData)
     }
     return (
