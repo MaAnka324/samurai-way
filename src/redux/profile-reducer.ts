@@ -1,6 +1,6 @@
 import {AllActionsTypes} from "./state";
 import {AppThunk} from "./redux-store";
-import {profileAPI, usersAPI} from "../api/api";
+import {profileAPI} from "../api/api";
 
 
 export type PostsType = {
@@ -62,11 +62,11 @@ const profileReducer = (state: InitialStateType = initialState, action: AllActio
                 messageForNewPost: action.newText
             }
         case 'ADD-POST':
-            const newMessage = {id: 3, message: state.messageForNewPost, likesCount: 4}
+            const newMessage = {id: 3, message: action.newPost, likesCount: 4}
             return {
                 ...state,
                 messageForNewPost: '',
-                post: [...state.post, newMessage]
+                post: [newMessage, ...state.post]
             }
         case "SET-USER-PROFILE": {
             return {...state, profile: action.profile}
@@ -88,9 +88,10 @@ export type ProfileActionsTypes = ReturnType<typeof addPostAC>
     | ReturnType<typeof setStatus>
 
 
-export const addPostAC = () => {
+export const addPostAC = (newPost: string) => {
     return {
         type: "ADD-POST",
+        newPost
     } as const
 }
 

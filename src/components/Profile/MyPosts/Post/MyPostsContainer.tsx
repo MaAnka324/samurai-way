@@ -51,8 +51,8 @@ let mapStateToProps = (state: ReduxStoreRootStateType) => {
 
 let mapDispatchToProps = (dispatch: Dispatch) => {
     return {
-        addPost: () => {
-            dispatch(addPostAC())
+        addPost: (newPost: string) => {
+            dispatch(addPostAC(newPost))
         },
         onChange: (e: ChangeEvent<HTMLTextAreaElement>) => {
             dispatch(changeNewTextAC(e.currentTarget.value))

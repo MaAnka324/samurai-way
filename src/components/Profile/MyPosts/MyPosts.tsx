@@ -1,20 +1,43 @@
-import React, {ChangeEvent, ChangeEventHandler} from 'react';
+import React, {ChangeEvent} from 'react';
 import s from './MyPosts.module.css'
-
 import Post from "./Post/Post";
 import {PostsType} from "../../../redux/profile-reducer";
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
 
 
 type MyPostsType = {
-    addPost: () => void
+    addPost: (newPost: string) => void
     posts: PostsType[]
     onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void
     messageForNewPost: string
 }
-const MyPosts = (props: MyPostsType) => {
 
-    const addPost = () => {
-        props.addPost()
+type PostFormDataType = {
+    post: string
+}
+
+
+const MyPostsForm: React.FC<InjectedFormProps<PostFormDataType>> = (props) => {
+    return (
+        <form onSubmit={props.handleSubmit}>
+            <Field name={'post'}
+                   component={'textarea'}
+                   placeholder='Enter your post'
+            ></Field>
+            <button>Add post</button>
+        </form>
+    )
+}
+
+
+const PostReduxForm = reduxForm<PostFormDataType>({
+    form: 'post'
+})(MyPostsForm)
+
+
+const MyPosts = (props: MyPostsType) => {
+    const onSubmit = (formData: PostFormDataType) => {
+        props.addPost(formData.post)
     }
 
     let postElement = props.posts.map(p => <Post
@@ -25,13 +48,7 @@ const MyPosts = (props: MyPostsType) => {
     return (
         <div className={s.postsBlock}>
             <h3>My posts</h3>
-            <div>
-                <textarea
-                    value={props.messageForNewPost}
-                    onChange={props.onChange}
-                />
-                <button onClick={addPost}>Add post</button>
-            </div>
+            <PostReduxForm onSubmit={onSubmit}/>
             <div className={s.posts}>
                 {postElement}
             </div>
