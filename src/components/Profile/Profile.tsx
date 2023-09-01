@@ -5,6 +5,8 @@ import {PostsType, ProfileType} from "../../redux/profile-reducer";
 import userPhoto from '../../assets/images/UserIcon.png'
 import {Redirect} from "react-router-dom";
 import ProfileStatus from "./MyPosts/ProfileStatus";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 
 type ProfileInfoType = {
     profile: ProfileType | null
@@ -15,7 +17,10 @@ type ProfileInfoType = {
 
 const ProfileInfo = (props: ProfileInfoType) => {
     if (!props.profile) {
-        return <div>Preloader</div>
+        return <Box sx={{display: 'flex'}}>
+            <CircularProgress/>
+        </Box>
+        // return <div>Preloader</div>
     }
 
 
