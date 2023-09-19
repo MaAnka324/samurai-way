@@ -2,7 +2,7 @@ import React from 'react';
 import Header from "./Header";
 import {ReduxStoreRootStateType} from "../../redux/redux-store";
 import {connect} from "react-redux";
-import {setUsersDataTC} from "../../redux/auth-reducer";
+import {getUsersDataTC, logoutTC} from "../../redux/auth-reducer";
 import {compose} from "redux";
 
 
@@ -37,7 +37,7 @@ type ProfilePropsType = MapStatePropsType & MapDispatchPropsType
 
 let mapStateToProps = (state: ReduxStoreRootStateType): MapStatePropsType => ({
     isAuth: state.auth.isAuth,
-    login: state.auth.login
+    login: state.auth.login,
 })
 
 // export default connect(mapStateToProps, {
@@ -47,7 +47,8 @@ let mapStateToProps = (state: ReduxStoreRootStateType): MapStatePropsType => ({
 
 
 export default compose<React.ComponentType>(
-    connect(mapStateToProps, {setUsersDataTC})
+    connect(mapStateToProps, {setUsersDataTC: getUsersDataTC,
+    logoutTC})
 )(HeaderContainer)
 
 

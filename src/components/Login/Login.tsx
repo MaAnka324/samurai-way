@@ -5,10 +5,12 @@ import {loginTC} from "../../redux/auth-reducer";
 import {Redirect} from "react-router-dom";
 import {Input} from "../common/FormsControls/FormsControls";
 import {required} from "../../utils/validators/valodators";
+import {inspect} from "util";
+import style from '../common/FormsControls/FormControl.module.css'
 
 
 export type FormDataType = {
-    login: string
+    email: string
     password: string
     rememberMe: boolean
 }
@@ -16,14 +18,15 @@ export type FormDataType = {
 
 
 const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
-    const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
+    const isAuth = useAppSelector(state => state.auth.isAuth)
 
-    if(isLoggedIn) return <Redirect to={'/profile/:userId?'}/>
+    if(isAuth) return <Redirect to={'/profile/:userId?'}/>
+
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field name={'login'}
-                       placeholder={'Login'}
+                <Field name={'email'}
+                       placeholder={'Email'}
                        component={Input}
                        validate={[required]}
                 />
@@ -32,6 +35,7 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
                 <Field name={'password'}
                        placeholder={'Password'}
                        component={Input}
+                       // type={'password'}
                        validate={[required]}
                 />
             </div>
@@ -40,6 +44,9 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
                        type={'checkbox'}
                        component={Input}/> remember me
             </div>
+            {props.error && <div className={style.formSummaryError}>
+                ERROR
+            </div>}
             <div>
                 <button>Login</button>
             </div>
@@ -55,10 +62,15 @@ const LoginReduxForm = reduxForm<FormDataType>({
 
 const Login = () => {
     const dispatch = useAppDispatch()
+    const isAuth = useAppSelector(state => state.auth.isAuth)
+
     const onSubmit = (formData: FormDataType) => {
         dispatch(loginTC(formData))
         console.log(formData)
     }
+
+    if(isAuth) return <Redirect to={'/profile/:userId?'}/>
+
     return (
         <div>
             <h1>LOGIN</h1>

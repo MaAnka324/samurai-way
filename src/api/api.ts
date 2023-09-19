@@ -52,6 +52,7 @@ export const authAPI = {
     },
 }
 
+
 export const profileAPI = {
     setUsersProfile(userId: string){
         return instance.get(`profile/${userId}`)
