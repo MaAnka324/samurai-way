@@ -92,7 +92,7 @@ export const loginTC = (data: FormDataType): AppThunk => {
                 else {
                     let message = data.messages.length > 0 ? data.messages[0] : "Some error"
                     let action = stopSubmit("login", {_error: message})
-                    // dispatch(action)
+                    dispatch(action)
                     console.log(action.payload._error)
                 }
             })

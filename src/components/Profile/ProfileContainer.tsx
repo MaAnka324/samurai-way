@@ -20,7 +20,11 @@ class ProfileContainer extends React.Component<PropsType> {
         let userId = this.props.match.params.userId
         console.log(this.props)
         if (!userId) {
-            userId = "28555" // my id 28555
+            console.log(this.props.authorizedUserId)
+
+            userId = this.props.authorizedUserId as string
+
+            //userId = '28555' // my id 28555
         }
 
         this.props.setUsersProfileTC(userId)
@@ -63,6 +67,7 @@ type MapStatePropsType = {
     profile: null | ProfileType
     isAuth: boolean
     status: string
+    authorizedUserId: string | null
 }
 
 type MapStatePropsForRedirectType = {
@@ -85,7 +90,8 @@ let mapStateToProps = (state: ReduxStoreRootStateType): MapStatePropsType => ({
     post: state.profilePage.post,
     messageForNewPost: state.profilePage.messageForNewPost,
     isAuth: state.auth.isAuth,
-    status: state.profilePage.status
+    status: state.profilePage.status,
+    authorizedUserId: state.auth.id
 })
 
 // let AuthRedirectComponent = WithAuthRedirect(ProfileContainer)

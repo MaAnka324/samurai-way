@@ -6,7 +6,7 @@ import usersReducer, {UsersActionsTypes} from "./users-reducer";
 import authReducer, {AuthActionsTypes} from "./auth-reducer";
 import thunkMiddleware, {ThunkAction, ThunkDispatch} from "redux-thunk";
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
-import { reducer as formReducer } from 'redux-form'
+import {FormAction, reducer as formReducer} from 'redux-form'
 
 let rootReducer = combineReducers({
     profilePage: profileReducer,
@@ -18,14 +18,14 @@ let rootReducer = combineReducers({
 })
 
 export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
-export type ReduxStoreRootStateType = ReturnType<typeof store.getState>
+export type ReduxStoreRootStateType = ReturnType<typeof rootReducer>
 
 export const useAppDispatch = () => useDispatch<AppDispatchType>()
 export const useAppSelector: TypedUseSelectorHook<ReduxStoreRootStateType> = useSelector
 
-export type AppActionsType = ProfileActionsTypes | DialogsActionsTypes | UsersActionsTypes | AuthActionsTypes
+export type AppActionsType = ProfileActionsTypes | DialogsActionsTypes | UsersActionsTypes | AuthActionsTypes | FormAction
 
-export type AppDispatchType = ThunkDispatch<ReduxStoreRootStateType, any, AppActionsType>
+export type AppDispatchType = ThunkDispatch<ReduxStoreRootStateType, unknown, AppActionsType>
 
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, ReduxStoreRootStateType, unknown, AppActionsType>
 
