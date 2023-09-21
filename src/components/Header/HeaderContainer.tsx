@@ -7,11 +7,9 @@ import {compose} from "redux";
 
 
 class HeaderContainer extends React.Component<ProfilePropsType> {
-    componentDidMount() {
-
-        this.props.setUsersDataTC()
-
-    }
+    // componentDidMount() {
+    //     this.props.setUsersDataTC()
+    // }
 
     render() {
         return <Header {...this.props}/>
@@ -47,8 +45,7 @@ let mapStateToProps = (state: ReduxStoreRootStateType): MapStatePropsType => ({
 
 
 export default compose<React.ComponentType>(
-    connect(mapStateToProps, {setUsersDataTC: getUsersDataTC,
-    logoutTC})
+    connect(mapStateToProps, {logoutTC})
 )(HeaderContainer)
 
 

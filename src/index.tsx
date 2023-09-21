@@ -13,8 +13,7 @@ export const renderTree = (state: ReduxStoreRootStateType) => {
       <BrowserRouter>
           <Provider store={store}>
         <App
-            state={state}
-            dispatch = {store.dispatch.bind(store)}
+
         />
           </Provider>
       </BrowserRouter>,
