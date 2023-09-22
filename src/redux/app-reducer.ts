@@ -1,9 +1,5 @@
 import {AllActionsTypes} from "./state";
 import {AppThunk} from "./redux-store";
-import {authAPI, usersAPI} from "../api/api";
-import {setUsers, toggleIsFetching} from "./users-reducer";
-import {FormDataType} from "../components/Login/Login";
-import {stopSubmit} from "redux-form";
 import {getUsersDataTC} from "../../src/redux/auth-reducer";
 
 

@@ -1,5 +1,4 @@
 import {AllActionsTypes} from "./state";
-import {Dispatch} from "redux";
 import {usersAPI} from "../api/api";
 import {AppThunk} from "./redux-store";
 
@@ -132,10 +131,10 @@ export const toggleFollowingProgress = (isFetching: boolean, userId: number) => 
 
 
 
-export const getUsersTC = (currentPage: number, pageSize: number): AppThunk => {
+export const requestUsersTC = (currentPage: number, pageSize: number): AppThunk => {
     return (dispatch) => {
         dispatch(toggleIsFetching(true))
-
+        dispatch(setCurrentPage(currentPage))
         usersAPI.getUsers(currentPage, pageSize)
             .then(data => {
                 dispatch(toggleIsFetching(false))

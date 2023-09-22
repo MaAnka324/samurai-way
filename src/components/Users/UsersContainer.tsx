@@ -1,20 +1,21 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {
-    follow, followTC,
-    getUsersTC,
-    setCurrentPage,
-    toggleFollowingProgress,
-    unfollow, unfollowTC,
-    UserType
-} from "../../redux/users-reducer";
+import {followTC, requestUsersTC, setCurrentPage, unfollowTC, UserType} from "../../redux/users-reducer";
 import {ReduxStoreRootStateType} from "../../redux/redux-store";
 import {Users} from "./Users";
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
-import WithAuthRedirect from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 import {withRouter} from "react-router-dom";
+import {
+    getCurrentPage,
+    getFollowingInProgress,
+    getIsAuth,
+    getIsFetching,
+    getPageSize,
+    getTotalUsersCount,
+    getUsers
+} from "../../../src/redux/users-selectors";
 
 
 class UsersAPIComponent extends React.Component<UsersType> {
@@ -111,13 +112,13 @@ export type UsersType = MapStatePropsType & MapDispatchPropsType
 
 let mapStateToProps = (state: ReduxStoreRootStateType): MapStatePropsType => {
     return {
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress,
-        isAuth: state.auth.isAuth
+        users: getUsers(state),
+        pageSize: getPageSize(state),
+        totalUsersCount: getTotalUsersCount(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        followingInProgress: getFollowingInProgress(state),
+        isAuth: getIsAuth(state)
     }
 }
 
@@ -145,20 +146,8 @@ let mapStateToProps = (state: ReduxStoreRootStateType): MapStatePropsType => {
 
 
 export default compose<React.ComponentType>(
-    connect(mapStateToProps, {setCurrentPage, getUsersTC, unfollowTC, followTC}),
-        WithAuthRedirect,
+    connect(mapStateToProps, {setCurrentPage, getUsersTC: requestUsersTC, unfollowTC, followTC}),
+        //WithAuthRedirect,
         withRouter
     )(UsersAPIComponent)
-
-
-// export default UsersContainer
-
-
-
-
-
-
-
-
-
 
