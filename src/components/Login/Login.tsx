@@ -5,7 +5,6 @@ import {loginTC} from "../../redux/auth-reducer";
 import {Redirect} from "react-router-dom";
 import {Input} from "../common/FormsControls/FormsControls";
 import {required} from "../../utils/validators/valodators";
-import {inspect} from "util";
 import style from '../common/FormsControls/FormControl.module.css'
 
 

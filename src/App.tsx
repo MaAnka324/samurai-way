@@ -73,12 +73,6 @@ export default compose<React.ComponentType>(
 
 
 
-
-
-
-
-
-
 // const App: React.FC<PropsType> = (props) => {
 //
 //     return (
