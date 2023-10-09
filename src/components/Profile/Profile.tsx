@@ -4,9 +4,9 @@ import MyPostsContainer from "./MyPosts/Post/MyPostsContainer";
 import {PostsType, ProfileType} from "../../redux/profile-reducer";
 import userPhoto from '../../assets/images/UserIcon.png'
 import {Redirect} from "react-router-dom";
-import ProfileStatus from "./MyPosts/ProfileStatus";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
+import ProfileStatusWithHooks from "../../../src/components/Profile/MyPosts/ProfileStatusWithHooks";
 
 type ProfileInfoType = {
     profile: ProfileType | null
@@ -40,7 +40,7 @@ const ProfileInfo = (props: ProfileInfoType) => {
                 <img
                     src={props.profile.photos?.large ? props.profile.photos.large : userPhoto}
                 />
-                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
+                <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
             </div>
             <div>
                 LookingForAJobDescription: {props.profile.lookingForAJobDescription}
