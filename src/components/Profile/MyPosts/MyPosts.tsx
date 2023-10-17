@@ -39,7 +39,7 @@ const PostReduxForm = reduxForm<PostFormDataType>({
 })(MyPostsForm)
 
 
-const MyPosts = (props: MyPostsType) => {
+const MyPosts = React.memo( (props: MyPostsType) => {
     const onSubmit = (formData: PostFormDataType) => {
         props.addPost(formData.post)
     }
@@ -58,6 +58,6 @@ const MyPosts = (props: MyPostsType) => {
             </div>
         </div>
     )
-}
+})
 
 export default MyPosts
