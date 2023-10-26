@@ -74,6 +74,12 @@ const profileReducer = (state: InitialStateType = initialState, action: AllActio
         case "SET-STATUS": {
             return {...state, status: action.status}
         }
+        case "DELETE-POST": {
+            return {
+                ...state,
+                post: state.post.filter(p => p.id != action.id)
+            }
+        }
         default:
             return state
     }
@@ -86,6 +92,7 @@ export type ProfileActionsTypes = ReturnType<typeof addPostAC>
     | ReturnType<typeof changeNewTextAC>
     | ReturnType<typeof setUsersProfile>
     | ReturnType<typeof setStatus>
+    | ReturnType<typeof deletePostAC>
 
 
 export const addPostAC = (newPost: string) => {
@@ -113,6 +120,13 @@ export const setStatus = (status: string) => {
     return {
         type: "SET-STATUS",
         status
+    } as const
+}
+
+export const deletePostAC = (id: number) => {
+    return {
+        type: "DELETE-POST",
+        id
     } as const
 }
 
