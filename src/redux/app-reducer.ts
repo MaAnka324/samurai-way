@@ -1,6 +1,6 @@
 import {AllActionsTypes} from "./state";
 import {AppThunk} from "./redux-store";
-import {getUsersDataTC} from "../../src/redux/auth-reducer";
+import {getUsersDataTC, setUserData} from "../../src/redux/auth-reducer";
 
 
 let initialState: InitialStateType = {
@@ -14,7 +14,7 @@ export type InitialStateType = {
 const appReducer = (state: InitialStateType = initialState, action: AllActionsTypes): InitialStateType => {
 
     switch (action.type) {
-        case 'SET-USER-DATA':
+        case 'SET-INITIALIZED':
             return {
                 ...state,
                 initialized: true
@@ -29,6 +29,7 @@ export const initializedSuccess = () => ({
     type: "SET-INITIALIZED",
 
 } as const)
+export type AppActionsTypes = ReturnType<typeof initializedSuccess>
 
 
 export const initializeAppTC = (): AppThunk => {

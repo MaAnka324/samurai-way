@@ -7,16 +7,13 @@ import {BrowserRouter} from "react-router-dom";
 import {Provider} from "react-redux";
 
 
-
 export const renderTree = (state: ReduxStoreRootStateType) => {
-  return  ReactDOM.render(
-      <BrowserRouter>
-          <Provider store={store}>
-        <App
-
-        />
-          </Provider>
-      </BrowserRouter>,
+    return ReactDOM.render(
+        <BrowserRouter>
+            <Provider store={store}>
+                <App/>
+            </Provider>
+        </BrowserRouter>,
         document.getElementById('root')
     );
 }

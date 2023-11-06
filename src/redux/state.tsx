@@ -3,6 +3,7 @@ import dialogsReducer, {DialogsActionsTypes} from "./dialogs-reducer";
 import sidebarReducer from "./sidebar-reducer";
 import {UsersActionsTypes, UserType} from "./users-reducer";
 import {AuthActionsTypes} from "./auth-reducer";
+import {AppActionsTypes} from "./../../src/redux/app-reducer";
 
 let onChange = () => {
     console.log("hello")
@@ -114,7 +115,7 @@ type StoreType = {
     dispatch: (action: AllActionsTypes) => void
 }
 
-export type AllActionsTypes = ProfileActionsTypes | DialogsActionsTypes | UsersActionsTypes | AuthActionsTypes
+export type AllActionsTypes = ProfileActionsTypes | DialogsActionsTypes | UsersActionsTypes | AuthActionsTypes | AppActionsTypes
 
 // const store: StoreType = {
 //     _state: {

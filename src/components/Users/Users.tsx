@@ -1,13 +1,23 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {UsersType} from "./UsersContainer";
 import styles from './Users.module.css'
 import userPhoto from '../../assets/images/UserIcon.png'
 import {NavLink} from "react-router-dom";
+import {Paginator} from "./Paginator";
 
 
-export const Users = (props: UsersType) => {
+export const Users: FC<UsersType> = (
+    {
+        users,
+        pageSize,
+        totalUsersCount,
+        followingInProgress,
+        followTC,
+        unfollowTC,
+        ...props
+    }) => {
 
-    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
+    let pagesCount = Math.ceil(totalUsersCount / pageSize)
 
     let pages = []
     for (let i = 1; i <= pagesCount; i++) {
@@ -16,18 +26,21 @@ export const Users = (props: UsersType) => {
 
     return (
         <div>
-            <div>
-                {pages.map(p => {
-                    return <span
-                        className={props.currentPage === p ? styles.selectedPage : ''}
-                        onClick={(e) => {
-                            props.setCurrentPage(p)
-                        }}
-                    >{p}</span>
-                })}
-            </div>
+            <Paginator
+                users={users}
+                pageSize={pageSize}
+                totalUsersCount={totalUsersCount}
+                currentPage={props.currentPage}
+                isFetching={props.isFetching}
+                followingInProgress={followingInProgress}
+                isAuth={props.isAuth}
+                followTC={followTC}
+                unfollowTC={unfollowTC}
+                getUsersTC={props.getUsersTC}
+                setCurrentPage={props.setCurrentPage}
+            />
             {
-                props.users && props.users.map((u: any) => <div key={u.id}>
+                users && users.map((u: any) => <div key={u.id}>
                     <span>
                         <div>
                             <NavLink to={'/profile/' + u.id}>
@@ -39,18 +52,18 @@ export const Users = (props: UsersType) => {
                         <div>
                             {u.followed
                                 ? <button
-                                    disabled={props.followingInProgress.some(id => id === u.id)}
+                                    disabled={followingInProgress.some(id => id === u.id)}
                                     onClick={() => {
 
-                                        props.unfollowTC(u.id)
+                                        unfollowTC(u.id)
 
                                     }}>Unfollow</button>
 
                                 : <button
-                                    disabled={props.followingInProgress.some(id => id === u.id)}
+                                    disabled={followingInProgress.some(id => id === u.id)}
                                     onClick={() => {
 
-                                        props.followTC(u.id)
+                                        followTC(u.id)
 
                                     }}>Follow</button>
                             }

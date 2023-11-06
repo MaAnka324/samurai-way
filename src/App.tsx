@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.css';
 import Nav from "./components/Nav/Nav";
-import {BrowserRouter, Route, withRouter} from "react-router-dom";
+import {Route, withRouter} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import {ReduxStoreRootStateType} from "./redux/redux-store";
-import {compose, Dispatch} from "redux";
+import {compose} from "redux";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
@@ -31,7 +31,7 @@ class App extends React.Component<AppPropsType> {
         }
 
         return (
-            <BrowserRouter>
+            // <BrowserRouter>
                 <div className="app-wrapper">
                     <HeaderContainer/>
                     <Nav/>
@@ -46,7 +46,7 @@ class App extends React.Component<AppPropsType> {
                         <Route path='/login' render={() => <Login/>}/>
                     </div>
                 </div>
-            </BrowserRouter>
+            // </BrowserRouter>
         );
     }
 }
