@@ -1,18 +1,18 @@
 import React from 'react';
 import './App.css';
 import Nav from "./components/Nav/Nav";
-import {Route, withRouter} from "react-router-dom";
+import {BrowserRouter, Route, withRouter} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
-import {ReduxStoreRootStateType} from "./redux/redux-store";
+import {ReduxStoreRootStateType, store} from "./redux/redux-store";
 import {compose} from "redux";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
-import {connect} from "react-redux";
+import {connect, Provider} from "react-redux";
 import {initializeAppTC} from "../src/redux/app-reducer";
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -65,11 +65,19 @@ let mapStateToProps = (state: ReduxStoreRootStateType): MapStatePropsType => ({
 })
 
 type AppPropsType = MapDispatchPropsType & MapStatePropsType
-
-export default compose<React.ComponentType>(
+let AppContainer = compose<React.ComponentType>(
     connect(mapStateToProps, {initializeAppTC}),
     withRouter
 )(App)
+
+let SamuraiJSApp = () => {
+    return  <BrowserRouter>
+        <Provider store={store}>
+            <AppContainer/>
+        </Provider>
+    </BrowserRouter>
+}
+export default SamuraiJSApp
 
 
 
