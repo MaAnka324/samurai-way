@@ -35,7 +35,6 @@ export type AppActionsTypes = ReturnType<typeof initializedSuccess>
 export const initializeAppTC = (): AppThunk => {
     return (dispatch) => {
         let promise = dispatch(getUsersDataTC())
-        debugger
         Promise.all([promise])
             .then(() => {
                 dispatch(initializedSuccess())

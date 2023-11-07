@@ -1,4 +1,4 @@
-import {applyMiddleware, combineReducers, legacy_createStore as createStore} from "redux";
+import {applyMiddleware, combineReducers, compose, legacy_createStore as createStore} from "redux";
 import profileReducer, {ProfileActionsTypes} from "./profile-reducer";
 import dialogsReducer, {DialogsActionsTypes} from "./dialogs-reducer";
 import sidebarReducer from "./sidebar-reducer";
@@ -19,7 +19,15 @@ let rootReducer = combineReducers({
     form: formReducer
 })
 
-export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
+declare global {
+    interface Window {
+        __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+    }
+}
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+export const store = createStore(rootReducer, composeEnhancers( applyMiddleware(thunkMiddleware)))
+
 export type ReduxStoreRootStateType = ReturnType<typeof rootReducer>
 
 export const useAppDispatch = () => useDispatch<AppDispatchType>()
