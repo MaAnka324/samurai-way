@@ -24,7 +24,7 @@ export type UserLocation = {
 let initialState: InitialStateType = {
     users: [],
     pageSize: 10,
-    totalUsersCount: 190,
+    totalUsersCount: 201,
     currentPage: 1,
     isFetching: true,
     followingInProgress: []
@@ -135,7 +135,7 @@ export const requestUsersTC = (currentPage: number, pageSize: number): AppThunk 
         const data = await usersAPI.getUsers(currentPage, pageSize)
         dispatch(toggleIsFetching(false))
         dispatch(setUsers(data.items))
-        // dispatch(setTotalUsersCount(data.totalCount))  //покажет количество страниц
+        dispatch(setUsersTotalCount(data.totalCount))
     }
 }
 

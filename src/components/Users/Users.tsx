@@ -4,21 +4,24 @@ import styles from './Users.module.css'
 import userPhoto from '../../assets/images/UserIcon.png'
 import {NavLink} from "react-router-dom";
 import {Paginator} from "./Paginator";
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 
 
 export const Users: FC<UsersType> = (
     {
         users,
         pageSize,
-        totalUsersCount,
+        totalItemsCount,
         followingInProgress,
         followTC,
         unfollowTC,
         ...props
     }) => {
 
-    let pagesCount = Math.ceil(totalUsersCount / pageSize)
+    let pagesCount = Math.ceil(totalItemsCount / pageSize)
 
+    console.log(totalItemsCount)
     let pages = []
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
@@ -27,16 +30,10 @@ export const Users: FC<UsersType> = (
     return (
         <div>
             <Paginator
-                users={users}
                 pageSize={pageSize}
-                totalUsersCount={totalUsersCount}
+                totalItemsCount={totalItemsCount}
                 currentPage={props.currentPage}
-                isFetching={props.isFetching}
-                followingInProgress={followingInProgress}
-                isAuth={props.isAuth}
-                followTC={followTC}
-                unfollowTC={unfollowTC}
-                getUsersTC={props.getUsersTC}
+                portionSize={10}
                 setCurrentPage={props.setCurrentPage}
             />
             {

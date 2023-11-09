@@ -14,7 +14,7 @@ import {
     getIsFetching,
     getPageSize,
     getTotalUsersCount,
-    getUsers, getUsersSuperSelector
+    getUsersSuperSelector
 } from "../../../src/redux/users-selectors";
 
 
@@ -62,19 +62,13 @@ class UsersAPIComponent extends React.Component<UsersType> {
                 </Box>
                 : null}
             <Users
-                totalUsersCount={this.props.totalUsersCount}
+                totalItemsCount={this.props.totalItemsCount}
                 pageSize={this.props.pageSize}
                 currentPage={this.props.currentPage}
                 setCurrentPage={this.onPageChanged}
                 users={this.props.users}
-                // follow={this.props.follow}
-                // unfollow={this.props.unfollow}
-                // setUsers={this.props.setUsers}
-                // toggleIsFetching={this.props.toggleIsFetching}
                 isFetching={this.props.isFetching}
                 followingInProgress={this.props.followingInProgress}
-                // toggleFollowingProgress={this.props.toggleFollowingProgress}
-                // setTotalUsersCount={this.props.setTotalUsersCount}
                 getUsersTC={this.props.getUsersTC}
                 followTC={this.props.followTC}
                 unfollowTC={this.props.unfollowTC}
@@ -88,11 +82,12 @@ class UsersAPIComponent extends React.Component<UsersType> {
 type MapStatePropsType = {
     users: UserType[]
     pageSize: number
-    totalUsersCount: number
+    totalItemsCount: number
     currentPage: number
     isFetching: boolean
     followingInProgress: Array<number>
     isAuth: boolean
+
 }
 
 type MapDispatchPropsType = {
@@ -115,11 +110,12 @@ let mapStateToProps = (state: ReduxStoreRootStateType): MapStatePropsType => {
         //users: getUsers(state),
         users: getUsersSuperSelector(state),
         pageSize: getPageSize(state),
-        totalUsersCount: getTotalUsersCount(state),
+        totalItemsCount: getTotalUsersCount(state),
         currentPage: getCurrentPage(state),
         isFetching: getIsFetching(state),
         followingInProgress: getFollowingInProgress(state),
-        isAuth: getIsAuth(state)
+        isAuth: getIsAuth(state),
+
     }
 }
 
