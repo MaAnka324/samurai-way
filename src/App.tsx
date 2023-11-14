@@ -8,16 +8,17 @@ import Settings from "./components/Settings/Settings";
 import {ReduxStoreRootStateType, store} from "./redux/redux-store";
 import {compose} from "redux";
 import UsersContainer from "./components/Users/UsersContainer";
-import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
 import {connect, Provider} from "react-redux";
-import {initializeAppTC} from "../src/redux/app-reducer";
+import {initializeAppTC} from "./redux/app-reducer";
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
+import WithSuspense from "../src/hoc/withSuspense";
 
 //import DialogsContainer from "./components/Dialogs/DialogsContainer";
 const DialogsContainer = React.lazy(() => import("./components/Dialogs/DialogsContainer"));
+const ProfileContainer = React.lazy(() => import("./components/Profile/ProfileContainer"));
 
 
 class App extends React.Component<AppPropsType> {
@@ -33,18 +34,14 @@ class App extends React.Component<AppPropsType> {
         }
 
         return (
-            // <BrowserRouter>
             <div className="app-wrapper">
                 <HeaderContainer/>
                 <Nav/>
                 <div className='app-wrapper-content'>
-                    <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
+                    {/*<Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>*/}
                     {/*<Route path='/profile' render={() => <ProfileContainer/>}/>*/}
-                    <Route path='/dialogs' render={() => {
-                        return <Suspense fallback={<div>Loading...</div>}>
-                            <DialogsContainer/>
-                        </Suspense>
-                    }}/>
+                    <Route path='/profile/:userId?' render={WithSuspense(ProfileContainer)}/>
+                    <Route path='/dialogs' render={WithSuspense(DialogsContainer)}/>
                     <Route path='/users' render={() => <UsersContainer/>}/>
                     <Route path='/news' render={() => <News/>}/>
                     <Route path='/music' render={() => <Music/>}/>
@@ -52,7 +49,6 @@ class App extends React.Component<AppPropsType> {
                     <Route path='/login' render={() => <Login/>}/>
                 </div>
             </div>
-            // </BrowserRouter>
         );
     }
 }
