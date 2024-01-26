@@ -2,7 +2,7 @@ import React from 'react';
 import {
     getStatusTC,
     PostsType,
-    ProfileType,
+    ProfileType, savePhotoTC,
     setUsersProfile,
     setUsersProfileTC,
     updateStatusTC
@@ -16,14 +16,14 @@ import {compose} from "redux";
 
 class ProfileContainer extends React.Component<PropsType> {
 
-    componentDidMount() {
+    refreshProfile() {
         let userId = this.props.match.params.userId
         console.log(this.props)
         if (!userId) {
             userId = this.props.authorizedUserId as string
-            //userId = '28555' // my id 28555
+            //userId = '28555'
 
-            if(!userId) {
+            if (!userId) {
                 this.props.history.push('/login')
             }
         }
@@ -32,19 +32,30 @@ class ProfileContainer extends React.Component<PropsType> {
         this.props.getStatusTC(userId)
     }
 
+    componentDidMount() {
+        this.refreshProfile()
+    }
+
+    componentDidUpdate(prevProps: Readonly<PropsType>, prevState: Readonly<{}>, snapshot?: any) {
+        if (this.props.match.params.userId != prevProps.match.params.userId) {
+            this.refreshProfile()
+        }
+    }
+
     render() {
         return (
             <div>
                 <Profile {...this.props}
+                         isOwner={!this.props.match.params.userId}
                          profile={this.props.profile}
                          status={this.props.status}
                          updateStatus={this.props.updateStatusTC}
+                         savePhoto={this.props.savePhotoTC}
                 />
             </div>
         )
     }
 }
-
 
 
 let mapStateToPropsForRedirect = (state: ReduxStoreRootStateType): MapStatePropsForRedirectType => ({
@@ -80,6 +91,7 @@ type MapDispatchPropsType = {
     setUsersProfileTC: (userId: string) => void
     getStatusTC: (userId: string) => void
     updateStatusTC: (status: string) => void
+    savePhotoTC: (file: File) => void
 }
 
 type ProfilePropsType = MapStatePropsType & MapDispatchPropsType // & MapStatePropsForRedirectType
@@ -110,7 +122,8 @@ export default compose<React.ComponentType>(
         setUsersProfile,
         setUsersProfileTC,
         getStatusTC,
-        updateStatusTC
+        updateStatusTC,
+        savePhotoTC
     }),
     withRouter,
     // WithAuthRedirect

@@ -80,6 +80,12 @@ const profileReducer = (state: InitialStateType = initialState, action: AllActio
                 post: state.post.filter(p => p.id != action.id)
             }
         }
+        case "ADD-PHOTO": {
+            if (!state.profile) {
+                return state; // or handle the case where profile is null
+            }
+            return {...state, profile: {...state.profile, photos: action.photos}};
+        }
         default:
             return state
     }
@@ -93,28 +99,18 @@ export type ProfileActionsTypes = ReturnType<typeof addPostAC>
     | ReturnType<typeof setUsersProfile>
     | ReturnType<typeof setStatus>
     | ReturnType<typeof deletePostAC>
+    | ReturnType<typeof savePhotoSuccess>
 
 
-export const addPostAC = (newPost: string) => {
-    return {
-        type: "ADD-POST",
-        newPost
-    } as const
-}
+export const addPostAC = (newPost: string) => ({type: "ADD-POST", newPost} as const)
 
-export const changeNewTextAC = (newText: string) => {
-    return {
-        type: "CHANGE-NEW-TEXT",
-        newText
-    } as const
-}
+export const savePhotoSuccess = (photos: PhotosType) => ({type: "ADD-PHOTO", photos} as const)
 
-export const setUsersProfile = (profile: ProfileType) => {
-    return {
-        type: "SET-USER-PROFILE",
-        profile
-    } as const
-}
+
+export const changeNewTextAC = (newText: string) => ({type: "CHANGE-NEW-TEXT", newText} as const)
+
+
+export const setUsersProfile = (profile: ProfileType) => ({type: "SET-USER-PROFILE", profile} as const)
 
 export const setStatus = (status: string) => {
     return {
@@ -150,6 +146,15 @@ export const updateStatusTC = (status: string): AppThunk => {
         const data = await profileAPI.updateStatus(status)
         if (data.resultCode === 0) {
             dispatch(setStatus(status))
+        }
+    }
+}
+
+export const savePhotoTC = (file: File): AppThunk => {
+    return async (dispatch) => {
+        const data = await profileAPI.savePhoto(file)
+        if (data.resultCode === 0) {
+            dispatch(savePhotoSuccess(data.data.photos))
         }
     }
 }

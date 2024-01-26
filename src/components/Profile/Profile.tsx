@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import s from './Profile.module.css'
 import MyPostsContainer from "./MyPosts/Post/MyPostsContainer";
 import {PostsType, ProfileType} from "../../redux/profile-reducer";
@@ -12,6 +12,8 @@ type ProfileInfoType = {
     profile: ProfileType | null
     status: string
     updateStatus: (userId: string) => void
+    isOwner: boolean
+    savePhoto: (file: File) => void
 }
 
 
@@ -21,6 +23,12 @@ const ProfileInfo = (props: ProfileInfoType) => {
             <CircularProgress/>
         </Box>
         // return <div>Preloader</div>
+    }
+
+    const mainPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
+        if(e.target.files && e.target.files.length){
+            props.savePhoto(e.target.files[0])
+        }
     }
 
 
@@ -40,6 +48,7 @@ const ProfileInfo = (props: ProfileInfoType) => {
                 <img
                     src={props.profile.photos?.large ? props.profile.photos.large : userPhoto}
                 />
+                {props.isOwner && <input type='file' onChange={mainPhotoSelected}/>}
                 <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
             </div>
             <div>
@@ -58,6 +67,8 @@ interface ProfilePropsTypeNew {
     isAuth: boolean
     status: string
     updateStatus: (userId: string) => void
+    isOwner: boolean
+    savePhoto: (file: File) => void
 }
 
 
@@ -71,6 +82,8 @@ const Profile = (props: ProfilePropsTypeNew) => {
                 profile={props.profile}
                 status={props.status}
                 updateStatus={props.updateStatus}
+                isOwner={props.isOwner}
+                savePhoto={props.savePhoto}
             />
             <MyPostsContainer/>
         </div>
