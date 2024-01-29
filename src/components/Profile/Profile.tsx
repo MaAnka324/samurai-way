@@ -42,7 +42,7 @@ const ProfileInfo = (props: ProfileInfoType) => {
                 {props.profile.fullName}
             </div>
             <p>
-                About me: {props.profile.aboutMe}
+                <b>About me </b>{props.profile.aboutMe}
             </p>
             <div className={s.descriptionBlock}>
                 <img
