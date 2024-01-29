@@ -51,9 +51,9 @@ const ProfileInfo = (props: ProfileInfoType) => {
                 {props.isOwner && <input type='file' onChange={mainPhotoSelected}/>}
                 <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
             </div>
-            <div>
-                LookingForAJobDescription: {props.profile.lookingForAJobDescription}
-            </div>
+            {/*<div>*/}
+            {/*    LookingForAJobDescription: {props.profile.lookingForAJobDescription}*/}
+            {/*</div>*/}
         </div>
     )
 }
