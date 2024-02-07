@@ -2,7 +2,7 @@ import React from 'react';
 import {
     getStatusTC,
     PostsType,
-    ProfileType, savePhotoTC,
+    ProfileType, savePhotoTC, saveProfileTC,
     setUsersProfile,
     setUsersProfileTC,
     updateStatusTC
@@ -12,6 +12,7 @@ import {connect} from "react-redux";
 import {ReduxStoreRootStateType} from "../../redux/redux-store";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {compose} from "redux";
+import {FormProfileDataType} from "../../../src/components/Profile/ProfileDataForm";
 
 
 class ProfileContainer extends React.Component<PropsType> {
@@ -92,6 +93,7 @@ type MapDispatchPropsType = {
     getStatusTC: (userId: string) => void
     updateStatusTC: (status: string) => void
     savePhotoTC: (file: File) => void
+    saveProfile: (data: FormProfileDataType) => void
 }
 
 type ProfilePropsType = MapStatePropsType & MapDispatchPropsType // & MapStatePropsForRedirectType
@@ -123,7 +125,8 @@ export default compose<React.ComponentType>(
         setUsersProfileTC,
         getStatusTC,
         updateStatusTC,
-        savePhotoTC
+        savePhotoTC,
+        saveProfileTC
     }),
     withRouter,
     // WithAuthRedirect

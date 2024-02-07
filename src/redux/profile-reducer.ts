@@ -1,6 +1,7 @@
 import {AllActionsTypes} from "./state";
 import {AppThunk} from "./redux-store";
 import {profileAPI} from "../api/api";
+import {FormProfileDataType} from "../../src/components/Profile/ProfileDataForm";
 
 
 export type PostsType = {
@@ -156,5 +157,14 @@ export const savePhotoTC = (file: File): AppThunk => {
         if (data.resultCode === 0) {
             dispatch(savePhotoSuccess(data.data.photos))
         }
+    }
+}
+
+export const saveProfileTC = (profile: FormProfileDataType): AppThunk => {
+    return async (dispatch) => {
+        // const data = await profileAPI.saveProfile(profile)
+        // if (data.resultCode === 0) {
+        //     dispatch(saveProfileSuccess(data))
+        // }
     }
 }
