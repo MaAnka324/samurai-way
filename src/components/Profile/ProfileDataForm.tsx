@@ -2,16 +2,13 @@ import React from "react";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {Input} from "../../../src/components/common/FormsControls/FormsControls";
 import {required} from "../../../src/utils/validators/valodators";
-import {useAppDispatch, useAppSelector} from "../../../src/redux/redux-store";
-import {Contacts} from "@mui/icons-material";
-import {Checkbox} from "@mui/material";
 
 
 
 export type FormProfileDataType = {
-    name: string
+    fullName: string
     lookingForAJob: boolean
-    myProfessionalSkills: string
+    lookingForAJobDescription: string
     aboutMe: string
 }
 
@@ -19,8 +16,8 @@ export const ProfileDataForm: React.FC<InjectedFormProps<FormProfileDataType>> =
     return (
     <form onSubmit={handleSubmit}>
         <div>
-            <b>Name : </b> <Field name={'name'}
-                                  placeholder={'Name'}
+            <b>Name : </b> <Field name={'fullName'}
+                                  placeholder={'fullName'}
                                   component={Input}
                                   validate={[required]}
         />
@@ -34,10 +31,10 @@ export const ProfileDataForm: React.FC<InjectedFormProps<FormProfileDataType>> =
         </div>
         <div>
             <b>My professional
-                skills:</b> <Field name={'myProfessionalSkills'}
-                                   placeholder={'myProfessionalSkills'}
+                skills:</b> <Field name={'lookingForAJobDescription'}
+                                   placeholder={'lookingForAJobDescription'}
                                    component={Input}
-                                   />
+        />
         </div>
         <div>
             <b>About me </b><Field name={'aboutMe'}

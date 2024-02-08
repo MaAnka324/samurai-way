@@ -1,5 +1,6 @@
 import axios from "axios";
 import {FormDataType} from "../components/Login/Login";
+import {FormProfileDataType} from "../../src/components/Profile/ProfileDataForm";
 
 const instance = axios.create({
     withCredentials: true,
@@ -32,19 +33,19 @@ export const usersAPI = {
 
 
 export const authAPI = {
-    me(){
+    me() {
         return instance.get(`auth/me`)
             .then(response => {
                 return response.data
             })
     },
-    login(data: FormDataType){
+    login(data: FormDataType) {
         return instance.post(`auth/login`, data)
             .then(response => {
                 return response.data
             })
     },
-    logout(){
+    logout() {
         return instance.delete(`auth/login`)
             .then(response => {
                 return response.data
@@ -54,7 +55,7 @@ export const authAPI = {
 
 
 export const profileAPI = {
-    setUsersProfile(userId: string){
+    setUsersProfile(userId: string) {
         return instance.get(`profile/${userId}`)
             .then(response => {
                 return response.data
@@ -80,6 +81,12 @@ export const profileAPI = {
                 'Content-Type': "multipart/form-data"
             }
         })
+            .then(response => {
+                return response.data
+            })
+    },
+    saveProfile(profile: FormProfileDataType) {
+        return instance.put('profile', profile)
             .then(response => {
                 return response.data
             })

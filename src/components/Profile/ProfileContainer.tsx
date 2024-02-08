@@ -19,7 +19,6 @@ class ProfileContainer extends React.Component<PropsType> {
 
     refreshProfile() {
         let userId = this.props.match.params.userId
-        console.log(this.props)
         if (!userId) {
             userId = this.props.authorizedUserId as string
             //userId = '28555'
@@ -52,6 +51,7 @@ class ProfileContainer extends React.Component<PropsType> {
                          status={this.props.status}
                          updateStatus={this.props.updateStatusTC}
                          savePhoto={this.props.savePhotoTC}
+                         saveProfile={this.props.saveProfileTC}
                 />
             </div>
         )
@@ -93,7 +93,7 @@ type MapDispatchPropsType = {
     getStatusTC: (userId: string) => void
     updateStatusTC: (status: string) => void
     savePhotoTC: (file: File) => void
-    saveProfile: (data: FormProfileDataType) => void
+    saveProfileTC: (data: FormProfileDataType) => void
 }
 
 type ProfilePropsType = MapStatePropsType & MapDispatchPropsType // & MapStatePropsForRedirectType

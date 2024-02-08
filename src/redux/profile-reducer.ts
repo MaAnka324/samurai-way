@@ -161,10 +161,12 @@ export const savePhotoTC = (file: File): AppThunk => {
 }
 
 export const saveProfileTC = (profile: FormProfileDataType): AppThunk => {
-    return async (dispatch) => {
-        // const data = await profileAPI.saveProfile(profile)
-        // if (data.resultCode === 0) {
-        //     dispatch(saveProfileSuccess(data))
-        // }
+    return async (dispatch, getState) => {
+        const id = getState().auth.id
+        const data = await profileAPI.saveProfile(profile)
+        debugger
+        if (data.resultCode === 0 && id !== null) {
+            dispatch(setUsersProfileTC(id))
+        }
     }
 }

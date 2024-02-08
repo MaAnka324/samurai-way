@@ -8,6 +8,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import ProfileStatusWithHooks from "../../../src/components/Profile/MyPosts/ProfileStatusWithHooks";
 import {FormProfileDataType, ProfileDataForm, ProfileReduxForm} from "./ProfileDataForm";
+import {useAppDispatch} from "../../../src/redux/redux-store";
 
 type ProfileInfoType = {
     profile: ProfileType | null
@@ -56,7 +57,9 @@ const ProfileInfo = (props: ProfileInfoType) => {
             <ProfileStatusWithHooks status={props?.status} updateStatus={props?.updateStatus}/>
             {editMode
                 ? <div>
-                    <ProfileReduxForm onSubmit={onSubmit}/>
+                    <ProfileReduxForm initialValues={props.profile} onSubmit={onSubmit}/>
+                    <button onClick={() => {
+                        setEditMode(false)}}>go to profile</button>
                 </div>
                 : <div>
                     <ProfileData profile={props.profile}
