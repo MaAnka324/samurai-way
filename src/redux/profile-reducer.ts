@@ -2,6 +2,7 @@ import {AllActionsTypes} from "./state";
 import {AppThunk} from "./redux-store";
 import {profileAPI} from "../api/api";
 import {FormProfileDataType} from "../../src/components/Profile/ProfileDataForm";
+import {stopSubmit} from "redux-form";
 
 
 export type PostsType = {
@@ -20,7 +21,7 @@ export type ProfilePageType = {
 export type ProfileType = {
     photos: PhotosType
     aboutMe: string
-    contacts: ContactsType
+    contacts?: ContactsType | null | undefined
     lookingForAJob: boolean
     lookingForAJobDescription: string
     fullName: string
@@ -31,15 +32,15 @@ type PhotosType = {
     'large': string
 }
 
-type ContactsType = {
-    github: string,
-    vk: string,
-    facebook: string,
-    instagram: string,
-    twitter: string,
-    website: string,
-    youtube: string,
-    mainLink: string
+export type ContactsType = {
+    github?: string
+    vk?: string
+    facebook?: string
+    instagram?: string
+    twitter?: string
+    website?: string
+    youtube?: string
+    mainLink?: string
 }
 
 let initialState: ProfilePageType = {
@@ -164,9 +165,12 @@ export const saveProfileTC = (profile: FormProfileDataType): AppThunk => {
     return async (dispatch, getState) => {
         const id = getState().auth.id
         const data = await profileAPI.saveProfile(profile)
-        debugger
         if (data.resultCode === 0 && id !== null) {
             dispatch(setUsersProfileTC(id))
+        }
+        else {
+            let message = data.messages.length > 0 ? data.messages[0] : "Some error"
+            dispatch(stopSubmit("edit-profile", {_error: message}))
         }
     }
 }

@@ -111,7 +111,7 @@ const Profile = (props: ProfilePropsTypeNew) => {
 
 
 type ProfileDataType = {
-    profile: ProfileType | null
+    profile?: ProfileType | null
     status: string
     updateStatus: (userId: string) => void
     goToEditMode: () => void
@@ -136,12 +136,14 @@ const ProfileData = (props: ProfileDataType) => {
         </div>
         <div>
             <b>Contacts </b>
-            {props?.profile?.contacts && Object.keys(props.profile.contacts).map(key => {
+            {props?.profile?.contacts && Object.keys(props?.profile?.contacts).map(key => {
+                const contacts = props?.profile?.contacts! as ContactsType
+                console.log(contacts[key as keyof ContactsType])
                 return (
                     <Contacts
                         key={key}
                         contactTitle={key}
-                        // contactValue={props.profile.contacts[key]}
+                        contactValue={contacts[key as keyof ContactsType]}
                     />
                 );
             })}
