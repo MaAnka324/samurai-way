@@ -12,10 +12,12 @@ export type FormDataType = {
     email: string
     password: string
     rememberMe: boolean
+    captchaUrl: string
 }
 
 const LoginForm: React.FC<InjectedFormProps<FormDataType>> = ({handleSubmit, error}) => {
     const isAuth = useAppSelector(state => state.auth.isAuth)
+    const captchaUrl = useAppSelector(state => state.auth.captchaUrl)
 
     if(isAuth) return <Redirect to={'/profile/:userId?'}/>
 
@@ -41,6 +43,7 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = ({handleSubmit, err
                        type={'checkbox'}
                        component={Input}/> remember me
             </div>
+            {captchaUrl && <img src={captchaUrl}/>}
             {error && <div className={style.formSummaryError}>
                 ERROR
             </div>}
@@ -60,6 +63,7 @@ const LoginReduxForm = reduxForm<FormDataType>({
 const Login = () => {
     const dispatch = useAppDispatch()
     const isAuth = useAppSelector(state => state.auth.isAuth)
+    const captchaUrl = useAppSelector(state => state.auth.captchaUrl)
 
     const onSubmit = (formData: FormDataType) => {
         dispatch(loginTC(formData))
@@ -71,7 +75,7 @@ const Login = () => {
     return (
         <div>
             <h1>LOGIN</h1>
-            <LoginReduxForm onSubmit={onSubmit}/>
+            <LoginReduxForm onSubmit={onSubmit} />
         </div>
     );
 };

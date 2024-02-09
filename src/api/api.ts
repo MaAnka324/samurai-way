@@ -31,6 +31,15 @@ export const usersAPI = {
     }
 }
 
+export const securityAPI = {
+    getCaptcha() {
+        return instance.get(`security/get-captcha-url`)
+            .then(response => {
+                return response.data
+            })
+    }
+}
+
 
 export const authAPI = {
     me() {

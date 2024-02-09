@@ -1,6 +1,6 @@
 import {AllActionsTypes} from "./state";
 import {AppThunk} from "./redux-store";
-import {authAPI, usersAPI} from "../api/api";
+import {authAPI, securityAPI, usersAPI} from "../api/api";
 import {setUsers, toggleIsFetching} from "./users-reducer";
 import {FormDataType} from "../components/Login/Login";
 import {stopSubmit} from "redux-form";
@@ -17,6 +17,7 @@ let initialState: InitialStateType = {
     email: null,
     login: null,
     isAuth: false,
+    captchaUrl: null
     // isLoggedIn: false
 }
 
@@ -25,6 +26,7 @@ export type InitialStateType = {
     email: string | null
     login: string | null
     isAuth: boolean
+    captchaUrl: string | null
     // isLoggedIn: boolean
 }
 
@@ -36,6 +38,11 @@ const authReducer = (state: InitialStateType = initialState, action: AllActionsT
                 ...state,
                 ...action.data,
                 isAuth: true
+            }
+        case 'GET-CAPTCHA-URL-SUCCESS':
+            return {
+                ...state,
+                captchaUrl: action.captchaUrl
             }
         // case "login/SET-IS-LOGGED-IN":
         //     return {
@@ -51,6 +58,7 @@ export default authReducer
 
 
 export type AuthActionsTypes = ReturnType<typeof setUserData>
+    | ReturnType<typeof getCaptchaUrlAC>
 
 export const setUserData = (id: string | null, email: string | null,
                             login: string | null, isAuth: boolean | null) => ({
@@ -65,6 +73,9 @@ export const setUserData = (id: string | null, email: string | null,
 
 // export const setIsLoggedInAC = (value: boolean) =>
 //     ({type: 'login/SET-IS-LOGGED-IN', value} as const)
+
+export const getCaptchaUrlAC = (captchaUrl: string) =>
+    ({type: 'GET-CAPTCHA-URL-SUCCESS', captchaUrl} as const)
 
 
 export const getUsersDataTC = (): AppThunk => {
@@ -89,6 +100,9 @@ export const loginTC = (formData: FormDataType): AppThunk => {
                 dispatch(getUsersDataTC())
                 //dispatch(setIsLoggedInAC(true))
             } else {
+                if (data.resultCode === 10) {
+                    dispatch(getCaptchaUrlTC())
+                }
                 let message = data.messages.length > 0 ? data.messages[0] : "Some error"
                 let action = stopSubmit("login", {_error: message})
                 dispatch(action)
@@ -98,6 +112,19 @@ export const loginTC = (formData: FormDataType): AppThunk => {
 
         }
 
+    }
+}
+
+export const getCaptchaUrlTC = (): AppThunk => {
+    return async (dispatch) => {
+        try {
+            const data = await securityAPI.getCaptcha()
+            console.log(data)
+            const captchaUrl = data.url
+            dispatch(getCaptchaUrlAC(captchaUrl))
+        } catch (e) {
+
+        }
     }
 }
 
