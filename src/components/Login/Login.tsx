@@ -12,14 +12,15 @@ export type FormDataType = {
     email: string
     password: string
     rememberMe: boolean
-    captchaUrl: string
+    captcha: string
 }
 
 const LoginForm: React.FC<InjectedFormProps<FormDataType>> = ({handleSubmit, error}) => {
     const isAuth = useAppSelector(state => state.auth.isAuth)
     const captchaUrl = useAppSelector(state => state.auth.captchaUrl)
 
-    if(isAuth) return <Redirect to={'/profile/:userId?'}/>
+    // if(isAuth) return <Redirect to={'/profile/:userId?'}/>
+    // debugger
 
 
     return (
@@ -44,7 +45,16 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = ({handleSubmit, err
                        type={'checkbox'}
                        component={Input}/> remember me
             </div>
+
             {captchaUrl && <img src={captchaUrl}/>}
+            {captchaUrl && <div>
+                <Field name={'captcha'}
+                       placeholder={'Captcha'}
+                       component={Input}
+                       validate={[required]}
+                />
+            </div>}
+
             {error && <div className={style.formSummaryError}>
                 ERROR
             </div>}
@@ -57,7 +67,12 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = ({handleSubmit, err
 
 
 const LoginReduxForm = reduxForm<FormDataType>({
-    form: 'login'
+    form: 'login',
+    initialValues: {
+        email: 'matviychuk.anna324@gmail.com',
+        password: '123456789Anna',
+        rememberMe: false
+    }
 })(LoginForm)
 
 
@@ -76,6 +91,7 @@ const Login = () => {
     return (
         <div>
             <h1>LOGIN</h1>
+            <p>*You can try the App through my account:</p>
             <LoginReduxForm onSubmit={onSubmit} />
         </div>
     );

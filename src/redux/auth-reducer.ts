@@ -92,7 +92,6 @@ export const loginTC = (formData: FormDataType): AppThunk => {
     return async (dispatch) => {
         try {
             const data = await authAPI.login(formData)
-            console.log(data)
             if (data.resultCode === 0) {
                 dispatch(getUsersDataTC())
                 //dispatch(setIsLoggedInAC(true))
@@ -103,7 +102,6 @@ export const loginTC = (formData: FormDataType): AppThunk => {
                 let message = data.messages.length > 0 ? data.messages[0] : "Some error"
                 let action = stopSubmit("login", {_error: message})
                 dispatch(action)
-                console.log(action.payload._error)
             }
         } catch (e) {
 
