@@ -4,6 +4,7 @@ import {authAPI, securityAPI, usersAPI} from "../api/api";
 import {setUsers, toggleIsFetching} from "./users-reducer";
 import {FormDataType} from "../components/Login/Login";
 import {stopSubmit} from "redux-form";
+import {getStatusTC, setUsersProfileTC} from "../../src/redux/profile-reducer";
 
 type DataType = {
     id: string | null
@@ -36,19 +37,13 @@ const authReducer = (state: InitialStateType = initialState, action: AllActionsT
         case 'samurai-way/auth/SET-USER-DATA':
             return {
                 ...state,
-                ...action.data,
-                isAuth: true
+                ...action.data
             }
         case 'GET-CAPTCHA-URL-SUCCESS':
             return {
                 ...state,
                 captchaUrl: action.captchaUrl
             }
-        // case "login/SET-IS-LOGGED-IN":
-        //     return {
-        //         ...state,
-        //         isLoggedIn: action.value
-        //     }
         default:
             return state
     }
@@ -56,12 +51,11 @@ const authReducer = (state: InitialStateType = initialState, action: AllActionsT
 
 export default authReducer
 
-
 export type AuthActionsTypes = ReturnType<typeof setUserData>
     | ReturnType<typeof getCaptchaUrlAC>
 
 export const setUserData = (id: string | null, email: string | null,
-                            login: string | null, isAuth: boolean | null) => ({
+                            login: string | null, isAuth: boolean ) => ({
     type: "samurai-way/auth/SET-USER-DATA",
     data: {
         id,
@@ -83,8 +77,11 @@ export const getUsersDataTC = (): AppThunk => {
         try {
             const data = await authAPI.me()
             if (data.resultCode === 0) {
-                let {id, email, login, isAuth} = data.data
+                let isAuth = true
+                let {id, email, login} = data.data
                 dispatch(setUserData(id, email, login, isAuth))
+                dispatch(setUsersProfileTC(id))
+                dispatch(getStatusTC(id))
             }
         } catch (error) {
         }
@@ -134,7 +131,7 @@ export const logoutTC = (): AppThunk => {
         try {
             if (data.resultCode === 0) {
                 //dispatch(setIsLoggedInAC(false))
-                dispatch(setUserData(null, null, null, null))
+                dispatch(setUserData(null, null, null, false))
             }
         } catch (e) {
 

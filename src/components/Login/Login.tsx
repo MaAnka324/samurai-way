@@ -21,6 +21,7 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = ({handleSubmit, err
 
     if(isAuth) return <Redirect to={'/profile/:userId?'}/>
 
+
     return (
         <form onSubmit={handleSubmit}>
             <div>

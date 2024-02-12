@@ -12,7 +12,7 @@ class HeaderContainer extends React.Component<ProfilePropsType> {
     // }
 
     render() {
-        return <Header {...this.props}/>
+        return <Header />
     }
 }
 

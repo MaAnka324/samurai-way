@@ -8,7 +8,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import ProfileStatusWithHooks from "../../../src/components/Profile/MyPosts/ProfileStatusWithHooks";
 import {FormProfileDataType, ProfileDataForm, ProfileReduxForm} from "./ProfileDataForm";
-import {useAppDispatch} from "../../../src/redux/redux-store";
+import {useAppDispatch, useAppSelector} from "../../../src/redux/redux-store";
 
 type ProfileInfoType = {
     profile: ProfileType | null
@@ -21,6 +21,7 @@ type ProfileInfoType = {
 
 
 const ProfileInfo = (props: ProfileInfoType) => {
+    // const isAuth = useAppSelector(state => state.auth.isAuth)
 
     let [editMode, setEditMode] = useState<boolean>(false)
 
@@ -40,6 +41,8 @@ const ProfileInfo = (props: ProfileInfoType) => {
     const onSubmit = (formData: FormProfileDataType) => {
         props.saveProfile(formData)
     }
+
+    // if(!isAuth) return <Redirect to={'/login'}/>
 
 
     return (
@@ -120,6 +123,7 @@ type ProfileDataType = {
 
 
 const ProfileData = (props: ProfileDataType) => {
+    debugger
     return <div>
         <div>
             <b>Name : </b> {props?.profile?.fullName}
@@ -138,7 +142,6 @@ const ProfileData = (props: ProfileDataType) => {
             <b>Contacts </b>
             {props?.profile?.contacts && Object.keys(props?.profile?.contacts).map(key => {
                 const contacts = props?.profile?.contacts! as ContactsType
-                console.log(contacts[key as keyof ContactsType])
                 return (
                     <Contacts
                         key={key}
