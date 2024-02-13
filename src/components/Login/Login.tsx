@@ -86,7 +86,7 @@ const Login = () => {
         console.log(formData)
     }
 
-    if(isAuth) return <Redirect to={'/profile/:userId?'}/>
+    if(isAuth) return <Redirect to={'/profile'}/>
 
     return (
         <div>

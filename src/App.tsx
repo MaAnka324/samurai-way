@@ -1,7 +1,7 @@
 import React, {Suspense} from 'react';
 import './App.css';
 import Nav from "./components/Nav/Nav";
-import {BrowserRouter, HashRouter, Route, withRouter} from "react-router-dom";
+import {BrowserRouter, HashRouter, Redirect, Route, Switch, withRouter} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
@@ -38,15 +38,20 @@ class App extends React.Component<AppPropsType> {
                 <HeaderContainer/>
                 <Nav/>
                 <div className='app-wrapper-content'>
-                    {/*<Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>*/}
-                    {/*<Route path='/profile' render={() => <ProfileContainer/>}/>*/}
-                    <Route path='/profile/:userId?' render={WithSuspense(ProfileContainer)}/>
-                    <Route path='/dialogs' render={WithSuspense(DialogsContainer)}/>
-                    <Route path='/users' render={() => <UsersContainer/>}/>
-                    <Route path='/news' render={() => <News/>}/>
-                    <Route path='/music' render={() => <Music/>}/>
-                    <Route path='/settings' render={() => <Settings/>}/>
-                    <Route path='/login' render={() => <Login/>}/>
+                    <Switch>
+                        {/*<Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>*/}
+                        {/*<Route path='/profile' render={() => <ProfileContainer/>}/>*/}
+                        <Route exact path='/' render={()=><Redirect to={'/profile'}/>}/>
+                        <Route path='/profile/:userId?' render={WithSuspense(ProfileContainer)}/>
+                        <Route path='/dialogs' render={WithSuspense(DialogsContainer)}/>
+                        <Route path='/users' render={() => <UsersContainer/>}/>
+                        <Route path='/news' render={() => <News/>}/>
+                        <Route path='/music' render={() => <Music/>}/>
+                        <Route path='/settings' render={() => <Settings/>}/>
+                        <Route path='/login' render={() => <Login/>}/>
+                        <Route path='*' render={() => <div>404 NOT FOUND</div>}/>
+                    </Switch>
+
                 </div>
             </div>
         );
