@@ -8,6 +8,10 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import ProfileStatusWithHooks from "../../../src/components/Profile/MyPosts/ProfileStatusWithHooks";
 import {FormProfileDataType, ProfileReduxForm} from "./ProfileDataForm";
+import EditIcon from '@mui/icons-material/Edit';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
+import {Button, IconButton} from "@mui/material";
 
 type ProfileInfoType = {
     profile: ProfileType | null
@@ -46,14 +50,34 @@ const ProfileInfo = (props: ProfileInfoType) => {
                 <img
                     src={props.profile.photos?.large ? props.profile.photos.large : userPhoto}
                 />
-                {props.isOwner && <input type='file' onChange={mainPhotoSelected}/>}
+                {/*{props.isOwner && <input type='file' onChange={mainPhotoSelected}/>}*/}
+                {props.isOwner && <label>
+                    <input type="file"
+                           name='photo'
+                           onChange={mainPhotoSelected}
+                           style={{display: 'none'}}
+                    />
+                    <IconButton component="span">
+                        <AddAPhotoIcon color="primary"/>
+                    </IconButton>
+                </label>
+                }
             </div>
-            <ProfileStatusWithHooks isOwner={props.isOwner} status={props?.status} updateStatus={props?.updateStatus}/>
+            <div className={s.descriptionBlock}>
+                <ProfileStatusWithHooks isOwner={props.isOwner} status={props?.status} updateStatus={props?.updateStatus}/>
+            </div>
             {editMode
                 ? <div>
                     <ProfileReduxForm initialValues={props.profile} onSubmit={onSubmit}/>
-                    <button onClick={() => {
-                        setEditMode(false)}}>go to profile</button>
+                    <div className={s.button}>
+                        <Button variant="outlined" startIcon={<ArrowBackIcon />}
+                                onClick={() => {setEditMode(false)}}>
+                            go to profile
+                        </Button>
+                    </div>
+
+                    {/*<button onClick={() => {*/}
+                    {/*    setEditMode(false)}}>go to profile</button>*/}
                 </div>
                 : <div>
                     <ProfileData profile={props.profile}
@@ -114,19 +138,19 @@ type ProfileDataType = {
 
 
 const ProfileData = (props: ProfileDataType) => {
-    return <div>
+    return <div className={s.profileDataForm}>
         <div>
             <b>Name : </b> {props?.profile?.fullName}
         </div>
         <div>
-            <b>Looking for a Job :</b> {props?.profile?.lookingForAJob ? "yes" : "no"}
+            <b>Looking for a Job : </b> {props?.profile?.lookingForAJob ? "yes" : "no"}
         </div>
         <div>
             <b>My professional
-                skills:</b> {props?.profile?.lookingForAJobDescription ? props.profile.lookingForAJobDescription : "------"}
+                skills : </b> {props?.profile?.lookingForAJobDescription ? props.profile.lookingForAJobDescription : "------"}
         </div>
         <div>
-            <b>About me </b>{props?.profile?.aboutMe}
+            <b>About me : </b>{props?.profile?.aboutMe}
         </div>
         <div>
             <b>Contacts </b>
@@ -141,9 +165,17 @@ const ProfileData = (props: ProfileDataType) => {
                 );
             })}
         </div>
+
         {props.isOwner && <div>
-            {<button onClick={props.goToEditMode}>edit</button>}
-        </div>}
+            {<Button variant="outlined" startIcon={<EditIcon />}
+                     onClick={props.goToEditMode}>
+                Edit
+            </Button>}
+            {/*{<EditIcon color={"primary"} fontSize={"medium"} onClick={props.goToEditMode}/>}*/}
+            {/*{<button onClick={props.goToEditMode}>edit</button>}*/}
+        </div>
+
+        }
 
     </div>
 }

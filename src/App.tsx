@@ -46,8 +46,8 @@ class App extends React.Component<AppPropsType> {
                         <Route path='/dialogs' render={WithSuspense(DialogsContainer)}/>
                         <Route path='/users' render={() => <UsersContainer/>}/>
                         <Route path='/news' render={() => <News/>}/>
-                        <Route path='/music' render={() => <Music/>}/>
-                        <Route path='/settings' render={() => <Settings/>}/>
+                        {/*<Route path='/music' render={() => <Music/>}/>*/}
+                        {/*<Route path='/settings' render={() => <Settings/>}/>*/}
                         <Route path='/login' render={() => <Login/>}/>
                         <Route path='*' render={() => <div>404 NOT FOUND</div>}/>
                     </Switch>

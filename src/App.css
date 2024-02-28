@@ -14,7 +14,8 @@
 
 .app-wrapper-content {
   grid-area: c;
-  background-color: darkslategrey;
+  background-color: #49464b;
+  min-height: 100vh;
 }
 
 /*.App {*/

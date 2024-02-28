@@ -1,11 +1,24 @@
 .descriptionBlock {
-    padding: 10px;
+    padding: 10px 20px;
+}
 
+.profileDataForm {
+    /*background-color: lightpink;*/
+    height: 400px;
+    padding: 5px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .descriptionBlock img {
-    width: 130px;
-
+    width: 150px;
 }
 
+.button {
+    display: flex;
+    flex-direction: row;
+    justify-content:  right;
+    width: 505px;
+}
 

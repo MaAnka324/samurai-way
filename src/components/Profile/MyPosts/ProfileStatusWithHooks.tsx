@@ -1,4 +1,6 @@
 import React, {ChangeEvent, useEffect, useState} from 'react';
+import EditIcon from '@mui/icons-material/Edit';
+import s from './Status.module.css'
 
 
 type StatusType = {
@@ -33,8 +35,9 @@ const ProfileStatusWithHooks = (props: StatusType) => {
     return (
         <div>
             {!editeMode &&
-                <div><b>Status : </b>
+                <div className={s.statusBlock}><b>Status : </b>
                     <span onDoubleClick={activateMode}>{props.status || '------'}</span>
+                    {props.isOwner ? <EditIcon onClick={activateMode} fontSize={'small'} color="primary"/> : null}
                 </div>
             }
             {editeMode &&
