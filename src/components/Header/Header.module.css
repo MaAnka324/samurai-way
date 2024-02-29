@@ -1,13 +1,19 @@
 .header {
     grid-area: h;
     background-color: #292829;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: right;
 }
 
 .header img {
     width: 50px ;
+    border-radius: 30px;
 }
 
 .loginBlock {
+    /*background-color: #2f6e2c;*/
     float: right;
 }
 
@@ -16,5 +22,11 @@
 }
 
 .loginName {
+    width: 300px;
     color: chartreuse;
+    margin-right: 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
 }
