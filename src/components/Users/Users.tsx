@@ -4,8 +4,7 @@ import styles from './Users.module.css'
 import userPhoto from '../../assets/images/UserIcon.png'
 import {NavLink} from "react-router-dom";
 import {Paginator} from "./Paginator";
-import Pagination from '@mui/material/Pagination';
-import Stack from '@mui/material/Stack';
+import {Button} from "@mui/material";
 
 
 export const Users: FC<UsersType> = (
@@ -28,7 +27,7 @@ export const Users: FC<UsersType> = (
     }
 
     return (
-        <div>
+        <div >
             <Paginator
                 pageSize={pageSize}
                 totalItemsCount={totalItemsCount}
@@ -36,9 +35,11 @@ export const Users: FC<UsersType> = (
                 portionSize={10}
                 setCurrentPage={props.setCurrentPage}
             />
-            {
-                users && users.map((u: any) => <div key={u.id}>
-                    <span>
+            <div className={styles.usersBlock}>
+                {
+                    users && users.map((u: any) => <div className={styles.user} key={u.id}>
+                    <span className={styles.user}>
+
                         <div>
                             <NavLink to={'/profile/' + u.id}>
                             <img
@@ -48,36 +49,37 @@ export const Users: FC<UsersType> = (
                         </div>
                         <div>
                             {u.followed
-                                ? <button
+                                ? <Button variant="outlined"
                                     disabled={followingInProgress.some(id => id === u.id)}
                                     onClick={() => {
 
                                         unfollowTC(u.id)
 
-                                    }}>Unfollow</button>
+                                    }}>Unfollow</Button>
 
-                                : <button
+                                : <Button variant="outlined"
                                     disabled={followingInProgress.some(id => id === u.id)}
                                     onClick={() => {
 
                                         followTC(u.id)
 
-                                    }}>Follow</button>
+                                    }}>Follow</Button>
                             }
                         </div>
                     </span>
-                    <span>
                         <span>
-                            <div>{u.name}</div>
+                        <span>
+                            <b>{u.name}</b>
                             <div>{u.status}</div>
                         </span>
-                        <span>
-                            <div>{"u.location.country"}</div>
+                        {/*<span>*/}
+                            {/*<div>{u.location.country}</div>*/}
                             {/*<div>{"u.location.city"}</div>*/}
-                        </span>
+                        {/*</span>*/}
                     </span>
-                </div>)
-            }
+                    </div>)
+                }
+            </div>
         </div>
     );
 

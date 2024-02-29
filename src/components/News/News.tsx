@@ -3,7 +3,8 @@ import React from 'react';
 const News = () => {
     return (
         <div>
-            News
+            <h3>News</h3>
+            *to develop
         </div>
     )
 }

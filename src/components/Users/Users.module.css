@@ -6,3 +6,21 @@
 .selectedPage {
     font-weight: bold;
 }
+
+.user {
+    /*background-color: #2f6e2c;*/
+    width: 280px;
+    margin: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: right;
+    align-items: center;
+}
+
+.usersBlock {
+    /*background-color: lightpink;*/
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
