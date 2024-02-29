@@ -6,7 +6,10 @@ import {Redirect} from "react-router-dom";
 import {Input} from "../common/FormsControls/FormsControls";
 import {required} from "../../utils/validators/valodators";
 import style from '../common/FormsControls/FormControl.module.css'
+import Button from "@mui/material/Button";
 
+import TextField from "@mui/material/TextField";
+import {RenderFieldProps} from "../../../src/components/Profile/ProfileDataForm";
 
 export type FormDataType = {
     email: string
@@ -15,51 +18,61 @@ export type FormDataType = {
     captcha: string
 }
 
+const renderField: React.FC<RenderFieldProps> = ({input, label, type}) => (
+    <div>
+        <label>{label}</label>
+        <div>
+            <TextField {...input} type={type} variant="outlined" className={style.field}/>
+        </div>
+    </div>
+);
+
 const LoginForm: React.FC<InjectedFormProps<FormDataType>> = ({handleSubmit, error}) => {
-    const isAuth = useAppSelector(state => state.auth.isAuth)
     const captchaUrl = useAppSelector(state => state.auth.captchaUrl)
-
-    // if(isAuth) return <Redirect to={'/profile/:userId?'}/>
-    // debugger
-
 
     return (
         <form onSubmit={handleSubmit}>
-            <div>
-                <Field name={'email'}
-                       placeholder={'Email'}
-                       component={Input}
-                       validate={[required]}
-                />
-            </div>
-            <div>
-                <Field name={'password'}
-                       placeholder={'Password'}
-                       component={Input}
-                       type={'password'}
-                       validate={[required]}
-                />
-            </div>
-            <div>
-                <Field name={'rememberMe'}
-                       type={'checkbox'}
-                       component={Input}/> remember me
-            </div>
+            <div className={style.loginForm}>
+                <div>
+                    <b>Email </b>
+                    <Field name={'email'}
+                           placeholder={'Email'}
+                           component={renderField}
+                           validate={[required]}
+                    />
+                </div>
+                <div>
+                    <b>Password </b>
+                    <Field name={'password'}
+                           placeholder={'Password'}
+                           component={renderField}
+                           type={'password'}
+                           validate={[required]}
+                    />
+                </div>
+                <div>
+                    <b>Remember Me </b>
+                    <Field name={'rememberMe'}
+                           type={'checkbox'}
+                           component={Input}
+                    />
+                </div>
 
-            {captchaUrl && <img src={captchaUrl}/>}
-            {captchaUrl && <div>
-                <Field name={'captcha'}
-                       placeholder={'Captcha'}
-                       component={Input}
-                       validate={[required]}
-                />
-            </div>}
+                {captchaUrl && <img src={captchaUrl}/>}
+                {captchaUrl && <div>
+                    <Field name={'captcha'}
+                           placeholder={'Captcha'}
+                           component={Input}
+                           validate={[required]}
+                    />
+                </div>}
 
-            {error && <div className={style.formSummaryError}>
-                ERROR
-            </div>}
-            <div>
-                <button>Login</button>
+                {error && <div className={style.formSummaryError}>
+                    ERROR
+                </div>}
+                <div className={style.buttonLogin}>
+                    <Button type="submit" variant="outlined">Log In</Button>
+                </div>
             </div>
         </form>
     );
@@ -79,20 +92,19 @@ const LoginReduxForm = reduxForm<FormDataType>({
 const Login = () => {
     const dispatch = useAppDispatch()
     const isAuth = useAppSelector(state => state.auth.isAuth)
-    const captchaUrl = useAppSelector(state => state.auth.captchaUrl)
 
     const onSubmit = (formData: FormDataType) => {
         dispatch(loginTC(formData))
         console.log(formData)
     }
 
-    if(isAuth) return <Redirect to={'/profile'}/>
+    if (isAuth) return <Redirect to={'/profile'}/>
 
     return (
-        <div>
+        <div className={style.loginBlock}>
             <h1>LOGIN</h1>
             <p>*You can try the App through my account:</p>
-            <LoginReduxForm onSubmit={onSubmit} />
+            <LoginReduxForm onSubmit={onSubmit}/>
         </div>
     );
 };

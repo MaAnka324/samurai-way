@@ -17,13 +17,13 @@ export type FormProfileDataType = {
     contacts?: ContactsType | null | undefined
 };
 
-interface RenderFieldProps {
+export interface RenderFieldProps {
     input: any;
     label: string;
     type: string;
 }
 
-const renderField: React.FC<RenderFieldProps> = ({input, label, type}) => (
+export const renderField: React.FC<RenderFieldProps> = ({input, label, type}) => (
     <div>
         <label>{label}</label>
         <div>
