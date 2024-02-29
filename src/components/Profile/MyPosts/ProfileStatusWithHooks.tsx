@@ -1,6 +1,7 @@
 import React, {ChangeEvent, useEffect, useState} from 'react';
 import EditIcon from '@mui/icons-material/Edit';
 import s from './Status.module.css'
+import TextField from "@mui/material/TextField";
 
 
 type StatusType = {
@@ -42,11 +43,11 @@ const ProfileStatusWithHooks = (props: StatusType) => {
             }
             {editeMode &&
                 <div>
-                    <input
-                        onChange={onStatusChange}
-                        onBlur={deactivateMode}
-                        autoFocus={true}
-                        value={status}
+                    <TextField variant="outlined"
+                               onChange={onStatusChange}
+                               onBlur={deactivateMode}
+                               autoFocus={true}
+                               value={status}
                     />
                 </div>
             }

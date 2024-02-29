@@ -122,7 +122,7 @@ const Profile = (props: ProfilePropsTypeNew) => {
                 savePhoto={props.savePhoto}
                 saveProfile={props.saveProfile}
             />
-            <MyPostsContainer/>
+            {/*<MyPostsContainer/>*/}
         </div>
     )
 }
@@ -171,8 +171,6 @@ const ProfileData = (props: ProfileDataType) => {
                      onClick={props.goToEditMode}>
                 Edit
             </Button>}
-            {/*{<EditIcon color={"primary"} fontSize={"medium"} onClick={props.goToEditMode}/>}*/}
-            {/*{<button onClick={props.goToEditMode}>edit</button>}*/}
         </div>
 
         }
@@ -191,7 +189,7 @@ const Contacts = (props: ContactsType) => {
             <b>
                 {props.contactTitle}
             </b>
-            : {props.contactValue}
+            : {props?.contactValue !== null ? <a href={props?.contactValue} target='_blank'>{props?.contactValue}</a> : ''}
         </div>
     )
 }

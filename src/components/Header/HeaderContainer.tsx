@@ -7,10 +7,6 @@ import {compose} from "redux";
 
 
 class HeaderContainer extends React.Component<ProfilePropsType> {
-    // componentDidMount() {
-    //     this.props.setUsersDataTC()
-    // }
-
     render() {
         return <Header />
     }
@@ -23,11 +19,6 @@ type MapStatePropsType = {
 }
 
 type MapDispatchPropsType = {
-    // setUserData: (
-    //     id: string | null,
-    //     email: string | null,
-    //     login: string | null,
-    // ) => void
     setUsersDataTC: () => void
 }
 

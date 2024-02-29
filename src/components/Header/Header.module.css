@@ -14,3 +14,7 @@
 .loginBlock a {
     color: white;
 }
+
+.loginName {
+    color: chartreuse;
+}
